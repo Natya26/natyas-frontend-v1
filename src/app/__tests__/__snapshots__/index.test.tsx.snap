@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> should render and match the snapshot 1`] = `
+<BrowserRouter>
+  <Routes>
+    <Route
+      element={<LoginPage />}
+      path="/"
+    />
+    <Route
+      element={<Layout />}
+    >
+      <Route
+        element={<HomePage />}
+        path="/home"
+      />
+      <Route
+        element={<Settings />}
+        path="/settings"
+      />
+    </Route>
+  </Routes>
+  <Memo(l) />
+  <ToastContainer
+    autoClose={5000}
+    closeButton={[Function]}
+    closeOnClick={true}
+    draggable={true}
+    draggableDirection="x"
+    draggablePercent={80}
+    pauseOnFocusLoss={true}
+    pauseOnHover={true}
+    position="top-right"
+    role="alert"
+    theme="light"
+    transition={[Function]}
+  />
+</BrowserRouter>
+`;

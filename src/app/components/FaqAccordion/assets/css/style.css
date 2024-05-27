@@ -1,0 +1,43 @@
+.Accordion-wrapper .MuiPaper-root.MuiPaper-elevation {
+  width: 100% !important;
+  max-width: 100%;
+  margin: 15px 0px;
+}
+.Accordion-wrapper .series-list-accordion {
+  background: none;
+  border-radius: 5px !important;
+  box-shadow: none;
+}
+.Accordion-wrapper .series-list-accordion .MuiAccordionSummary-content {
+  justify-content: space-between;
+}
+.episode-action-box span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.episode-action-box span button,
+.episode-action-box span p {
+  margin: 0px 5px;
+  /* color: #f4793b; */
+  color: #b4b7bd;
+}
+.seriesList li:hover {
+  /* border-bottom: 1px solid #f7f3f3; */
+  background: aliceblue;
+}
+.seriesList .MuiListItemAvatar-root svg {
+  fill: #f4793b;
+}
+.seriesList .MuiAvatar-root {
+  /* background: #f4793b; */
+  cursor: pointer;
+  background: #ffffff;
+  box-shadow: 0px 1px 4px 0px #dac4c4;
+}
+.Accordion-wrapper
+  .Mui-expanded
+  .MuiAccordionSummary-content
+  p:nth-last-child(1) {
+  color: #f4793b;
+}

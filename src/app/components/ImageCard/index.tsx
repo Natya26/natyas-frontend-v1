@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Card, CardMedia } from '@mui/material';
-import CardImg from './assets/img/bg/logo.svg';
+import CardImg from './assets/img/bg/fusion-logo.svg';
 
 type CardProps = {
   name?: string | null;

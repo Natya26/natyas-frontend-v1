@@ -300,7 +300,7 @@ const Header = () => {
 };
 const LogoWrapper = styled(Box)`
   .MuiAvatar-img {
-    height: auto !important;
+    height: 100% !important;
   }
   @media (min-width: 768px) and (max-width: 991px) {
     width: 190px;

@@ -14,7 +14,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { WatchCard } from 'app/components/WatchCard';
 import { TrailerCard } from 'app/components/TrailerCard';
 import ImageCard from 'app/components/ImageCard';
-import logo from './assets/images/logo/Navarasa-logo.png';
+import logo from './assets/images/logo/Fusion-logo.png';
 import { selectSeries, selectSimilarSeries } from './slice/selectors';
 import dateFormat from 'dateformat';
 import { useDispatch, useSelector } from 'react-redux';
@@ -274,7 +274,7 @@ export const IndividialView = ({
           >
             <Box sx={{ flexGrow: 1 }}>
               <Grid container spacing={1}>
-                <Grid xs={7} sm={6} md={6} lg={6} xl={6}>
+                <Grid  xs={7} sm={6} md={6} lg={6} xl={6}>
                   <LeftWrapper>
                     <TopWrapper>
                       <VectorButton variant="text" onClick={handleBack}>

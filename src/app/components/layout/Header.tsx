@@ -8,7 +8,7 @@ import Toolbar from '@mui/material/Toolbar';
 import InputBase from '@mui/material/InputBase';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import icon from './assets/img/icon/usericon.jpg';
-import NavarasaHeadIcon from './assets/img/icon/navarasa.svg';
+import NavarasaHeadIcon from './assets/img/icon/fusion-logo.svg';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import bgImage from './assets/img/bg/navarasa-bg.png';
 import { Grid, Box, Divider } from '@mui/material';
 import { Outlet } from 'react-router-dom';
-import RightLogo from './assets/img/bg/Right-logo.png';
+import RightLogo from './assets/img/bg/Fusion-Right-logo.png';
 
 const OnboardLayout = () => {
   return (

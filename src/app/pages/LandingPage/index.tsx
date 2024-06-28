@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import backImg from './assets/image/background/Navarasa_background_Img.png';
-import logo from './assets/image/logo/logo.png';
+import logo from './assets/image/logo/fusion-logo.png';
 import appStore from './assets/image/icons/download-apk.png';
 import googlePlay from './assets/image/icons/google-play-button.png';
 import Video1 from './assets/videos/video2.mp4';

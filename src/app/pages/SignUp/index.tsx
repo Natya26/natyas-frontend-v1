@@ -21,7 +21,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
 import { useManageAppSlice } from '../slice';
 import useToast from 'hooks/Toast';
-import LeftLogo from './assets/Navarasa-left-logo.png';
+import LeftLogo from './assets/Fusion-left-logo.png';
 import SimpleReactValidator from 'simple-react-validator';
 
 type Props = {};
@@ -117,7 +117,7 @@ const SignUp = (props: Props) => {
       <Box>
         <Box>
           <HeadingOneWrapper>
-            Exclusive content, wherever you go
+            Exclusive content, wherever you go 
           </HeadingOneWrapper>
           <ParaOneWrapper>Create a free account.</ParaOneWrapper>
         </Box>

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import logo from './assets/img/logo/Navarasa-logo.png';
+import logo from './assets/img/logo/Fusion-logo.png';
 import { Box, Grid } from '@mui/material';
 import emailIcon from './assets/img/icons/email.png';
 import phoneIcon from './assets/img/icons/phone.png';
@@ -47,9 +47,9 @@ export const Footer = ({ className }: Props) => {
     >
       <Box>
         <Grid className="footerContainer" container spacing={0}>
-          <Grid className="footer" xs={12} sm={6} md={4}>
+          <Grid className="footer" item xs={12} sm={6} md={4}>
             <div className="footer-logo-block">
-              <LogoImage src={logo} alt="Navarasa-logo" />
+              <LogoImage src={logo} alt="Fusion-logo" />
             </div>
             <div>
               <ul className="contact-ul">
@@ -85,7 +85,7 @@ export const Footer = ({ className }: Props) => {
               </ul>
             </div>
           </Grid>
-          <Grid className="terms-footer-grid" xs={12} sm={6} md={8}>
+          <Grid className="terms-footer-grid" item xs={12} sm={6} md={8}>
             <div className="terms-block">
               <ul className="terms-conditions-ul">
                 <li>

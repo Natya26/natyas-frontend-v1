@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import backImg from './assets/image/background/Navarasa_background_Img.png';
+import backImg from './assets/image/background/Fusion_background_Img.png';
 import logo from './assets/image/logo/fusion-logo.png';
 import appStore from './assets/image/icons/download-apk.png';
 import googlePlay from './assets/image/icons/google-play-button.png';
-import Video1 from './assets/videos/video2.mp4';
+import fusionSlideTwo from './assets/videos/fusionSlideTwo.gif';
 import emailIcon from './assets/image/icons/email.png';
 import phoneIcon from './assets/image/icons/phone.png';
 import WhatsappIcon from './assets/image/icons/whatsapp.png';
@@ -13,7 +13,7 @@ import WhatsappIcon from './assets/image/icons/whatsapp.png';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-import tv from './assets/image/gif/navarasaSlideOne.gif';
+import tv from './assets/image/gif/fusionSlideOne.gif';
 import devices from './assets/image/icons/devices.png';
 import navigation from './assets/image/icons/navigation.png';
 import { useNavigate } from 'react-router-dom';
@@ -31,7 +31,7 @@ export const LandingPage = (props: Props) => {
   const handleWatchClick = () => {
     navigate(RoutePath.signup.path);
   };
-  
+
   // const handleGooglePlay = () => {
   //   window.open(
   //     // 'https://play.google.com/store/apps/details?id=com.world.navarasa&hl=en&gl=US',
@@ -64,7 +64,7 @@ export const LandingPage = (props: Props) => {
           <HeadingWrapper>Exclusive content, wherever you go</HeadingWrapper>
           <FirstParaWrapper>
             Get early access to new releases to content exclusively available on
-            Navarasa
+            Fusion
           </FirstParaWrapper>
           <ButtonWrapper
             onClick={handleWatchClick}
@@ -79,7 +79,10 @@ export const LandingPage = (props: Props) => {
               textDecoration: 'none',
             }}
           >
-            <SpanWrapper style={{ display: 'none' }}> Download our app </SpanWrapper>
+            <SpanWrapper style={{ display: 'none' }}>
+              {' '}
+              Download our app{' '}
+            </SpanWrapper>
           </div>
           <br />
           <ImgWrapper style={{ display: 'none' }}>
@@ -126,12 +129,12 @@ export const LandingPage = (props: Props) => {
                     available on Navarasa
                   </SecondParaWrapper> */}
                   <SecondParaWrapper>
-                    Become a part of the exclusive Navarasa community.
+                    Become a part of the exclusive Fusion community.
                   </SecondParaWrapper>
                   <SecondParaWrapper>
                     Only subscribed members have access to this exclusive
                     content, so you'll be joining a community of like-minded
-                    people who love Navarasa originals.
+                    people who love Fusion originals.
                   </SecondParaWrapper>
                 </div>
               </Grid>
@@ -147,9 +150,7 @@ export const LandingPage = (props: Props) => {
           <Grid container spacing={1}>
             <Grid className="leftDevice" xs={12} md={6}>
               <div className="postionDevice">
-                <StyledVideo autoPlay loop muted>
-                  <source src={Video1} type="video/mp4" />
-                </StyledVideo>
+                <StyledImage src={fusionSlideTwo} />
               </div>
             </Grid>
             <Grid className="rightDevice" xs={12} md={6}>
@@ -161,7 +162,7 @@ export const LandingPage = (props: Props) => {
                   Create your own personalized watchlists
                 </ThirdParaWrapper> */}
                 <ThirdParaWrapper>
-                  Change the way you watch content on Navarasa.
+                  Change the way you watch content on Fusion.
                 </ThirdParaWrapper>
                 <ThirdParaWrapper>
                   {' '}
@@ -307,8 +308,10 @@ const FirstWrapper = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  z-index: -1;
 `;
-const StyledVideo = styled.video`
+const StyledImage = styled.img`
+  border-radius: 15px;
   @media (min-width: 320px) and (max-width: 575px) {
     width: 100%;
   }
@@ -619,6 +622,7 @@ const SecondParaWrapper = styled.p`
 const GifOneWrapper = styled.img`
   height: auto;
   width: 100%;
+  border-radius: 5px;
 `;
 const ThirdWrapper = styled.div`
   padding: 40px;
@@ -864,6 +868,7 @@ const FourthParaWrapper = styled.p`
 const ImgFourthWrapper = styled.img`
   width: 100%;
   height: auto;
+  border-radius: 15px;
   @media (min-width: 576px) and (max-width: 767px) {
     width: 300px;
     height: 350px;

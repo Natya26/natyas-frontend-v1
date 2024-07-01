@@ -56,7 +56,7 @@ export const Footer = ({ className }: Props) => {
                 <li>
                   <StyledImageIcon src={location} alt="phone" />
                   <a>
-                    Navarasa World Pvt Ltd 51/3079 PRA 9 , <br /> NIKUNJAM,
+                    Fusion World Pvt Ltd 51/3079 PRA 9 , <br /> NIKUNJAM,
                     PUNNAKKAMUGHAL , <br /> ARAMADA TRIVANDRUM Kerala 695032
                     India
                   </a>
@@ -67,12 +67,12 @@ export const Footer = ({ className }: Props) => {
                     info@navarasaworld.com
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <StyledImageIcon src={phoneIcon} alt="phone" />
                   <a href="tel:884-824-9902">+91 8848249902</a>
-                </li>
+                </li> */}
 
-                <li>
+                {/* <li>
                   <StyledImageIcon src={WhatsappIcon} alt="watsapp" />
                   <a
                     href="https://wa.me/918590691762"
@@ -81,7 +81,7 @@ export const Footer = ({ className }: Props) => {
                   >
                     Whatsapp
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
           </Grid>
@@ -154,7 +154,7 @@ export const Footer = ({ className }: Props) => {
       </Box>
       <div className="copyright">
         {' '}
-        <p>Copyright &copy; 2024, All Right Reserved Navarasa World Pvt Ltd</p>
+        <p>Copyright &copy; 2024, All Right Reserved Fusion </p>
       </div>
     </FooterWrapper>
   );

@@ -16,9 +16,13 @@ const PrivacyPolicyTab = (props: Props) => {
         </HeaderWrapper>
         <SubWrapper>
           <SubContentWrapper>
-            <StyledTypography variant="body2" sx={{marginBottom:"10px"}} gutterBottom>
-              This Privacy Policy (“Privacy Policy”) applies to NAVARASA App
-              platforms including without limitation www.navarasaworld.com and
+            <StyledTypography
+              variant="body2"
+              sx={{ marginBottom: '10px' }}
+              gutterBottom
+            >
+              This Privacy Policy (“Privacy Policy”) applies to FUSION App
+              platforms including without limitation www.fusionflix.in and
               other related Site/s or App/s, mobile applications and other
               online features each a “Site/s or App/s”).
             </StyledTypography>
@@ -84,8 +88,8 @@ const PrivacyPolicyTab = (props: Props) => {
               If after you opt-in, you change your mind, you may withdraw your
               consent for us to contact you, for the continued collection, use
               or disclosure of your information, at any time, by emailing us at
-              info@navarasaworld.com or contacting us at the address provided on
-              the website.
+              info@fusionflix.in or contacting us at the address provided on the
+              website.
             </StyledTypography>
           </SubContentWrapper>
           <SubHeaderWrapper>
@@ -121,7 +125,11 @@ const PrivacyPolicyTab = (props: Props) => {
               of credit card information by our store and its service providers.
               For more insight, you may also want to read terms and conditions
               of Razor Pay on{' '}
-              <a href="https://stripe.com/en-in" target={'_blank'}>
+              <a
+                href="https://stripe.com/en-in"
+                target={'_blank'}
+                rel="noreferrer"
+              >
                 https://stripe.com/en-in
               </a>
             </StyledTypography>
@@ -242,8 +250,8 @@ const PrivacyPolicyTab = (props: Props) => {
               If you would like to: access, correct, amend or delete any
               personal information we have, register a complaint, or simply want
               more information, mail our Privacy Compliance Officer at
-              info@navarasaworld.com Or by contacting at the company contact
-              which is hereby incorporated by this reference into the Terms of
+              info@fusionflix.in Or by contacting at the company contact which
+              is hereby incorporated by this reference into the Terms of
               Service.
             </StyledTypography>
           </SubContentWrapper>
@@ -277,8 +285,8 @@ const SubWrapper = styled.div`
   }
 `;
 const HeaderWrapper = styled.div`
-    text-align: center;
-    padding: 0 20px 10px 20px;
+  text-align: center;
+  padding: 0 20px 10px 20px;
   @media (min-width: 320px) and (max-width: 575px) {
     font-size: 10px !important;
     text-align: left;
@@ -328,12 +336,12 @@ const SubContentWrapper = styled.div`
   }
 `;
 
-const StyledTypography=styled(Typography)`
-@media (min-width: 576px) and (max-width: 767px) {
-  font-size:11px !important;
-}
-@media (min-width: 320px) and (max-width: 575px) {
-  font-size:10px !important;
-}
+const StyledTypography = styled(Typography)`
+  @media (min-width: 576px) and (max-width: 767px) {
+    font-size: 11px !important;
+  }
+  @media (min-width: 320px) and (max-width: 575px) {
+    font-size: 10px !important;
+  }
 `;
 export default PrivacyPolicyTab;

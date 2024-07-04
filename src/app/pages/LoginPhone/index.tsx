@@ -5,7 +5,7 @@ import Divider from '@mui/material/Divider';
 import googleImg from './assets/google_login.png';
 import { NumberField } from 'app/components/NumberField';
 import { MExtensionField } from 'app/components/MExtensionField';
-import backgroundNavarasa from './assets/background-navarasa.png';
+import backgroundFusion from './assets/Fusion_background_Img.png';
 import logo from './assets/fusion-logo.png';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'app/RoutePath';
@@ -290,7 +290,7 @@ const ParaWrapper = styled.p`
 `;
 
 const MainBackgroundImg = styled.div`
-  background: url(${backgroundNavarasa});
+  background: url(${backgroundFusion});
   width: 100%;
   height: 100vh;
   background-size: cover;

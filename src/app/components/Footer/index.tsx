@@ -63,8 +63,8 @@ export const Footer = ({ className }: Props) => {
                 </li>
                 <li>
                   <StyledImageIcon src={emailIcon} alt="email" />
-                  <a href="mailto:info@navarasaworld.com">
-                    info@navarasaworld.com
+                  <a href="mailto:info@fusionflix.in .com">
+                    info@fusionflix.in
                   </a>
                 </li>
                 {/* <li>

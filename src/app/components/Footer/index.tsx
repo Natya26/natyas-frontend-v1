@@ -56,14 +56,14 @@ export const Footer = ({ className }: Props) => {
                 <li>
                   <StyledImageIcon src={location} alt="phone" />
                   <a>
-                    Fusion World Pvt Ltd 51/3079 PRA 9 , <br /> NIKUNJAM,
-                    PUNNAKKAMUGHAL , <br /> ARAMADA TRIVANDRUM Kerala 695032
-                    India
+                    FUSION &nbsp; 51/3079 PRA 9 , <br /> NIKUNJAM,
+                    PUNNAKKAMUGHAL , <br /> ARAMADA TRIVANDRUM Kerala 695032,
+                    INDIA
                   </a>
                 </li>
                 <li>
                   <StyledImageIcon src={emailIcon} alt="email" />
-                  <a href="mailto:info@fusionflix.in .com">
+                  <a href="mailto:info@fusionflix.in">
                     info@fusionflix.in
                   </a>
                 </li>
@@ -90,7 +90,7 @@ export const Footer = ({ className }: Props) => {
               <ul className="terms-conditions-ul">
                 <li>
                   <a
-                    href="https://apidev.navarasaworld.com/v1/policies/terms-and-conditions"
+                    href="/FooterStaticPages/terms-and-conditions.html"
                     target="_blank"
                     // onClick={handleTerms}
                     rel="noreferrer"
@@ -100,7 +100,7 @@ export const Footer = ({ className }: Props) => {
                 </li>
                 <li>
                   <a
-                    href="https://apidev.navarasaworld.com/v1/policies/privacy-policy"
+                    href="/FooterStaticPages/privacy-policy.html"
                     target="_blank"
                     // onClick={handlePrivacy}
                     rel="noreferrer"
@@ -110,7 +110,7 @@ export const Footer = ({ className }: Props) => {
                 </li>
                 <li>
                   <a
-                    href="https://apidev.navarasaworld.com/v1/policies/terms-and-conditions"
+                    href="/FooterStaticPages/terms-and-conditions.html"
                     target="_blank"
                     // onClick={handleTerms}
                     rel="noreferrer"
@@ -120,7 +120,7 @@ export const Footer = ({ className }: Props) => {
                 </li>
                 <li>
                   <a
-                    href="https://apidev.navarasaworld.com/v1/policies/refund-policy"
+                    href="/FooterStaticPages/refund-policy.html"
                     target="_blank"
                     rel="noreferrer"
                   >

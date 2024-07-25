@@ -116,7 +116,9 @@ export const LoginOtp = ({ onChange }: Props) => {
           Cookies.set('userPhoto', userPhoto);
           dispatch(appSliceActions.setIsAuthenticated(true));
           dispatch(appSliceActions.setRedirectPath(RoutePath.settings.path));
-          navigate(RoutePath.homepage.path);
+          // navigate(RoutePath.homepage.path);
+          // changed for fusion
+          navigate(RoutePath.fusionhomepage.path);
         } else {
           alert('Error Msg: Invalid');
           setOffToast('error', 'Invalid OTP entered');

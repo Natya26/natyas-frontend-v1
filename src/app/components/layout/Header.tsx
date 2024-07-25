@@ -94,7 +94,9 @@ const Header = ({}: Props) => {
     });
   };
   const handleBackToHome = () => {
-    navigate(RoutePath.homepage.path);
+    // navigate(RoutePath.homepage.path);
+    // Changed for fusion
+    navigate(RoutePath.fusionhomepage.path);
   };
   console.log(location?.pathname, 'location?.pathname--------------');
 

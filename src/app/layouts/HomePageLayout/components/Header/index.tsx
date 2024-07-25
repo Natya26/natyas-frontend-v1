@@ -159,7 +159,9 @@ const Header = () => {
     navigate(RoutePath.notifications.path);
   };
   const handleBackToHome = () => {
-    navigate(RoutePath.homepage.path);
+    // navigate(RoutePath.homepage.path);
+    // Changed for fusion
+    navigate(RoutePath.fusionhomepage.path);
   };
   let userName = Cookies.get('userName')!
     ? atob(Cookies.get('userName')!)

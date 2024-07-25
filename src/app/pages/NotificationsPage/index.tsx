@@ -35,7 +35,9 @@ export const NotificationsPage = ({ name, summary, id }: Props) => {
   const { actions: AppActions } = useManageAppSlice();
 
   const handleBack = (): void => {
-    navigate(RoutePath.homepage.path);
+    // navigate(RoutePath.homepage.path);
+    // Changed for fusion
+    navigate(RoutePath.fusionhomepage.path);
   };
 
   const getAllNotificationList = (

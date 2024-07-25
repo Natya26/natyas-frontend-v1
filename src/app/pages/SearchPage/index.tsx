@@ -78,7 +78,9 @@ const SearchPage = (props: Props) => {
 
   //handle  backToHomeclick
   const handleBackToHomeClick = () => {
-    navigate(RoutePath.homepage.path);
+    // navigate(RoutePath.homepage.path);
+    // Changed for fusion
+    navigate(RoutePath.fusionhomepage.path);
   };
   //handle get Genre lookup
   const handleGetLookup = () => {
@@ -121,21 +123,21 @@ const SearchPage = (props: Props) => {
       ) : (
         <SearchPageWrapper>
           <SearchPageContentWrapper className="SearchPageContentWrapper">
-            <SearchPageWrapperContent >
-            <Box sx={{ width: '100%', padding: '60px 60px 25px 60px ' }}>
-              <CloseIcon
-                style={{ cursor: 'pointer' }}
-                onClick={handleBackToHomeClick}
-              />
-            </Box>
-            <Box sx={{ width: '100%', padding: '0 35px 0px 100px' }}>
-              <StyledSearchTextField
-                placeholder={`Search any title by name ${
-                  selectedGenre ? 'in ' + selectedGenre : ''
-                }`}
-                onChange={e => handleChange(e)}
-              />
-            </Box>
+            <SearchPageWrapperContent>
+              <Box sx={{ width: '100%', padding: '60px 60px 25px 60px ' }}>
+                <CloseIcon
+                  style={{ cursor: 'pointer' }}
+                  onClick={handleBackToHomeClick}
+                />
+              </Box>
+              <Box sx={{ width: '100%', padding: '0 35px 0px 100px' }}>
+                <StyledSearchTextField
+                  placeholder={`Search any title by name ${
+                    selectedGenre ? 'in ' + selectedGenre : ''
+                  }`}
+                  onChange={e => handleChange(e)}
+                />
+              </Box>
             </SearchPageWrapperContent>
             <ContentWrapper className="search-ContentWrapper">
               <StyledListWrapper className="search-list">
@@ -182,40 +184,40 @@ const SearchPage = (props: Props) => {
   );
 };
 const SearchPageWrapperContent = styled.div`
-    @media (min-width: 1366px) and (max-width: 4000px) {
-      font-size: 24px;
-    }
-    @media (min-width: 1200px) and (max-width: 1365px) {
-      font-size: 22px;
-    }
-    @media (min-width: 992px) and (max-width: 1199px) {
-      font-size: 20px;
-    }
-    @media (min-width: 768px) and (max-width: 991px) {
-      font-size: 18px;
-    }
-    @media (min-width: 576px) and (max-width: 767px) {
-      font-size: 15px;
-    }
-    @media (min-width: 320px) and (max-width: 575px) {
-      display: flex;
+  @media (min-width: 1366px) and (max-width: 4000px) {
+    font-size: 24px;
+  }
+  @media (min-width: 1200px) and (max-width: 1365px) {
+    font-size: 22px;
+  }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    font-size: 20px;
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    font-size: 18px;
+  }
+  @media (min-width: 576px) and (max-width: 767px) {
+    font-size: 15px;
+  }
+  @media (min-width: 320px) and (max-width: 575px) {
+    display: flex;
     align-items: center;
     padding: 15px 10px 0 10px;
-      > div{
-        &:nth-child(1){
-          padding: 1px 7px;
-    display: inline-flex;
-    align-items: center;
-    width: 35px;
-    height: 20px;
-        }
-        &:nth-child(2){
-          width: calc(100% - 35px);
-          padding: 0;
-        }
+    > div {
+      &:nth-child(1) {
+        padding: 1px 7px;
+        display: inline-flex;
+        align-items: center;
+        width: 35px;
+        height: 20px;
+      }
+      &:nth-child(2) {
+        width: calc(100% - 35px);
+        padding: 0;
       }
     }
-`
+  }
+`;
 const StyledListWrapper = styled.div`
   margin: 6px 0 !important;
   padding: 0px;
@@ -248,7 +250,7 @@ const StyledListWrapper = styled.div`
       }
       .MuiButtonBase-root {
         background: none !important;
-        &:hover{
+        &:hover {
           color: #f4793b !important;
         }
         .MuiTypography-root {
@@ -279,30 +281,30 @@ const ContentWrapper = styled.div`
   height: calc(100vh - 122px);
   @media (min-width: 1200px) and (max-width: 1365px) {
     height: auto;
-      padding: 15px 0;
+    padding: 15px 0;
+  }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    height: auto;
+    padding: 15px 0;
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    height: auto;
+    padding: 15px 0;
+  }
+  @media (min-width: 576px) and (max-width: 767px) {
+    height: auto;
+    padding: 15px 0;
+  }
+  @media (min-width: 320px) and (max-width: 575px) {
+    height: auto;
+    padding: 15px 0;
+    .search-list {
+      width: 130px;
     }
-    @media (min-width: 992px) and (max-width: 1199px) {
-      height: auto;
-      padding: 15px 0;
+    .search-content {
+      width: calc(100% - 130px);
     }
-    @media (min-width: 768px) and (max-width: 991px) {
-      height: auto;
-      padding: 15px 0;
-    }
-    @media (min-width: 576px) and (max-width: 767px) {
-      height: auto;
-      padding: 15px 0;
-    }
-    @media (min-width: 320px) and (max-width: 575px) {
-      height: auto;
-      padding: 15px 0;
-      .search-list{
-        width: 130px;
-      }
-      .search-content{
-        width: calc(100% - 130px);
-      }
-    }
+  }
 `;
 const RightContentWrapper = styled.div`
   width: calc(100% - 200px);
@@ -372,11 +374,11 @@ const StyledSearchTextField = styled(SearchTextField)`
   @media (min-width: 320px) and (max-width: 575px) {
     height: 35px;
     padding: 5px 20px !important;
-    input{
+    input {
       height: 35px !important;
-    font-size: 10px !important;
+      font-size: 10px !important;
     }
-    svg{
+    svg {
       width: 12px;
     }
   }

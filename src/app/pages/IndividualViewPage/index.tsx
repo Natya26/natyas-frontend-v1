@@ -39,6 +39,7 @@ import { Footer } from 'app/components/Footer';
 import { selectCurrentUserSubscription } from '../Settings/slice/selectors';
 import { useManageUserSlice } from '../Settings/slice';
 import { SubscriptionApiService } from 'services/openapi/services/SubscriptionApiService';
+import FusionVideo from '../FusionHomePage/constants/index';
 
 type Props = {
   children?: React.ReactNode;
@@ -52,6 +53,9 @@ type Props = {
   src?: string;
   title?: string;
   className?: string;
+  // id?: number | string;
+  image?: string;
+  url?: string;
 };
 
 export const IndividialView = ({
@@ -66,10 +70,13 @@ export const IndividialView = ({
   src,
   title,
   className,
+  // id,
+  image,
+  url,
   ...other
 }: Props) => {
   const { seriesId: routeSeriesId } = useParams();
-
+  console.log('my video id ', routeSeriesId!);
   const navigate = useNavigate();
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -79,6 +86,12 @@ export const IndividialView = ({
   const { error: apiError, isLoading, handleRequest } = useApi();
   const [error, setError] = React.useState<unknown | null>();
   const SeriesPayload = useSelector(selectSeries);
+
+  //updated for fusion
+  const FusionSeriesPayload = FusionVideo.filter(
+    item => item.id.toString() === routeSeriesId,
+  );
+  console.log(FusionSeriesPayload);
   const SimilarSeriesPayload = useSelector(selectSimilarSeries);
   const pageLoader = useSelector(selectPageLoader);
 
@@ -241,10 +254,8 @@ export const IndividialView = ({
       </div>
     );
   }
-  const releaseYear = dateFormat(
-    SeriesPayload?.release_date?.toString(),
-    'yyyy',
-  );
+  const release_date = '2024';
+  const releaseYear = dateFormat(release_date?.toString(), 'yyyy');
   const scrollToTop = () => {
     var element = document.getElementById('mainWrapper');
     element!.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -256,7 +267,10 @@ export const IndividialView = ({
     handleGetSeries(seriesId);
     handleGetSimilarSeries(seriesId);
   }, []);
-  const encodedBannerImg = encodeURI(SERVER_BASE_URL + SeriesPayload?.poster);
+  // const encodedBannerImg = encodeURI(SERVER_BASE_URL + SeriesPayload?.poster);
+
+  //updated for fusion static page.
+  const encodedBannerImg = encodeURI(FusionSeriesPayload[0]?.image);
   return (
     <>
       {pageLoader ? (
@@ -274,22 +288,24 @@ export const IndividialView = ({
           >
             <Box sx={{ flexGrow: 1 }}>
               <Grid container spacing={1}>
-                <Grid  xs={7} sm={6} md={6} lg={6} xl={6}>
+                <Grid xs={7} sm={6} md={6} lg={6} xl={6}>
                   <LeftWrapper>
                     <TopWrapper>
                       <VectorButton variant="text" onClick={handleBack}>
                         <VectorImg src={vector} alt="vector" />
                       </VectorButton>
 
-                      <HeadingWrapper>{SeriesPayload?.name}</HeadingWrapper>
+                      <HeadingWrapper>
+                        {FusionSeriesPayload[0]?.title}
+                      </HeadingWrapper>
                     </TopWrapper>
 
                     <ContentWrapper>
                       <ParaWrapper>
-                        {releaseYear}. {SeriesPayload?.languages?.[0]?.name}
+                        {releaseYear}. {FusionSeriesPayload[0]?.language}
                       </ParaWrapper>
                       <FirstParaWrapper>
-                        {SeriesPayload?.description}
+                        {FusionSeriesPayload[0]?.description}
                       </FirstParaWrapper>
                       <IconWrapper>
                         <ListWrapper>
@@ -355,7 +371,7 @@ export const IndividialView = ({
                 <WatchWrapper>
                   <h4>{SeriesPayload?.seasons?.[0]?.name}</h4>
 
-                  {SeriesPayload?.seasons?.[0]?.episodes?.map(
+                  {/* {SeriesPayload?.seasons?.[0]?.episodes?.map(
                     (episode, index) => {
                       return (
                         <StyledWatchCard
@@ -372,7 +388,20 @@ export const IndividialView = ({
                         />
                       );
                     },
-                  )}
+                  )} */}
+                  {/* updated for fusion static page */}
+                  {FusionSeriesPayload?.map((episode, index) => {
+                    return (
+                      <StyledWatchCard
+                        key={index}
+                        src={episode?.image ? episode?.image : ''}
+                        name={episode.title}
+                        summary={episode.description}
+                        // duration={episode?.duration}
+                        onClick={e => handleWatch(e, episode?.id.toString()!)}
+                      />
+                    );
+                  })}
                   <div className="border" />
                   <h4>Trailers</h4>
                   <TrailerWrapper>
@@ -421,7 +450,7 @@ export const IndividialView = ({
           {SimilarSeriesPayload?.length && (
             <SectionWrapper>
               <HomeHeadLabelWrapper>
-                <ListHeadLabel>SIMILAR SERIES</ListHeadLabel>
+                <ListHeadLabel>SIMILAR SERIES yesssss</ListHeadLabel>
               </HomeHeadLabelWrapper>
               <StyledHomeSectionWrapper>
                 <Carousel
@@ -477,11 +506,11 @@ const FirstWrapper = styled.div`
   justify-content: center;
   color: #ffffff;
   width: 100%;
-  height: 80vh;
+  height: 87vh;
   padding: 70px 40px 40px 50px;
   background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat;
+  background-position: 25% 50% !important;
+  background-repeat: no-repeat !important;
   @media (min-width: 320px) and (max-width: 575px) {
     padding: 60px 20px 10px 20px !important;
     height: 70vh;

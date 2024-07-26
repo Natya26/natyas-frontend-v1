@@ -76,7 +76,6 @@ export const IndividialView = ({
   ...other
 }: Props) => {
   const { seriesId: routeSeriesId } = useParams();
-  console.log('my video id ', routeSeriesId!);
   const navigate = useNavigate();
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -91,7 +90,10 @@ export const IndividialView = ({
   const FusionSeriesPayload = FusionVideo.filter(
     item => item.id.toString() === routeSeriesId,
   );
-  console.log(FusionSeriesPayload);
+
+  const FusionSimilarSeriesPayload = FusionVideo.filter(
+    obj => JSON.stringify(obj) !== JSON.stringify(FusionSeriesPayload[0]),
+  );
   const SimilarSeriesPayload = useSelector(selectSimilarSeries);
   const pageLoader = useSelector(selectPageLoader);
 
@@ -213,21 +215,22 @@ export const IndividialView = ({
     handleGetSimilarSeries(e);
   };
   const handlePlayClick = (e, id: string) => {
-    if (currentSubscription?.active && ExpiryDate) {
-      navigate(RoutePath.playvideo.path.replace(':videoId', id));
-    } else {
-      navigate(RoutePath.settings.path); //Redirect to settings page
-      dispatch(userActions.setSettingsTabVal(4)); //for making subscription tab active
-    }
-    // navigate(RoutePath.playvideo.path.replace(':videoId', e));
+    // if (currentSubscription?.active && ExpiryDate) {
+    //   navigate(RoutePath.playvideo.path.replace(':videoId', id));
+    // } else {
+    //   navigate(RoutePath.settings.path); //Redirect to settings page
+    //   dispatch(userActions.setSettingsTabVal(4)); //for making subscription tab active
+    // }
+    navigate(RoutePath.playvideo.path.replace(':videoId', id));
   };
   const handleWatch = (e, id: string) => {
-    if (currentSubscription?.active && ExpiryDate) {
-      navigate(RoutePath.playvideo.path.replace(':videoId', id));
-    } else {
-      navigate(RoutePath.settings.path); //Redirect to settings page
-      dispatch(userActions.setSettingsTabVal(4)); //for making subscription tab active
-    }
+    // if (currentSubscription?.active && ExpiryDate) {
+    //   navigate(RoutePath.playvideo.path.replace(':videoId', id));
+    // } else {
+    //   navigate(RoutePath.settings.path); //Redirect to settings page
+    //   dispatch(userActions.setSettingsTabVal(4)); //for making subscription tab active
+    // }
+    navigate(RoutePath.playvideo.path.replace(':videoId', id));
   };
 
   function a11yProps(index: number) {
@@ -329,13 +332,18 @@ export const IndividialView = ({
                   </LeftWrapper>
                 </Grid>
                 <Grid xs={5} sm={6} md={6} lg={6} xl={6}>
-                  {SeriesPayload?.trailers?.length ? (
+                  {/* {SeriesPayload?.trailers?.length ? ( */}
+                  {FusionSeriesPayload?.length ? (
                     <RightWrapper>
                       <PlayButton
                         onClick={e =>
+                          // handlePlayClick(
+                          //   e,
+                          //   SeriesPayload?.trailers?.[0]?.fwp_id!,
+                          // )
                           handlePlayClick(
                             e,
-                            SeriesPayload?.trailers?.[0]?.fwp_id!,
+                            FusionSeriesPayload?.[0]?.id.toString(),
                           )
                         }
                         className="playbtn"
@@ -397,13 +405,13 @@ export const IndividialView = ({
                         src={episode?.image ? episode?.image : ''}
                         name={episode.title}
                         summary={episode.description}
-                        // duration={episode?.duration}
+                        duration={episode?.duration}
                         onClick={e => handleWatch(e, episode?.id.toString()!)}
                       />
                     );
                   })}
                   <div className="border" />
-                  <h4>Trailers</h4>
+                  {/* <h4>Trailers</h4>
                   <TrailerWrapper>
                     {SeriesPayload?.trailers?.map((trailer, index) => {
                       return (
@@ -420,7 +428,7 @@ export const IndividialView = ({
                         />
                       );
                     })}
-                  </TrailerWrapper>
+                  </TrailerWrapper> */}
                   <div className="border" />
                 </WatchWrapper>
               </TabPanel>
@@ -447,10 +455,11 @@ export const IndividialView = ({
               </TabPanel>
             </Box>
           </SecondWrapper>
-          {SimilarSeriesPayload?.length && (
+          {/* {SimilarSeriesPayload?.length && ( */}
+          {FusionSimilarSeriesPayload?.length && (
             <SectionWrapper>
               <HomeHeadLabelWrapper>
-                <ListHeadLabel>SIMILAR SERIES yesssss</ListHeadLabel>
+                <ListHeadLabel>SIMILAR SERIES</ListHeadLabel>
               </HomeHeadLabelWrapper>
               <StyledHomeSectionWrapper>
                 <Carousel
@@ -472,12 +481,10 @@ export const IndividialView = ({
                   dotListClass="custom-dot-list-style"
                   itemClass="carousel-item-padding-40-px"
                 >
-                  {SimilarSeriesPayload?.map((item, index) => (
+                  {FusionSimilarSeriesPayload?.map((item, index) => (
                     <ImageCard
                       key={index}
-                      poster={
-                        item?.poster ? SERVER_BASE_URL + item?.poster : ''
-                      }
+                      poster={item?.image ? item.image : ''}
                       onClick={e => handleSimilarSeriesClick(item.id!)}
                     />
                   ))}

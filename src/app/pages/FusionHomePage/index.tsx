@@ -239,12 +239,13 @@ const HomePage = (props: Props) => {
     if (CarouselIsMoving) {
       return;
     } else if (id) {
-      if (currentSubscription?.active && ExpiryDate) {
-        navigate(RoutePath.playvideo.path.replace(':videoId', id));
-      } else {
-        navigate(RoutePath.settings.path);
-        dispatch(userActions.setSettingsTabVal(4));
-      }
+      // if (currentSubscription?.active && ExpiryDate) {
+      //   navigate(RoutePath.playvideo.path.replace(':videoId', id));
+      // } else {
+      //   navigate(RoutePath.settings.path);
+      //   dispatch(userActions.setSettingsTabVal(4));
+      // }
+      navigate(RoutePath.playvideo.path.replace(':videoId', id));
     }
   };
 
@@ -268,7 +269,6 @@ const HomePage = (props: Props) => {
   //   handleNewAndHotlist();
   //   handleComingSoonList();
   // }, [FetchPayload]);
-
 
   //changed for fusion
   // const encodedBannerImg = encodeURI(SERVER_BASE_URL + FeaturedPaylord?.poster);
@@ -324,7 +324,8 @@ const HomePage = (props: Props) => {
                       <HeadingTitle>{Thumbnail[1].title}</HeadingTitle>
                     </div>
                     <TextFieldContentLabel className="move-and-fade">
-                      {FeaturedPaylord?.description}
+                      {/* {FeaturedPaylord?.description} */}
+                      {Thumbnail[1].description}
                     </TextFieldContentLabel>
                     <div className="icon">
                       <AddButton
@@ -336,7 +337,8 @@ const HomePage = (props: Props) => {
                       <FloatLabel>My List</FloatLabel>
                     </div>
                     <TextFieldContentLabel>
-                      {releaseYear} - {FeaturedPaylord?.languages?.[0]?.name}
+                      {/* {releaseYear} - {FeaturedPaylord?.languages?.[0]?.name} */}
+                      {releaseYear}
                     </TextFieldContentLabel>
                   </Content>
                 </ContentWrapper>
@@ -390,8 +392,13 @@ const HomePage = (props: Props) => {
                         {FeaturedPaylord?.seasons?.[0]?.episodes?.map(
                           (item, index) => (
                             <div>
+                              {/*updated for fusion */}
                               <DrawerEpisodeCard
-                                onClick={e => handleEpisodeClick(item?.fwp_id!)}
+                                onClick={e =>
+                                  handleEpisodeClick(
+                                    Thumbnail[1]?.id.toString(),
+                                  )
+                                }
                                 key={index}
                                 poster={
                                   item?.poster
@@ -403,10 +410,12 @@ const HomePage = (props: Props) => {
                                 <div className="group-label">
                                   <SeasonAndDurationLabel className="season">
                                     {/* {item.name} */}
+                                    {/* //updated for fusion */}
                                     {Thumbnail[1].title}
                                   </SeasonAndDurationLabel>{' '}
                                   <TextFieldContentLabel>
                                     {/* {item.description} */}
+                                    {/* //updated for fusion */}
                                     {Thumbnail[1].title}
                                   </TextFieldContentLabel>
                                 </div>
@@ -679,7 +688,6 @@ const HomePage = (props: Props) => {
             ''
           )} */}
 
-
           {/* Malayalam */}
           {/* {AllMalayalamSeriesPaylord?.length ? (
             <SectionWrapper>
@@ -728,7 +736,6 @@ const HomePage = (props: Props) => {
             ''
           )} */}
 
-
           {/* Hindi */}
           {/* {AllHindiSeriesPaylord?.length ? (
             <SectionWrapper>
@@ -776,7 +783,6 @@ const HomePage = (props: Props) => {
           ) : (
             ''
           )} */}
-
 
           {/* Tamil */}
           {/* {AllTamilSeriesPaylord?.length ? (

@@ -1,4 +1,4 @@
-import seaBulliesVideo from '../assets/videos/TEMP VIDEO FOR FUSION/01/SEA BULLIES 1.mp4';
+import seaBulliesVideo from '../assets/videos/TEMP VIDEO FOR FUSION/01/SEABULLIES1.mp4';
 import seaBulliesImage from '../assets/videos/TEMP VIDEO FOR FUSION/01/SEABULLIES.png';
 import horizonVideo from '../assets/videos/TEMP VIDEO FOR FUSION/02/HORIZON 1.mp4';
 import horizonImage from '../assets/videos/TEMP VIDEO FOR FUSION/02/HORIZON.png';
@@ -23,6 +23,7 @@ const videoData = [
     image: seaBulliesImage,
     language: 'English',
     description: 'Sea Bullies(English)',
+    duration: 101,
   },
   {
     id: 2,
@@ -31,6 +32,7 @@ const videoData = [
     image: horizonImage,
     language: 'English',
     description: 'Horizon(English)',
+    duration: 47,
   },
   {
     id: 3,
@@ -39,6 +41,7 @@ const videoData = [
     image: oceanOfTimeImage,
     language: 'English',
     description: 'Ocean Of Time(English)',
+    duration: 42,
   },
   {
     id: 4,
@@ -47,6 +50,7 @@ const videoData = [
     image: intoFutureImage,
     language: 'English',
     description: 'Into Future(English)',
+    duration: 116,
   },
   {
     id: 5,
@@ -55,6 +59,7 @@ const videoData = [
     image: chaplinUntoldImage,
     language: 'English',
     description: 'Chaplin Untold(English)',
+    duration: 120,
   },
   {
     id: 6,
@@ -63,6 +68,7 @@ const videoData = [
     image: vibrantCinemaImage,
     language: 'English',
     description: 'Vibrant Cinema(English)',
+    duration: 142,
   },
   {
     id: 7,
@@ -71,6 +77,7 @@ const videoData = [
     image: kohINoorImage,
     language: 'English',
     description: 'Koh-I-Noor(English)',
+    duration: 120,
   },
   {
     id: 8,
@@ -79,6 +86,7 @@ const videoData = [
     image: HHHolmesImage,
     language: 'English',
     description: 'HH Holmes(English)',
+    duration: 94,
   },
 ];
 

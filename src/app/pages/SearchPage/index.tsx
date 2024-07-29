@@ -58,6 +58,16 @@ const SearchPage = (props: Props) => {
   const [selectedGenre, setSelectedGenre] = React.useState<string | undefined>(
     '',
   );
+  const [searchTerm, setSearchTerm] = React.useState('');
+
+  //handle Fusion Search Videos
+  const handleSearchFusionVideos = (text: string) => {
+    const query = text.toLowerCase();
+    setSearchTerm(query);
+  };
+  const filteredVideos = FusionVideos.filter(video =>
+    video.title.toLowerCase().includes(searchTerm)
+  );
 
   //handle Genre click
   const handleListItemClick = (index?: number, name?: string) => {
@@ -106,7 +116,10 @@ const SearchPage = (props: Props) => {
   const handleChange = (
     e?: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    handleGetMediaSearchResult(e?.target.value! ?? '');
+    // handleGetMediaSearchResult(e?.target.value! ?? '');
+    //updated for fusion videos
+    e?.preventDefault();
+    handleSearchFusionVideos(e?.target.value! ?? '');
   };
   useEffect(() => {
     dispatch(AppActions.setPageLoader(true));
@@ -175,7 +188,7 @@ const SearchPage = (props: Props) => {
                       onClick={e => handleSeriesViewClick(item?.id!)}
                     />
                   ))} */}
-                  {FusionVideos?.map((item, index) => (
+                  {filteredVideos?.map((item, index) => (
                     <ImageCard
                       key={index}
                       poster={item?.image ? item?.image : ''}

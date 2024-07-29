@@ -311,13 +311,13 @@ export const IndividialView = ({
                         {FusionSeriesPayload[0]?.description}
                       </FirstParaWrapper>
                       <IconWrapper>
-                        <ListWrapper>
+                        {/* <ListWrapper>
                           <StyledMyList
                             value={SeriesPayload?.isInMyList}
                             onClick={handleAddMyList}
                           />
                           <SecondParaWrapper>My List</SecondParaWrapper>
-                        </ListWrapper>
+                        </ListWrapper> */}
                         <LikeWrapper>
                           <div className="icon">
                             <LikeButton

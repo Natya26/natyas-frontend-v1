@@ -15,7 +15,19 @@ import kohINoorImage from '../assets/videos/TEMP VIDEO FOR FUSION/07/Koh-I-Noor.
 import HHHolmesVideo from '../assets/videos/TEMP VIDEO FOR FUSION/08/HH Holmes 1.mp4';
 import HHHolmesImage from '../assets/videos/TEMP VIDEO FOR FUSION/08/HH-Holmes.png';
 
-const videoData = [
+
+//shape of our data with a TypeScript interface
+interface Video {
+  id: number;
+  title: string;
+  url: string;
+  image: string;
+  language: string;
+  description: string;
+  duration: number;
+}
+
+const videoData: Video[] = [
   {
     id: 1,
     title: 'Sea Bullies',

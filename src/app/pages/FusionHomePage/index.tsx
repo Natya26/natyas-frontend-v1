@@ -327,15 +327,15 @@ const HomePage = (props: Props) => {
                       {/* {FeaturedPaylord?.description} */}
                       {Thumbnail[1].description}
                     </TextFieldContentLabel>
-                    <div className="icon">
+                    {/* <div className="icon">
                       <AddButton
                         value={FeaturedPaylord?.isInMyList}
                         onClick={handleAddMyList}
                       />
-                    </div>
-                    <div className="mylist">
+                    </div> */}
+                    {/* <div className="mylist">
                       <FloatLabel>My List</FloatLabel>
-                    </div>
+                    </div> */}
                     <TextFieldContentLabel>
                       {/* {releaseYear} - {FeaturedPaylord?.languages?.[0]?.name} */}
                       {releaseYear}
@@ -434,7 +434,7 @@ const HomePage = (props: Props) => {
             </Carousel>
           </Wrapper>
           {/* My List Slider */}
-          {GetMyListPayload?.length ? (
+          {/* {GetMyListPayload?.length ? (
             <SectionWrapper>
               <HomeHeadLabelWrapper>
                 <ListHeadLabel>MY LIST</ListHeadLabel>
@@ -479,7 +479,7 @@ const HomePage = (props: Props) => {
             </SectionWrapper>
           ) : (
             ''
-          )}
+          )} */}
           {/* New & Hot */}
           {/* {NewAndHotListpayload?.length ? ( */}
           {Thumbnail?.length ? (

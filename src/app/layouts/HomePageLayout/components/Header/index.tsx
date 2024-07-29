@@ -235,7 +235,7 @@ const Header = () => {
               )}
             {location?.pathname !== RoutePath.notifications.path && (
               <Box sx={headerStyles.iconBox}>
-                <NotificationIcon onClick={handleNotificationClick} />
+                {/* <NotificationIcon onClick={handleNotificationClick} /> */}
               </Box>
             )}
             <Box onClick={handleOpenUserMenu} sx={headerStyles.iconBox}>

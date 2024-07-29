@@ -30,6 +30,7 @@ import PageLoaderWrapper from 'app/components/PageLoaderWrapper';
 import PulseLoader from 'react-spinners/PulseLoader';
 import { selectPageLoader } from '../slice/selectors';
 import { useManageAppSlice } from '../slice';
+import FusionVideos from '../FusionHomePage/constants/index';
 
 type Props = {};
 
@@ -165,12 +166,19 @@ const SearchPage = (props: Props) => {
               </StyledListWrapper>
               <RightContentWrapper className="search-content">
                 <CardContentWrapper>
-                  {allSeriesList?.map((item, index) => (
+                  {/* {allSeriesList?.map((item, index) => (
                     <ImageCard
                       key={index}
                       poster={
                         item?.poster ? SERVER_BASE_URL + item?.poster : ''
                       }
+                      onClick={e => handleSeriesViewClick(item?.id!)}
+                    />
+                  ))} */}
+                  {FusionVideos?.map((item, index) => (
+                    <ImageCard
+                      key={index}
+                      poster={item?.image ? item?.image : ''}
                       onClick={e => handleSeriesViewClick(item?.id!)}
                     />
                   ))}

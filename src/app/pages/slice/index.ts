@@ -7,7 +7,8 @@ import { RoutePath } from 'app/RoutePath';
 export const initialState: ManageAppState = {
   session: {
     isAuthenticated: false,
-    redirectPath: RoutePath.homepage.path,
+    // redirectPath: RoutePath.homepage.path,
+    redirectPath: RoutePath.fusionhomepage.path,
   },
   pageLoader: false,
 };

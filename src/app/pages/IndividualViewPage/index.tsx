@@ -39,6 +39,7 @@ import { Footer } from 'app/components/Footer';
 import { selectCurrentUserSubscription } from '../Settings/slice/selectors';
 import { useManageUserSlice } from '../Settings/slice';
 import { SubscriptionApiService } from 'services/openapi/services/SubscriptionApiService';
+import FusionVideo from '../FusionHomePage/constants/index';
 
 type Props = {
   children?: React.ReactNode;
@@ -52,6 +53,9 @@ type Props = {
   src?: string;
   title?: string;
   className?: string;
+  // id?: number | string;
+  image?: string;
+  url?: string;
 };
 
 export const IndividialView = ({
@@ -66,10 +70,12 @@ export const IndividialView = ({
   src,
   title,
   className,
+  // id,
+  image,
+  url,
   ...other
 }: Props) => {
   const { seriesId: routeSeriesId } = useParams();
-
   const navigate = useNavigate();
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -79,6 +85,15 @@ export const IndividialView = ({
   const { error: apiError, isLoading, handleRequest } = useApi();
   const [error, setError] = React.useState<unknown | null>();
   const SeriesPayload = useSelector(selectSeries);
+
+  //updated for fusion
+  const FusionSeriesPayload = FusionVideo.filter(
+    item => item.id.toString() === routeSeriesId,
+  );
+
+  const FusionSimilarSeriesPayload = FusionVideo.filter(
+    obj => JSON.stringify(obj) !== JSON.stringify(FusionSeriesPayload[0]),
+  );
   const SimilarSeriesPayload = useSelector(selectSimilarSeries);
   const pageLoader = useSelector(selectPageLoader);
 
@@ -200,21 +215,22 @@ export const IndividialView = ({
     handleGetSimilarSeries(e);
   };
   const handlePlayClick = (e, id: string) => {
-    if (currentSubscription?.active && ExpiryDate) {
-      navigate(RoutePath.playvideo.path.replace(':videoId', id));
-    } else {
-      navigate(RoutePath.settings.path); //Redirect to settings page
-      dispatch(userActions.setSettingsTabVal(4)); //for making subscription tab active
-    }
-    // navigate(RoutePath.playvideo.path.replace(':videoId', e));
+    // if (currentSubscription?.active && ExpiryDate) {
+    //   navigate(RoutePath.playvideo.path.replace(':videoId', id));
+    // } else {
+    //   navigate(RoutePath.settings.path); //Redirect to settings page
+    //   dispatch(userActions.setSettingsTabVal(4)); //for making subscription tab active
+    // }
+    navigate(RoutePath.playvideo.path.replace(':videoId', id));
   };
   const handleWatch = (e, id: string) => {
-    if (currentSubscription?.active && ExpiryDate) {
-      navigate(RoutePath.playvideo.path.replace(':videoId', id));
-    } else {
-      navigate(RoutePath.settings.path); //Redirect to settings page
-      dispatch(userActions.setSettingsTabVal(4)); //for making subscription tab active
-    }
+    // if (currentSubscription?.active && ExpiryDate) {
+    //   navigate(RoutePath.playvideo.path.replace(':videoId', id));
+    // } else {
+    //   navigate(RoutePath.settings.path); //Redirect to settings page
+    //   dispatch(userActions.setSettingsTabVal(4)); //for making subscription tab active
+    // }
+    navigate(RoutePath.playvideo.path.replace(':videoId', id));
   };
 
   function a11yProps(index: number) {
@@ -241,10 +257,8 @@ export const IndividialView = ({
       </div>
     );
   }
-  const releaseYear = dateFormat(
-    SeriesPayload?.release_date?.toString(),
-    'yyyy',
-  );
+  const release_date = '2024';
+  const releaseYear = dateFormat(release_date?.toString(), 'yyyy');
   const scrollToTop = () => {
     var element = document.getElementById('mainWrapper');
     element!.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -256,7 +270,10 @@ export const IndividialView = ({
     handleGetSeries(seriesId);
     handleGetSimilarSeries(seriesId);
   }, []);
-  const encodedBannerImg = encodeURI(SERVER_BASE_URL + SeriesPayload?.poster);
+  // const encodedBannerImg = encodeURI(SERVER_BASE_URL + SeriesPayload?.poster);
+
+  //updated for fusion static page.
+  const encodedBannerImg = encodeURI(FusionSeriesPayload[0]?.image);
   return (
     <>
       {pageLoader ? (
@@ -274,22 +291,24 @@ export const IndividialView = ({
           >
             <Box sx={{ flexGrow: 1 }}>
               <Grid container spacing={1}>
-                <Grid  xs={7} sm={6} md={6} lg={6} xl={6}>
+                <Grid xs={7} sm={6} md={6} lg={6} xl={6}>
                   <LeftWrapper>
                     <TopWrapper>
                       <VectorButton variant="text" onClick={handleBack}>
                         <VectorImg src={vector} alt="vector" />
                       </VectorButton>
 
-                      <HeadingWrapper>{SeriesPayload?.name}</HeadingWrapper>
+                      <HeadingWrapper>
+                        {FusionSeriesPayload[0]?.title}
+                      </HeadingWrapper>
                     </TopWrapper>
 
                     <ContentWrapper>
                       <ParaWrapper>
-                        {releaseYear}. {SeriesPayload?.languages?.[0]?.name}
+                        {releaseYear}. {FusionSeriesPayload[0]?.language}
                       </ParaWrapper>
                       <FirstParaWrapper>
-                        {SeriesPayload?.description}
+                        {FusionSeriesPayload[0]?.description}
                       </FirstParaWrapper>
                       <IconWrapper>
                         <ListWrapper>
@@ -313,13 +332,18 @@ export const IndividialView = ({
                   </LeftWrapper>
                 </Grid>
                 <Grid xs={5} sm={6} md={6} lg={6} xl={6}>
-                  {SeriesPayload?.trailers?.length ? (
+                  {/* {SeriesPayload?.trailers?.length ? ( */}
+                  {FusionSeriesPayload?.length ? (
                     <RightWrapper>
                       <PlayButton
                         onClick={e =>
+                          // handlePlayClick(
+                          //   e,
+                          //   SeriesPayload?.trailers?.[0]?.fwp_id!,
+                          // )
                           handlePlayClick(
                             e,
-                            SeriesPayload?.trailers?.[0]?.fwp_id!,
+                            FusionSeriesPayload?.[0]?.id.toString(),
                           )
                         }
                         className="playbtn"
@@ -355,7 +379,7 @@ export const IndividialView = ({
                 <WatchWrapper>
                   <h4>{SeriesPayload?.seasons?.[0]?.name}</h4>
 
-                  {SeriesPayload?.seasons?.[0]?.episodes?.map(
+                  {/* {SeriesPayload?.seasons?.[0]?.episodes?.map(
                     (episode, index) => {
                       return (
                         <StyledWatchCard
@@ -372,9 +396,22 @@ export const IndividialView = ({
                         />
                       );
                     },
-                  )}
+                  )} */}
+                  {/* updated for fusion static page */}
+                  {FusionSeriesPayload?.map((episode, index) => {
+                    return (
+                      <StyledWatchCard
+                        key={index}
+                        src={episode?.image ? episode?.image : ''}
+                        name={episode.title}
+                        summary={episode.description}
+                        duration={episode?.duration}
+                        onClick={e => handleWatch(e, episode?.id.toString()!)}
+                      />
+                    );
+                  })}
                   <div className="border" />
-                  <h4>Trailers</h4>
+                  {/* <h4>Trailers</h4>
                   <TrailerWrapper>
                     {SeriesPayload?.trailers?.map((trailer, index) => {
                       return (
@@ -391,7 +428,7 @@ export const IndividialView = ({
                         />
                       );
                     })}
-                  </TrailerWrapper>
+                  </TrailerWrapper> */}
                   <div className="border" />
                 </WatchWrapper>
               </TabPanel>
@@ -418,7 +455,8 @@ export const IndividialView = ({
               </TabPanel>
             </Box>
           </SecondWrapper>
-          {SimilarSeriesPayload?.length && (
+          {/* {SimilarSeriesPayload?.length && ( */}
+          {FusionSimilarSeriesPayload?.length && (
             <SectionWrapper>
               <HomeHeadLabelWrapper>
                 <ListHeadLabel>SIMILAR SERIES</ListHeadLabel>
@@ -443,12 +481,10 @@ export const IndividialView = ({
                   dotListClass="custom-dot-list-style"
                   itemClass="carousel-item-padding-40-px"
                 >
-                  {SimilarSeriesPayload?.map((item, index) => (
+                  {FusionSimilarSeriesPayload?.map((item, index) => (
                     <ImageCard
                       key={index}
-                      poster={
-                        item?.poster ? SERVER_BASE_URL + item?.poster : ''
-                      }
+                      poster={item?.image ? item.image : ''}
                       onClick={e => handleSimilarSeriesClick(item.id!)}
                     />
                   ))}
@@ -477,11 +513,11 @@ const FirstWrapper = styled.div`
   justify-content: center;
   color: #ffffff;
   width: 100%;
-  height: 80vh;
+  height: 87vh;
   padding: 70px 40px 40px 50px;
   background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat;
+  background-position: 25% 50% !important;
+  background-repeat: no-repeat !important;
   @media (min-width: 320px) and (max-width: 575px) {
     padding: 60px 20px 10px 20px !important;
     height: 70vh;

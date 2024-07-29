@@ -1,4 +1,5 @@
 import HomePage from './HomePage';
+import FusionHomePage from './FusionHomePage';
 import Settings from './Settings';
 import { LandingPage } from './LandingPage';
 import Login from './Login';
@@ -14,6 +15,7 @@ import { PaymentSuccessPage } from './PaymentSuccessPage';
 
 export {
   HomePage,
+  FusionHomePage,
   Login,
   SignUp,
   Settings,

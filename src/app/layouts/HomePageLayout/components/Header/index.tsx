@@ -41,18 +41,22 @@ export const LanguageModel: DropdownModel[] = [
     id: 1,
     name: 'All',
   },
-  {
-    id: 2,
-    name: 'Malayalam',
-  },
-  {
-    id: 3,
-    name: 'Tamil',
-  },
-  {
-    id: 4,
-    name: 'Hindi',
-  },
+  // {
+  //   id: 2,
+  //   name: 'English',
+  // },
+  // {
+  //   id: 2,
+  //   name: 'Malayalam',
+  // },
+  // {
+  //   id: 3,
+  //   name: 'Tamil',
+  // },
+  // {
+  //   id: 4,
+  //   name: 'Hindi',
+  // },
 ];
 
 const Header = () => {
@@ -159,7 +163,9 @@ const Header = () => {
     navigate(RoutePath.notifications.path);
   };
   const handleBackToHome = () => {
-    navigate(RoutePath.homepage.path);
+    // navigate(RoutePath.homepage.path);
+    // Changed for fusion
+    navigate(RoutePath.fusionhomepage.path);
   };
   let userName = Cookies.get('userName')!
     ? atob(Cookies.get('userName')!)
@@ -229,7 +235,7 @@ const Header = () => {
               )}
             {location?.pathname !== RoutePath.notifications.path && (
               <Box sx={headerStyles.iconBox}>
-                <NotificationIcon onClick={handleNotificationClick} />
+                {/* <NotificationIcon onClick={handleNotificationClick} /> */}
               </Box>
             )}
             <Box onClick={handleOpenUserMenu} sx={headerStyles.iconBox}>

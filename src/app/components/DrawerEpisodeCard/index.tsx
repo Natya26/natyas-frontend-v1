@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Card, CardMedia } from '@mui/material';
-import CardImg from './assets/img/bg/1.png';
+// import CardImg from './assets/img/bg/1.png';
+import CardImg from './assets/img/bg/HORIZON.png';
 
 type CardProps = {
   name?: string | null;
@@ -18,7 +19,8 @@ const DrawerEpisodeCard = ({ poster, onClick }: CardProps) => {
         <CardMedia
           component="img"
           height="150"
-          image={poster ? poster : CardImg}
+          // image={poster ? poster : CardImg}
+          image={CardImg}
           alt="episode-img"
         />
       </Card>

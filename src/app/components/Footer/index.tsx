@@ -56,16 +56,14 @@ export const Footer = ({ className }: Props) => {
                 <li>
                   <StyledImageIcon src={location} alt="phone" />
                   <a>
-                    FUSION &nbsp; 51/3079 PRA 9 , <br /> NIKUNJAM,
-                    PUNNAKKAMUGHAL , <br /> ARAMADA TRIVANDRUM Kerala 695032,
-                    INDIA
+                    Navarasa World Private Limited <br /> 51/3079 PRA 9 , <br />{' '}
+                    NIKUNJAM, PUNNAKKAMUGHAL , <br /> ARAMADA TRIVANDRUM Kerala
+                    695032, INDIA
                   </a>
                 </li>
                 <li>
                   <StyledImageIcon src={emailIcon} alt="email" />
-                  <a href="mailto:info@fusionflix.in">
-                    info@fusionflix.in
-                  </a>
+                  <a href="mailto:info@fusionflix.in">info@fusionflix.in</a>
                 </li>
                 {/* <li>
                   <StyledImageIcon src={phoneIcon} alt="phone" />
@@ -154,7 +152,10 @@ export const Footer = ({ className }: Props) => {
       </Box>
       <div className="copyright">
         {' '}
-        <p>Copyright &copy; 2024, All Right Reserved Fusion </p>
+        <p>
+          Copyright &copy; 2024, All Right Reserved Navarasa World Private
+          Limited{' '}
+        </p>
       </div>
     </FooterWrapper>
   );

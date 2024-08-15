@@ -239,13 +239,13 @@ const HomePage = (props: Props) => {
     if (CarouselIsMoving) {
       return;
     } else if (id) {
-      // if (currentSubscription?.active && ExpiryDate) {
-      //   navigate(RoutePath.playvideo.path.replace(':videoId', id));
-      // } else {
-      //   navigate(RoutePath.settings.path);
-      //   dispatch(userActions.setSettingsTabVal(4));
-      // }
-      navigate(RoutePath.playvideo.path.replace(':videoId', id));
+      if (currentSubscription?.active && ExpiryDate) {
+        navigate(RoutePath.playvideo.path.replace(':videoId', id));
+      } else {
+        navigate(RoutePath.settings.path);
+        dispatch(userActions.setSettingsTabVal(4));
+      }
+      // navigate(RoutePath.playvideo.path.replace(':videoId', id));
     }
   };
 

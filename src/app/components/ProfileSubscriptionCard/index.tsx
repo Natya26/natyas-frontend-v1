@@ -30,7 +30,8 @@ const ProfileSubscriptionCard = ({
   newPlan,
   price,
 }: CardProps) => {
-  const PlanOptions = planDetails?.join(' ');
+  // const PlanOptions = planDetails?.join(' ');
+  const PlanOptions = planDetails;
 
   return (
     <Wrapper

@@ -215,22 +215,22 @@ export const IndividialView = ({
     handleGetSimilarSeries(e);
   };
   const handlePlayClick = (e, id: string) => {
-    // if (currentSubscription?.active && ExpiryDate) {
-    //   navigate(RoutePath.playvideo.path.replace(':videoId', id));
-    // } else {
-    //   navigate(RoutePath.settings.path); //Redirect to settings page
-    //   dispatch(userActions.setSettingsTabVal(4)); //for making subscription tab active
-    // }
-    navigate(RoutePath.playvideo.path.replace(':videoId', id));
+    if (currentSubscription?.active && ExpiryDate) {
+      navigate(RoutePath.playvideo.path.replace(':videoId', id));
+    } else {
+      navigate(RoutePath.settings.path); //Redirect to settings page
+      dispatch(userActions.setSettingsTabVal(4)); //for making subscription tab active
+    }
+    // navigate(RoutePath.playvideo.path.replace(':videoId', id));
   };
   const handleWatch = (e, id: string) => {
-    // if (currentSubscription?.active && ExpiryDate) {
-    //   navigate(RoutePath.playvideo.path.replace(':videoId', id));
-    // } else {
-    //   navigate(RoutePath.settings.path); //Redirect to settings page
-    //   dispatch(userActions.setSettingsTabVal(4)); //for making subscription tab active
-    // }
-    navigate(RoutePath.playvideo.path.replace(':videoId', id));
+    if (currentSubscription?.active && ExpiryDate) {
+      navigate(RoutePath.playvideo.path.replace(':videoId', id));
+    } else {
+      navigate(RoutePath.settings.path); //Redirect to settings page
+      dispatch(userActions.setSettingsTabVal(4)); //for making subscription tab active
+    }
+    // navigate(RoutePath.playvideo.path.replace(':videoId', id));
   };
 
   function a11yProps(index: number) {

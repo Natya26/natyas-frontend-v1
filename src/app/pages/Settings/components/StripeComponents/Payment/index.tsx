@@ -23,7 +23,7 @@ type Props = {
 //   amount: 1099,
 // };
 const Payment = ({
-  publishableKey,
+  // publishableKey,
   paymentIntendData,
   showStripes,
   setShowStripes,

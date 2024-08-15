@@ -155,7 +155,7 @@ const SubscripionsTab = (props: Props) => {
     currentSubscription?.valid_till! > new Date().toISOString();
   const handleStripeClick = () => {
     setShowStripes(true);
-    handleGetPaymentIntend(PaymentIntendPayload);
+    // handleGetPaymentIntend(PaymentIntendPayload);
   };
   const handleAirpayClick = () => {
     handleRequest(generateAirpayChecksum(selectedPlan?.id!))
@@ -299,7 +299,8 @@ const SubscripionsTab = (props: Props) => {
                       : false
                   }
                   planName={item?.name!}
-                  planDetails={item?.perks!}
+                  // planDetails={item?.perks!}
+                  planDetails="Watch All the Series. Click to Subscribe"
                   price={item?.cost}
                   validFrom={
                     currentSubscription?.active
@@ -312,7 +313,7 @@ const SubscripionsTab = (props: Props) => {
                       : ''
                   }
                   expireDate={'10/23'}
-                  onClick={e => handleShowPaymentView(e, item?.id, item)}
+                  // onClick={e => handleShowPaymentView(e, item?.id, item)}
                 />
               );
             })}
@@ -322,17 +323,17 @@ const SubscripionsTab = (props: Props) => {
             <div className="button-wrapper">
               <ButtonWrapper onClick={handleStripeClick}>
                 Debit Card/Credit Card
-                <Image className="stripe-logo" src={StripeLogo} />
+                {/* <Image className="stripe-logo" src={StripeLogo} /> */}
               </ButtonWrapper>
-              <label className="or-label">or</label>
-              <ButtonWrapper onClick={handleHdfcPaypayClick}>
+              {/* <label className="or-label">or</label> */}
+              {/* <ButtonWrapper onClick={handleHdfcPaypayClick}>
                 UPI payment
                 <Image className="hdfc-logo" src={Hdfc} />
-              </ButtonWrapper>
+              </ButtonWrapper> */}
               <label className="or-label">or</label>
               <ButtonWrapper onClick={handleAirpayClick}>
                 Cards, UPI & More
-                <Image className="airpay-logo" src={Airpay} />
+                {/* <Image className="airpay-logo" src={Airpay} /> */}
               </ButtonWrapper>
             </div>
           </StyledTabCardView>

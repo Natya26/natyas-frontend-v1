@@ -88,7 +88,7 @@ const PrivacyPolicyTab = (props: Props) => {
               If after you opt-in, you change your mind, you may withdraw your
               consent for us to contact you, for the continued collection, use
               or disclosure of your information, at any time, by emailing us at
-              info@fusionflix.in or contacting us at the address provided on the
+              contact@indhriya.com or contacting us at the address provided on the
               website.
             </StyledTypography>
           </SubContentWrapper>
@@ -250,7 +250,7 @@ const PrivacyPolicyTab = (props: Props) => {
               If you would like to: access, correct, amend or delete any
               personal information we have, register a complaint, or simply want
               more information, mail our Privacy Compliance Officer at
-              info@fusionflix.in Or by contacting at the company contact which
+              contact@indhriya.com Or by contacting at the company contact which
               is hereby incorporated by this reference into the Terms of
               Service.
             </StyledTypography>

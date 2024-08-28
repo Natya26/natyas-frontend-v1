@@ -1,6 +1,6 @@
-# Navarasa World
+# Indhriya
 
-Welcome to the **Indhriya* ! This is a React-based application developed with TypeScript, designed to provide a seamless experience for streaming web series, and other video content. The platform offers features like user authentication, content browsing, search functionality, and more.
+Welcome to the **Indhriya** ! This is a React-based application developed with TypeScript, designed to provide a seamless experience for streaming web series, and other video content. The platform offers features like user authentication, content browsing, search functionality, and more.
 
 ## Table of Contents
 

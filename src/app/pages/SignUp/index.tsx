@@ -96,9 +96,9 @@ const SignUp = (props: Props) => {
           Cookies.set('userId', userId);
           dispatch(appSliceActions.setIsAuthenticated(true));
           dispatch(appSliceActions.setRedirectPath(RoutePath.settings.path));
-          // navigate(RoutePath.homepage.path);
+          navigate(RoutePath.homepage.path);
           // Changed for fusion
-          navigate(RoutePath.fusionhomepage.path);
+          // navigate(RoutePath.fusionhomepage.path);
         } else {
           setOffToast('error', 'Something went wrong');
         }

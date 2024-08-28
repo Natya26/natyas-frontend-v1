@@ -16,7 +16,7 @@ import { useManageAppSlice } from '../slice';
 import PageLoaderWrapper from 'app/components/PageLoaderWrapper';
 import PulseLoader from 'react-spinners/PulseLoader';
 import { Footer } from 'app/components/Footer';
-import FusionList from '../FusionHomePage/constants/index';
+// import FusionList from '../FusionHomePage/constants/index';
 
 type Props = {};
 
@@ -27,9 +27,9 @@ export const ListView = (props: Props) => {
   const { getHomePageList, getNewAndHotList } = HomeApiService;
   const dispatch = useDispatch();
   const { actions } = useManageListViewSlice();
-  // const allSeriesList = useSelector(selectListViewList);
+  const allSeriesList = useSelector(selectListViewList);
   //changed for fusion static video pages
-  const allSeriesList = FusionList;
+  // const allSeriesList = FusionList;
   const listHeaderName = useSelector(selectListHeaderName);
   //Loader
   const pageLoader = useSelector(selectPageLoader);
@@ -44,9 +44,9 @@ export const ListView = (props: Props) => {
     tamil: 'tamil',
   };
   const handleBack = (): void => {
-    // navigate(RoutePath.homepage.path);
+    navigate(RoutePath.homepage.path);
     // Changed for fusion
-    navigate(RoutePath.fusionhomepage.path);
+    // navigate(RoutePath.fusionhomepage.path);
   };
   const getAllListViewList = (lang?: string) => {
     if (allListName === ListPath.newandhot) {
@@ -130,8 +130,8 @@ export const ListView = (props: Props) => {
                           onClick={e => handleSeriesViewClick(item?.id!)}
                           className="myhomecard"
                           poster={
-                            // item?.poster ? SERVER_BASE_URL + item?.poster : ''
-                            item?.image
+                            item?.poster ? SERVER_BASE_URL + item?.poster : ''
+                            // item?.image
                           }
                         />
                       </CardWrapper>

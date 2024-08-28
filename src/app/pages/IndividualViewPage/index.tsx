@@ -39,7 +39,7 @@ import { Footer } from 'app/components/Footer';
 import { selectCurrentUserSubscription } from '../Settings/slice/selectors';
 import { useManageUserSlice } from '../Settings/slice';
 import { SubscriptionApiService } from 'services/openapi/services/SubscriptionApiService';
-import FusionVideo from '../FusionHomePage/constants/index';
+// import FusionVideo from '../FusionHomePage/constants/index';
 
 type Props = {
   children?: React.ReactNode;
@@ -87,13 +87,13 @@ export const IndividialView = ({
   const SeriesPayload = useSelector(selectSeries);
 
   //updated for fusion
-  const FusionSeriesPayload = FusionVideo.filter(
-    item => item.id.toString() === routeSeriesId,
-  );
+  // const FusionSeriesPayload = FusionVideo.filter(
+  //   item => item.id.toString() === routeSeriesId,
+  // );
 
-  const FusionSimilarSeriesPayload = FusionVideo.filter(
-    obj => JSON.stringify(obj) !== JSON.stringify(FusionSeriesPayload[0]),
-  );
+  // const FusionSimilarSeriesPayload = FusionVideo.filter(
+  //   obj => JSON.stringify(obj) !== JSON.stringify(FusionSeriesPayload[0]),
+  // );
   const SimilarSeriesPayload = useSelector(selectSimilarSeries);
   const pageLoader = useSelector(selectPageLoader);
 
@@ -270,10 +270,11 @@ export const IndividialView = ({
     handleGetSeries(seriesId);
     handleGetSimilarSeries(seriesId);
   }, []);
-  // const encodedBannerImg = encodeURI(SERVER_BASE_URL + SeriesPayload?.poster);
+
+  const encodedBannerImg = encodeURI(SERVER_BASE_URL + SeriesPayload?.poster);
 
   //updated for fusion static page.
-  const encodedBannerImg = encodeURI(FusionSeriesPayload[0]?.image);
+  // const encodedBannerImg = encodeURI(FusionSeriesPayload[0]?.image);
   return (
     <>
       {pageLoader ? (
@@ -298,26 +299,24 @@ export const IndividialView = ({
                         <VectorImg src={vector} alt="vector" />
                       </VectorButton>
 
-                      <HeadingWrapper>
-                        {FusionSeriesPayload[0]?.title}
-                      </HeadingWrapper>
+                      <HeadingWrapper>{SeriesPayload?.name}</HeadingWrapper>
                     </TopWrapper>
 
                     <ContentWrapper>
                       <ParaWrapper>
-                        {releaseYear}. {FusionSeriesPayload[0]?.language}
+                        {releaseYear}. {SeriesPayload?.languages?.[0]?.name}
                       </ParaWrapper>
                       <FirstParaWrapper>
-                        {FusionSeriesPayload[0]?.description}
+                        {SeriesPayload?.description}
                       </FirstParaWrapper>
                       <IconWrapper>
-                        {/* <ListWrapper>
+                        <ListWrapper>
                           <StyledMyList
                             value={SeriesPayload?.isInMyList}
                             onClick={handleAddMyList}
                           />
                           <SecondParaWrapper>My List</SecondParaWrapper>
-                        </ListWrapper> */}
+                        </ListWrapper>
                         <LikeWrapper>
                           <div className="icon">
                             <LikeButton
@@ -332,18 +331,13 @@ export const IndividialView = ({
                   </LeftWrapper>
                 </Grid>
                 <Grid xs={5} sm={6} md={6} lg={6} xl={6}>
-                  {/* {SeriesPayload?.trailers?.length ? ( */}
-                  {FusionSeriesPayload?.length ? (
+                  {SeriesPayload?.trailers?.length ? (
                     <RightWrapper>
                       <PlayButton
                         onClick={e =>
-                          // handlePlayClick(
-                          //   e,
-                          //   SeriesPayload?.trailers?.[0]?.fwp_id!,
-                          // )
                           handlePlayClick(
                             e,
-                            FusionSeriesPayload?.[0]?.id.toString(),
+                            SeriesPayload?.trailers?.[0]?.fwp_id!,
                           )
                         }
                         className="playbtn"
@@ -379,7 +373,7 @@ export const IndividialView = ({
                 <WatchWrapper>
                   <h4>{SeriesPayload?.seasons?.[0]?.name}</h4>
 
-                  {/* {SeriesPayload?.seasons?.[0]?.episodes?.map(
+                  {SeriesPayload?.seasons?.[0]?.episodes?.map(
                     (episode, index) => {
                       return (
                         <StyledWatchCard
@@ -396,9 +390,9 @@ export const IndividialView = ({
                         />
                       );
                     },
-                  )} */}
+                  )}
                   {/* updated for fusion static page */}
-                  {FusionSeriesPayload?.map((episode, index) => {
+                  {/* {FusionSeriesPayload?.map((episode, index) => {
                     return (
                       <StyledWatchCard
                         key={index}
@@ -409,7 +403,7 @@ export const IndividialView = ({
                         onClick={e => handleWatch(e, episode?.id.toString()!)}
                       />
                     );
-                  })}
+                  })} */}
                   <div className="border" />
                   {/* <h4>Trailers</h4>
                   <TrailerWrapper>
@@ -455,8 +449,7 @@ export const IndividialView = ({
               </TabPanel>
             </Box>
           </SecondWrapper>
-          {/* {SimilarSeriesPayload?.length && ( */}
-          {FusionSimilarSeriesPayload?.length && (
+          {SimilarSeriesPayload?.length && (
             <SectionWrapper>
               <HomeHeadLabelWrapper>
                 <ListHeadLabel>SIMILAR SERIES</ListHeadLabel>
@@ -481,10 +474,12 @@ export const IndividialView = ({
                   dotListClass="custom-dot-list-style"
                   itemClass="carousel-item-padding-40-px"
                 >
-                  {FusionSimilarSeriesPayload?.map((item, index) => (
+                  {SimilarSeriesPayload?.map((item, index) => (
                     <ImageCard
                       key={index}
-                      poster={item?.image ? item.image : ''}
+                      poster={
+                        item?.poster ? SERVER_BASE_URL + item?.poster : ''
+                      }
                       onClick={e => handleSimilarSeriesClick(item.id!)}
                     />
                   ))}

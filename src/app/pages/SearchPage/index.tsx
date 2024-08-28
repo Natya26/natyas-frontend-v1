@@ -30,7 +30,7 @@ import PageLoaderWrapper from 'app/components/PageLoaderWrapper';
 import PulseLoader from 'react-spinners/PulseLoader';
 import { selectPageLoader } from '../slice/selectors';
 import { useManageAppSlice } from '../slice';
-import FusionVideos from '../FusionHomePage/constants/index';
+// import FusionVideos from '../FusionHomePage/constants/index';
 
 type Props = {};
 
@@ -61,13 +61,13 @@ const SearchPage = (props: Props) => {
   const [searchTerm, setSearchTerm] = React.useState('');
 
   //handle Fusion Search Videos
-  const handleSearchFusionVideos = (text: string) => {
-    const query = text.toLowerCase();
-    setSearchTerm(query);
-  };
-  const filteredVideos = FusionVideos.filter(video =>
-    video.title.toLowerCase().includes(searchTerm)
-  );
+  // const handleSearchFusionVideos = (text: string) => {
+  //   const query = text.toLowerCase();
+  //   setSearchTerm(query);
+  // };
+  // const filteredVideos = FusionVideos.filter(video =>
+  //   video.title.toLowerCase().includes(searchTerm)
+  // );
 
   //handle Genre click
   const handleListItemClick = (index?: number, name?: string) => {
@@ -89,9 +89,9 @@ const SearchPage = (props: Props) => {
 
   //handle  backToHomeclick
   const handleBackToHomeClick = () => {
-    // navigate(RoutePath.homepage.path);
+    navigate(RoutePath.homepage.path);
     // Changed for fusion
-    navigate(RoutePath.fusionhomepage.path);
+    // navigate(RoutePath.fusionhomepage.path);
   };
   //handle get Genre lookup
   const handleGetLookup = () => {
@@ -116,10 +116,10 @@ const SearchPage = (props: Props) => {
   const handleChange = (
     e?: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    // handleGetMediaSearchResult(e?.target.value! ?? '');
-    //updated for fusion videos
     e?.preventDefault();
-    handleSearchFusionVideos(e?.target.value! ?? '');
+    handleGetMediaSearchResult(e?.target.value! ?? '');
+    //updated for fusion videos
+    // handleSearchFusionVideos(e?.target.value! ?? '');
   };
   useEffect(() => {
     dispatch(AppActions.setPageLoader(true));
@@ -179,7 +179,7 @@ const SearchPage = (props: Props) => {
               </StyledListWrapper>
               <RightContentWrapper className="search-content">
                 <CardContentWrapper>
-                  {/* {allSeriesList?.map((item, index) => (
+                  {allSeriesList?.map((item, index) => (
                     <ImageCard
                       key={index}
                       poster={
@@ -187,14 +187,14 @@ const SearchPage = (props: Props) => {
                       }
                       onClick={e => handleSeriesViewClick(item?.id!)}
                     />
-                  ))} */}
-                  {filteredVideos?.map((item, index) => (
+                  ))}
+                  {/* {filteredVideos?.map((item, index) => (
                     <ImageCard
                       key={index}
                       poster={item?.image ? item?.image : ''}
                       onClick={e => handleSeriesViewClick(item?.id!)}
                     />
-                  ))}
+                  ))} */}
                 </CardContentWrapper>
               </RightContentWrapper>
             </ContentWrapper>

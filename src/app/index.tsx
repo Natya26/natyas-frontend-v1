@@ -140,7 +140,7 @@ export function App() {
           />
         </Route>
         <Route element={<HomePageLayout />}>
-          {/* <Route
+          <Route
             path={RoutePath.homepage.path}
             element={
               <ProtectedRoute
@@ -151,8 +151,8 @@ export function App() {
                 outlet={<HomePage />}
               />
             }
-          /> */}
-          <Route
+          />
+          {/* <Route
             path={RoutePath.fusionhomepage.path}
             element={
               <ProtectedRoute
@@ -163,7 +163,7 @@ export function App() {
                 outlet={<FusionHomePage />}
               />
             }
-          />
+          /> */}
           <Route
             path={RoutePath.mylistpage.path}
             element={

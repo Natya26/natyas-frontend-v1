@@ -64,7 +64,7 @@ export const LandingPage = (props: Props) => {
           <HeadingWrapper>Exclusive content, wherever you go</HeadingWrapper>
           <FirstParaWrapper>
             Get early access to new releases to content exclusively available on
-            Fusion
+            Indhriya
           </FirstParaWrapper>
           <ButtonWrapper
             onClick={handleWatchClick}
@@ -129,12 +129,12 @@ export const LandingPage = (props: Props) => {
                     available on Navarasa
                   </SecondParaWrapper> */}
                   <SecondParaWrapper>
-                    Become a part of the exclusive Fusion community.
+                    Become a part of the exclusive Indhriya community.
                   </SecondParaWrapper>
                   <SecondParaWrapper>
                     Only subscribed members have access to this exclusive
                     content, so you'll be joining a community of like-minded
-                    people who love Fusion originals.
+                    people who love Indhriya originals.
                   </SecondParaWrapper>
                 </div>
               </Grid>
@@ -162,7 +162,7 @@ export const LandingPage = (props: Props) => {
                   Create your own personalized watchlists
                 </ThirdParaWrapper> */}
                 <ThirdParaWrapper>
-                  Change the way you watch content on Fusion.
+                  Change the way you watch content on Indhriya.
                 </ThirdParaWrapper>
                 <ThirdParaWrapper>
                   {' '}

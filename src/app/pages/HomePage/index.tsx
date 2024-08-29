@@ -269,7 +269,7 @@ const HomePage = (props: Props) => {
       {pageLoader ? (
         <>
           <PageLoaderWrapper>
-            <PulseLoader color="#f4793b" />
+            <PulseLoader color="#e0be00" />
           </PageLoaderWrapper>
         </>
       ) : (
@@ -809,7 +809,7 @@ const HomePage = (props: Props) => {
 };
 
 const ViewAllLabel = styled(StyledLabel)`
-  color: #f4793b !important;
+  color: #e0be00 !important;
   text-transform: initial !important;
   letter-spacing: 1px !important;
   cursor: pointer;
@@ -866,15 +866,15 @@ const HomePageWrapper = styled.div`
         }
         button.each-slideshow-indicator.active {
           &::before {
-            background: #f4793b !important;
+            background: #e0be00 !important;
           }
         }
       }
     }
   }
   .react-multi-carousel-dot--active button {
-    background: #f4793b !important;
-    border-color: #f4793b !important;
+    background: #e0be00 !important;
+    border-color: #e0be00 !important;
   }
   .react-multi-carousel-dot-list {
     li {
@@ -1323,7 +1323,7 @@ const RecommendedWrapper = styled.div`
     font-family: 'Urbanist';
     font-weight: 700;
     font-size: 20px;
-    color: #f4793b;
+    color: #e0be00;
     padding-left: 5px;
   }
   .recommended {

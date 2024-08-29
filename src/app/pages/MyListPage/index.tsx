@@ -105,7 +105,7 @@ export const MyListPage = (props: Props) => {
       {pageLoader ? (
         <>
           <PageLoaderWrapper>
-            <PulseLoader color="#f4793b" />
+            <PulseLoader color="#e0be00" />
           </PageLoaderWrapper>
         </>
       ) : (
@@ -312,7 +312,7 @@ const TopWrapper = styled.div`
     align-items: center;
   }
   .edit {
-    background-color: #f4793b;
+    background-color: #e0be00;
   }
   button {
     padding: 0px !important;

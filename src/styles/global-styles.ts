@@ -71,19 +71,19 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   .submit-btn{
-    background:#f4793b !important
+    background:#e0be00 !important
   }
 
   .MuiList-root {
     background-color: #201E1E !important;
-    color: #f4793b !important;
+    color: #e0be00 !important;
   }
   #home-menu-appbar {
     .MuiPaper-root.MuiMenu-paper{
       background: #201e1e !important;
       .MuiList-root {
     background-color: transparent !important;
-    color: #f4793b !important;
+    color: #e0be00 !important;
     }}
     } 
    
@@ -113,7 +113,7 @@ export const GlobalStyle = createGlobalStyle`
       }
 
     .MuiMenuItem-root.Mui-selected{
-      color: #F4793B !important;
+      color: #e0be00 !important;
       background: none !important;
     }
   }

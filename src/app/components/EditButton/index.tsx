@@ -44,7 +44,7 @@ const StyledButton = styled(Button)`
   align-items: center;
   justify-content: center;
   background: #201e1e !important;
-  color: #f4793b !important;
+  color: #e0be00 !important;
   border-radius: 10px !important;
   font-family: 'Urbanist' !important;
   .text-span {

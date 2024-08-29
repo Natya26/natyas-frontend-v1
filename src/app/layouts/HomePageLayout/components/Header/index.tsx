@@ -9,7 +9,7 @@ import {
   MenuItem,
 } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Icon from './assets/img/logo/logo.png';
+import Icon from './assets/img/logo/indhriya-logo.png';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import { ReactComponent as ProfileIcon } from './assets/img/icons/profile.svg';
@@ -368,8 +368,8 @@ const headerStyles = {
     width: 'calc(100% - 0px)',
   },
   logo: {
-    width: '100%',
-    height: '60px',
+    width: '220px',
+    height: '90px',
     borderRadius: '0px',
     cursor: 'pointer',
   },

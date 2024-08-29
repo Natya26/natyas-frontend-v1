@@ -24,7 +24,7 @@ h1 {
   border-radius: 15px;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   overflow: hidden;
-  border: 2px solid #F4793B;
+  border: 2px solid #e0be00;
 }
 
 .upload-options {

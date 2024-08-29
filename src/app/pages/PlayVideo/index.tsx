@@ -339,7 +339,7 @@ const MainWrapper = styled.div`
   }
   .scrubber{
     vm-controls {
-      --vm-slider-value-color: #F4793B !important;
+      --vm-slider-value-color: #e0be00 !important;
       --vm-slider-track-height: 15px;
       --vm-scrubber-buffered-bg: #ffffff !important;
       --vm-slider-track-focused-height: 15px;

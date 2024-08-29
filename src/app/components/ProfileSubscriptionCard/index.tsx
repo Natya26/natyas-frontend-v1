@@ -120,7 +120,7 @@ const Wrapper = styled.div`
     min-height: 67px;
   }
   &.isActive {
-    border: 1px solid #f4793b !important;
+    border: 1px solid #e0be00 !important;
   }
 `;
 const NameBlockWrapper = styled.div`
@@ -176,7 +176,7 @@ const DetailsBlock = styled.div`
 `;
 const ExpireBlock = styled.div`
   width: 100%;
-  border: 1px solid #f4793b;
+  border: 1px solid #e0be00;
   padding: 4px 8px;
   min-width: 100px;
   max-width: fit-content;
@@ -231,7 +231,7 @@ const IconWrapper = styled.div`
     left: -12px;
   }
   svg {
-    fill: #f4793b;
+    fill: #e0be00;
   }
 `;
 export default ProfileSubscriptionCard;

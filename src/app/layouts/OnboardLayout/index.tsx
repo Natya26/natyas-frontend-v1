@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import bgImage from './assets/img/bg/Fusion_background_Img.png';
+import bgImage from './assets/img/bg/Indhriya_background_Img.png';
 import { Grid, Box, Divider } from '@mui/material';
 import { Outlet } from 'react-router-dom';
-import RightLogo from './assets/img/bg/Fusion-Right-logo.png';
+import RightLogo from './assets/img/bg/Indhriya-Right-logo.png';
 
 const OnboardLayout = () => {
   return (

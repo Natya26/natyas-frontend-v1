@@ -42,7 +42,7 @@ const StyledButton = styled(Button)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #f4793b !important;
+  background: #e0be00 !important;
   color: #ffffff !important;
   border-radius: 10px !important;
   font-family: 'Urbanist' !important;

@@ -108,7 +108,7 @@ export const ListView = (props: Props) => {
       {pageLoader ? (
         <>
           <PageLoaderWrapper>
-            <PulseLoader color="#f4793b" />
+            <PulseLoader color="#e0be00" />
           </PageLoaderWrapper>
         </>
       ) : (

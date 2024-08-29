@@ -309,7 +309,7 @@ const SubHeaderWrapper = styled.div`
     font-size: 14px;
     letter-spacing: 0.8px;
     font-family: 'Urbanist' !important;
-    color: #f4793b !important;
+    color: #e0be00 !important;
     @media (min-width: 576px) and (max-width: 767px) {
       font-size: 13px;
     }
@@ -332,7 +332,7 @@ const SubContentWrapper = styled.div`
     }
   }
   a {
-    color: #f4793b !important;
+    color: #e0be00 !important;
   }
 `;
 

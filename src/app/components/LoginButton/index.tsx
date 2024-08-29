@@ -36,7 +36,7 @@ const Wrapper = styled.div`
       font-family: 'Urbanist' !important;
       text-transform: capitalize !important;
       letter-spacing: 1.2px !important;
-      background: #f4793b !important;
+      background: #e0be00 !important;
       color: #ffffff;
       width: 150px;
       border-radius: 8px !important;
@@ -67,7 +67,7 @@ const Wrapper = styled.div`
         font-size: 11px;
       }
       &:hover {
-        background: #f4793b !important;
+        background: #e0be00 !important;
       }
     }
   }

@@ -185,7 +185,7 @@ const Settings = (props: any) => {
       {pageLoader ? (
         <>
           <PageLoaderWrapper>
-            <PulseLoader color="#f4793b" />
+            <PulseLoader color="#e0be00" />
           </PageLoaderWrapper>
         </>
       ) : (
@@ -393,13 +393,13 @@ const StyledTab = styled(Tabs)`
     }
   }
   .Mui-selected {
-    color: #f4793b !important;
+    color: #e0be00 !important;
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
     svg {
       path {
-        stroke: #f4793b !important;
+        stroke: #e0be00 !important;
       }
     }
   }

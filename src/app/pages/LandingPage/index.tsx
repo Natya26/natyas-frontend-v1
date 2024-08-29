@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import backImg from './assets/image/background/Fusion_background_Img.png';
-import logo from './assets/image/logo/fusion-logo.png';
+import backImg from './assets/image/background/Indhriya_background_Img.png';
+import logo from './assets/image/logo/indhriya-logo.png';
 import appStore from './assets/image/icons/download-apk.png';
 import googlePlay from './assets/image/icons/google-play-button.png';
-import fusionSlideTwo from './assets/videos/fusionSlideTwo.gif';
+import indhriyaSlideTwo from './assets/videos/indhriyaSlideTwo.gif';
 import emailIcon from './assets/image/icons/email.png';
 import phoneIcon from './assets/image/icons/phone.png';
 import WhatsappIcon from './assets/image/icons/whatsapp.png';
@@ -13,7 +13,7 @@ import WhatsappIcon from './assets/image/icons/whatsapp.png';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-import tv from './assets/image/gif/fusionSlideOne.gif';
+import tv from './assets/image/gif/indhriyaSlideOne.gif';
 import devices from './assets/image/icons/devices.png';
 import navigation from './assets/image/icons/navigation.png';
 import { useNavigate } from 'react-router-dom';
@@ -60,7 +60,7 @@ export const LandingPage = (props: Props) => {
     <MainWrapper id="landingPageMainWrapperId">
       <FirstWrapper id="FirstWrapper">
         <SubWrapper>
-          <img src={logo} alt="navarasa_logo" style={{ width: '220px' }} />
+          <img src={logo} alt="navarasa_logo" style={{ width: '270px' }} />
           <HeadingWrapper>Exclusive content, wherever you go</HeadingWrapper>
           <FirstParaWrapper>
             Get early access to new releases to content exclusively available on
@@ -149,8 +149,11 @@ export const LandingPage = (props: Props) => {
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={1}>
             <Grid className="leftDevice" xs={12} md={6}>
-              <div className="postionDevice">
-                <StyledImage src={fusionSlideTwo} />
+              <div className="positionDevice">
+                <StyledImage
+                  className="imgpositionDevice"
+                  src={indhriyaSlideTwo}
+                />
               </div>
             </Grid>
             <Grid className="rightDevice" xs={12} md={6}>
@@ -240,7 +243,7 @@ const ButtonWrapper = styled(Button)`
   &.btn-one {
     color: #ffffff;
     text-transform: capitalize;
-    background-color: #f4793b;
+    background-color: #e0be00;
     font-family: urbanist !important;
     border-radius: 9px !important;
     @media (min-width: 1366px) and (max-width: 4000px) {
@@ -289,7 +292,7 @@ const ButtonWrapper = styled(Button)`
       display: inline-block;
     }
     &:hover {
-      background-color: #f4793b;
+      background-color: #e0be00;
     }
   }
 `;
@@ -554,7 +557,7 @@ const SecondHeadingWrapper = styled.h1`
   color: #ffffff;
   text-align: left;
   span {
-    color: #f4793b;
+    color: #e0be00;
     font-weight: 100;
   }
   @media (min-width: 1366px) and (max-width: 4000px) {
@@ -658,7 +661,7 @@ const ThirdHeadingWrapper = styled.h1`
   color: #ffffff;
   text-align: right;
   span {
-    color: #f4793b;
+    color: #e0be00;
     font-weight: 100;
   }
   @media (min-width: 1366px) and (max-width: 4000px) {
@@ -724,7 +727,7 @@ const Fourthwrapper = styled.div`
   }
 
   ul li::marker {
-    color: #f4793b !important;
+    color: #e0be00 !important;
   }
   .leftNavigation {
     display: flex;
@@ -811,7 +814,7 @@ const FourthHeadingWrapper = styled.h1`
   color: #ffffff;
   margin-bottom: 0px;
   span {
-    color: #f4793b;
+    color: #e0be00;
     font-weight: 100;
   }
   @media (min-width: 1366px) and (max-width: 4000px) {

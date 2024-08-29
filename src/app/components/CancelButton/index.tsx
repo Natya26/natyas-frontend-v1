@@ -36,11 +36,11 @@ const Wrapper = styled.div`
       text-transform: capitalize !important;
       letter-spacing: 1px !important;
       background: transparent !important;
-      color: #f4793b;
+      color: #e0be00;
       max-height: 32px;
       min-width: 100px !important;
       max-width: 150px !important;
-      border: 1px solid #f4793b;
+      border: 1px solid #e0be00;
       border-radius: 10px !important;
       box-shadow: none !important;
       padding: 6px 20px !important;

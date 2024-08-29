@@ -80,7 +80,7 @@ const Wrapper = styled.div`
   padding: 5px;
   position: relative;
   border-radius: 50% !important;
-  border: 2px solid #f4793b;
+  border: 2px solid #e0be00;
 
   width: fit-content;
   /* background: aliceblue; */
@@ -98,10 +98,10 @@ const StyledImg = styled.img`
   min-width: 100px;
   margin: 8px 8px;
   border-radius: 50% !important;
-  border: 2px solid #f4793b;
+  border: 2px solid #e0be00;
 
   &.new-img-selected {
-    border: 3px solid #f4793b;
+    border: 3px solid #e0be00;
   }
 `;
 const StyledThumbImg = styled.img`
@@ -110,7 +110,7 @@ const StyledThumbImg = styled.img`
   margin: 8px 8px;
   border-radius: 50px !important;
   &.new-img-selected {
-    border: 3px solid #f4793b;
+    border: 3px solid #e0be00;
   }
 `;
 

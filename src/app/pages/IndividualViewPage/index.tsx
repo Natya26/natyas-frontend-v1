@@ -280,7 +280,7 @@ export const IndividialView = ({
       {pageLoader ? (
         <>
           <PageLoaderWrapper>
-            <PulseLoader color="#f4793b" />
+            <PulseLoader color="#e0be00" />
           </PageLoaderWrapper>
         </>
       ) : (
@@ -728,7 +728,7 @@ const StyledTab = styled(Tabs)`
   border: none !important;
   padding-bottom: 0px;
   .Mui-selected {
-    color: #f4793b !important;
+    color: #e0be00 !important;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -750,7 +750,7 @@ const StyledTab = styled(Tabs)`
   .MuiTabs-indicator {
     height: 2px;
     bottom: 0;
-    background-color: #f4793b !important;
+    background-color: #e0be00 !important;
   }
   .MuiBox-root {
     border: none !important;

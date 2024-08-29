@@ -131,7 +131,7 @@ const SearchPage = (props: Props) => {
       {pageLoader ? (
         <>
           <PageLoaderWrapper>
-            <PulseLoader color="#f4793b" />
+            <PulseLoader color="#e0be00" />
           </PageLoaderWrapper>
         </>
       ) : (
@@ -272,7 +272,7 @@ const StyledListWrapper = styled.div`
       .MuiButtonBase-root {
         background: none !important;
         &:hover {
-          color: #f4793b !important;
+          color: #e0be00 !important;
         }
         .MuiTypography-root {
           font-family: Urbanist !important;
@@ -287,7 +287,7 @@ const StyledListWrapper = styled.div`
         }
         &.Mui-selected {
           background: none !important;
-          color: #f4793b !important;
+          color: #e0be00 !important;
         }
       }
     }

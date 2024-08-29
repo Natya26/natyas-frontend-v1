@@ -374,7 +374,7 @@ export function MyProfileTab(props: Props) {
 }
 const StyledTabCardView = styled(TabCardView)`
   &.active {
-    border: 1px solid #f4793b; /* Replace with the desired border color */
+    border: 1px solid #e0be00; /* Replace with the desired border color */
   }
 `;
 const StyledGenderWrapper = styled.div`
@@ -493,7 +493,7 @@ const HeaderWrapper = styled.div`
     }
   }
   .username {
-    color: #f4793b;
+    color: #e0be00;
     text-transform: lowercase;
     @media (min-width: 1366px) and (max-width: 4000px) {
       font-size: 15px;

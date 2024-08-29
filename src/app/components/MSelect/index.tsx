@@ -85,7 +85,7 @@ const Wrapper = styled.div`
       max-height: 31px;
       text-align: left;
       background: #201e1e !important;
-      color: #f4793b !important;
+      color: #e0be00 !important;
       border-radius: 10px;
       margin-left:4px;
       @media (min-width: 1366px) and (max-width: 4000px) {
@@ -104,7 +104,7 @@ const Wrapper = styled.div`
       font-family: 'Urbanist';
       background: #201e1e !important;
       box-shadow: inset 0 0 40px 40px #201e1e;
-      color: #f4793b !important;
+      color: #e0be00 !important;
       border-radius: 10px !important;
       min-height: unset !important;
       position: relative;
@@ -136,11 +136,11 @@ const Wrapper = styled.div`
         margin-left:5px;
       }
       &.Mui-disabled {
-        -webkit-text-fill-color: #f4793b !important;
+        -webkit-text-fill-color: #e0be00 !important;
       }
     }
     .MuiSvgIcon-root {
-      fill: #f4793b !important;
+      fill: #e0be00 !important;
       left: 86px;
       @media (min-width: 1366px) and (max-width: 4000px) {
         left: 70px;

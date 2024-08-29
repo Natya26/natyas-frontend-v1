@@ -5,8 +5,8 @@ import Divider from '@mui/material/Divider';
 import googleImg from './assets/google_login.png';
 import { NumberField } from 'app/components/NumberField';
 import { MExtensionField } from 'app/components/MExtensionField';
-import backgroundFusion from './assets/Fusion_background_Img.png';
-import logo from './assets/fusion-logo.png';
+import backgroundFusion from './assets/Indhriya_background_Img.png';
+import logo from './assets/indhriya-logo.png';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'app/RoutePath';
 import { LoginButton } from 'app/components';
@@ -26,7 +26,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GoogleLogin } from '@react-oauth/google';
 import { useManageAppSlice } from '../slice';
 import Cookies from 'js-cookie';
-import LeftLogo from './assets/Fusion-left-logo.png';
+import LeftLogo from './assets/Indhriya-left-logo.png';
 import SimpleReactValidator from 'simple-react-validator';
 
 interface Props {}

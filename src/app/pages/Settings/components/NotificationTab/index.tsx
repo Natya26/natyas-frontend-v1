@@ -132,7 +132,7 @@ const SubContentWrapper = styled.div`
     color: #8a8a8a !important;
   }
   a {
-    color: #f4793b !important;
+    color: #e0be00 !important;
   }
 `;
 const SubTextWrapper = styled.div`

@@ -53,8 +53,6 @@ export const MyListPage = (props: Props) => {
   };
   const handleBack = (): void => {
     navigate(RoutePath.homepage.path);
-    // // Changed for fusion
-    // navigate(RoutePath.fusionhomepage.path);
   };
   const handleSave = (): void => {
     setClose(false);

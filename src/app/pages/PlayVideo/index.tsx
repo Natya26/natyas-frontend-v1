@@ -48,7 +48,6 @@ import PageLoaderWrapper from 'app/components/PageLoaderWrapper';
 import { selectPageLoader } from '../slice/selectors';
 import { useManageAppSlice } from '../slice';
 import { Footer } from 'app/components/Footer';
-// import FusionVideo from '../FusionHomePage/constants/index';
 
 type Props = {};
 
@@ -68,9 +67,6 @@ const PlayVideo = (props: Props) => {
   const pageLoader = useSelector(selectPageLoader);
 
   const [currentTime, setCurrentTime] = useState(0);
-  // const FusionSeriesPayload = FusionVideo.filter(
-  //   item => item.id.toString() === routeVideoId,
-  // );
   const onTimeUpdate = (event: CustomEvent<number>) => {
     setCurrentTime(event.detail);
   };
@@ -107,7 +103,6 @@ const PlayVideo = (props: Props) => {
         }, 2000);
       }
     });
-    // dispatch(actions.setVideoUrl(FusionSeriesPayload[0]?.url));
     setTimeout(() => {
       dispatch(AppActions.setPageLoader(false));
     }, 2000);
@@ -145,11 +140,6 @@ const PlayVideo = (props: Props) => {
                 <source data-src={VideoUrl} type="application/x-mpegURL" />
               </Hls>
 
-              {/* //updated for fusion */}
-              {/* <Video crossOrigin="" poster="">
-                <source data-src={VideoUrl} type="video/mp4" />
-              </Video> */}
-
               <Ui>
                 <LoadingScreen hideDots={false}>Loading</LoadingScreen>
                 <ClickToPlay />
@@ -164,7 +154,6 @@ const PlayVideo = (props: Props) => {
                     <div>
                       <StyledTextFieldContentLabel>
                         {CurrentlyWatchingPayload?.name}
-                        {/* {FusionSeriesPayload[0]?.title} */}
                       </StyledTextFieldContentLabel>
                     </div>
                   </div>

@@ -21,10 +21,10 @@ const PrivacyPolicyTab = (props: Props) => {
               sx={{ marginBottom: '10px' }}
               gutterBottom
             >
-              This Privacy Policy (“Privacy Policy”) applies to FUSION App
-              platforms including without limitation www.fusionflix.in and
-              other related Site/s or App/s, mobile applications and other
-              online features each a “Site/s or App/s”).
+              This Privacy Policy (“Privacy Policy”) applies to Indhriya App
+              platforms including without limitation www.indhriya.com and other
+              related Site/s or App/s, mobile applications and other online
+              features each a “Site/s or App/s”.
             </StyledTypography>
             <StyledTypography variant="body2" gutterBottom>
               This Privacy Policy should be read in conjunction with the Terms
@@ -88,8 +88,8 @@ const PrivacyPolicyTab = (props: Props) => {
               If after you opt-in, you change your mind, you may withdraw your
               consent for us to contact you, for the continued collection, use
               or disclosure of your information, at any time, by emailing us at
-              contact@indhriya.com or contacting us at the address provided on the
-              website.
+              contact@indhriya.com or contacting us at the address provided on
+              the website.
             </StyledTypography>
           </SubContentWrapper>
           <SubHeaderWrapper>

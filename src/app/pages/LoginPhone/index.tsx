@@ -5,7 +5,6 @@ import Divider from '@mui/material/Divider';
 import googleImg from './assets/google_login.png';
 import { NumberField } from 'app/components/NumberField';
 import { MExtensionField } from 'app/components/MExtensionField';
-import backgroundFusion from './assets/Indhriya_background_Img.png';
 import logo from './assets/indhriya-logo.png';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'app/RoutePath';
@@ -105,8 +104,6 @@ export const LoginPhone = () => {
           dispatch(appSliceActions.setIsAuthenticated(true));
           dispatch(appSliceActions.setRedirectPath(RoutePath.settings.path));
           navigate(RoutePath.homepage.path);
-          // Changed for fusion
-          // navigate(RoutePath.fusionhomepage.path);
         } else {
           setOffToast('error', 'Something went wrong');
         }
@@ -292,7 +289,6 @@ const ParaWrapper = styled.p`
 `;
 
 const MainBackgroundImg = styled.div`
-  background: url(${backgroundFusion});
   width: 100%;
   height: 100vh;
   background-size: cover;

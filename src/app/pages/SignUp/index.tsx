@@ -21,7 +21,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
 import { useManageAppSlice } from '../slice';
 import useToast from 'hooks/Toast';
-import LeftLogo from './assets/Fusion-left-logo.png';
+import LeftLogo from './assets/indhriya-logo.png';
 import SimpleReactValidator from 'simple-react-validator';
 
 type Props = {};
@@ -97,8 +97,6 @@ const SignUp = (props: Props) => {
           dispatch(appSliceActions.setIsAuthenticated(true));
           dispatch(appSliceActions.setRedirectPath(RoutePath.settings.path));
           navigate(RoutePath.homepage.path);
-          // Changed for fusion
-          // navigate(RoutePath.fusionhomepage.path);
         } else {
           setOffToast('error', 'Something went wrong');
         }

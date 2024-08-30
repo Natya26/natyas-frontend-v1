@@ -95,8 +95,6 @@ const Header = ({}: Props) => {
   };
   const handleBackToHome = () => {
     navigate(RoutePath.homepage.path);
-    // Changed for fusion
-    // navigate(RoutePath.fusionhomepage.path);
   };
   console.log(location?.pathname, 'location?.pathname--------------');
 
@@ -121,7 +119,7 @@ const Header = ({}: Props) => {
           <Avatar
             onClick={handleBackToHome}
             sx={headerStyles.headerAppIcon}
-            alt="Fusion Header Icon"
+            alt="Indhriya Header Icon"
             src={IndhriyaHeadIcon}
           />
           <Box sx={headerStyles.icon}>

@@ -57,9 +57,12 @@ export const Footer = ({ className }: Props) => {
                 <li>
                   <StyledImageIcon src={location} alt="phone" />
                   <a>
-                    Navarasa World Private Limited <br /> 51/3079 PRA 9 , <br />{' '}
+                    {/* Navarasa World Private Limited <br /> 51/3079 PRA 9 , <br />{' '}
                     NIKUNJAM, PUNNAKKAMUGHAL , <br /> ARAMADA TRIVANDRUM Kerala
-                    695032, INDIA
+                    695032, INDIA */}
+                    Indhriya <br /> 4567 Maple Avenue Avalon City, <br />
+                    Arcadia 89012 <br />
+                    Atlantis
                   </a>
                 </li>
                 <li>
@@ -154,10 +157,7 @@ export const Footer = ({ className }: Props) => {
       </Box>
       <div className="copyright">
         {' '}
-        <p>
-          Copyright &copy; 2024, All Right Reserved Navarasa World Private
-          Limited{' '}
-        </p>
+        <p>Copyright &copy; 2024, All Right Reserved Indhriya</p>
       </div>
     </FooterWrapper>
   );

@@ -124,10 +124,6 @@ export const LandingPage = (props: Props) => {
                   <SecondHeadingWrapper>
                     Exclusive content, <span>wherever you go</span>
                   </SecondHeadingWrapper>
-                  {/* <SecondParaWrapper>
-                    Get early access to new releases to content exclusively
-                    available on Navarasa
-                  </SecondParaWrapper> */}
                   <SecondParaWrapper>
                     Become a part of the exclusive Indhriya community.
                   </SecondParaWrapper>

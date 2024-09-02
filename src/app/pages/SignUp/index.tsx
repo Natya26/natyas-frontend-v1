@@ -63,7 +63,7 @@ const SignUp = (props: Props) => {
     if (simpleValidator?.current?.allValid()) {
       handleRequest(signUpUser(signInPayload)).then(res => {
         if (res.msg === 'Signup Success') {
-          let userId = btoa(res?.data?.result.navarasaUser.id);
+          let userId = btoa(res?.data?.result.indhriyaUser.id);
           Cookies.set('userId', userId);
           navigate(RoutePath.login.path);
           setOffToast('success', 'Account created Successfully');

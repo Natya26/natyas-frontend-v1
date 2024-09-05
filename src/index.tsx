@@ -37,7 +37,7 @@ root.render(
   <Provider store={store}>
     <HelmetProvider>
       <React.StrictMode>
-        <GoogleOAuthProvider clientId="9153321032-r0g6qtfqjvrh0ukktob3hpbmcmv53iqp.apps.googleusercontent.com">
+        <GoogleOAuthProvider clientId="29100417368-8f54uockt9gcqjvdhsflomla7vhfujg4.apps.googleusercontent.com">
           <App />
         </GoogleOAuthProvider>
       </React.StrictMode>

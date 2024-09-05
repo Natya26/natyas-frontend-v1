@@ -10,7 +10,7 @@ export type SignInUserResponse = {
   data?: {
     message?: 'Signup Success';
     result?: {
-      navarasaUser?: User;
+      indhriyaUser?: User;
     };
   };
   details?: any;

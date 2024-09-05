@@ -21,7 +21,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
 import { useManageAppSlice } from '../slice';
 import useToast from 'hooks/Toast';
-import LeftLogo from './assets/Fusion-left-logo.png';
+import LeftLogo from './assets/indhriya-logo.png';
 import SimpleReactValidator from 'simple-react-validator';
 
 type Props = {};
@@ -63,7 +63,7 @@ const SignUp = (props: Props) => {
     if (simpleValidator?.current?.allValid()) {
       handleRequest(signUpUser(signInPayload)).then(res => {
         if (res.msg === 'Signup Success') {
-          let userId = btoa(res?.data?.result.navarasaUser.id);
+          let userId = btoa(res?.data?.result.indhriyaUser.id);
           Cookies.set('userId', userId);
           navigate(RoutePath.login.path);
           setOffToast('success', 'Account created Successfully');
@@ -97,8 +97,6 @@ const SignUp = (props: Props) => {
           dispatch(appSliceActions.setIsAuthenticated(true));
           dispatch(appSliceActions.setRedirectPath(RoutePath.settings.path));
           navigate(RoutePath.homepage.path);
-          // Changed for fusion
-          // navigate(RoutePath.fusionhomepage.path);
         } else {
           setOffToast('error', 'Something went wrong');
         }

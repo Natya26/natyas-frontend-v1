@@ -52,8 +52,6 @@ export const PaymentSuccessPage = ({ name, summary, id }: Props) => {
       .then(res => {
         if (res?.data?.active) {
           navigate(RoutePath.homepage.path);
-          // Changed for fusion
-          // navigate(RoutePath.fusionhomepage.path);
           console.log(
             res,
             'Payment success res.........................................................',

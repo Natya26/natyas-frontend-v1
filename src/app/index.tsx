@@ -16,7 +16,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-tooltip/dist/react-tooltip.css';
 import {
   HomePage,
-  FusionHomePage,
   Login,
   SignUp,
   Settings,
@@ -152,18 +151,6 @@ export function App() {
               />
             }
           />
-          {/* <Route
-            path={RoutePath.fusionhomepage.path}
-            element={
-              <ProtectedRoute
-                {...{
-                  ...defaultProtectedRouteProps,
-                  redirectPath: RoutePath.fusionhomepage.path,
-                }}
-                outlet={<FusionHomePage />}
-              />
-            }
-          /> */}
           <Route
             path={RoutePath.mylistpage.path}
             element={

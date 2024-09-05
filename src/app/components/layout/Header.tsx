@@ -8,7 +8,7 @@ import Toolbar from '@mui/material/Toolbar';
 import InputBase from '@mui/material/InputBase';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import icon from './assets/img/icon/usericon.jpg';
-import FusionHeadIcon from './assets/img/icon/fusion-logo.svg';
+import IndhriyaHeadIcon from './assets/img/icon/indhriya-logo.svg';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -95,8 +95,6 @@ const Header = ({}: Props) => {
   };
   const handleBackToHome = () => {
     navigate(RoutePath.homepage.path);
-    // Changed for fusion
-    // navigate(RoutePath.fusionhomepage.path);
   };
   console.log(location?.pathname, 'location?.pathname--------------');
 
@@ -121,8 +119,8 @@ const Header = ({}: Props) => {
           <Avatar
             onClick={handleBackToHome}
             sx={headerStyles.headerAppIcon}
-            alt="Fusion Header Icon"
-            src={FusionHeadIcon}
+            alt="Indhriya Header Icon"
+            src={IndhriyaHeadIcon}
           />
           <Box sx={headerStyles.icon}>
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -218,8 +216,8 @@ const headerStyles = {
   },
   headerAppIcon: {
     background: '#030303',
-    height: '60px',
-    width: '150px',
+    height: '90px',
+    width: '220px',
     cursor: 'pointer',
   },
 };

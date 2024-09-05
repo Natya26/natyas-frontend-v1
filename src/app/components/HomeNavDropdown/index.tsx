@@ -117,7 +117,7 @@ const Wrapper = styled.div`
       min-height: 31px;
       max-height: 31px;
       text-align: left;
-      color: #f4793b !important;
+      color: #e0be00 !important;
       box-shadow: unset !important;
       .MuiSvgIcon-root
       {
@@ -161,7 +161,7 @@ const Wrapper = styled.div`
       box-shadow: none !important;
       position: relative;
       max-height: initial !important;
-      background: #f4793b !important;
+      background: #e0be00 !important;
       color: rgb(255 255 255) !important;
       border-radius: 10px !important;
       min-height: unset !important;

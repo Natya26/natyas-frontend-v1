@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import styled from 'styled-components';
-import logo from './assets/img/logo/Fusion-logo.png';
+import logo from './assets/img/logo/indhriya-logo.png';
 import { Box, Grid } from '@mui/material';
 import emailIcon from './assets/img/icons/email.png';
 import phoneIcon from './assets/img/icons/phone.png';
@@ -16,19 +17,19 @@ type Props = {
 export const Footer = ({ className }: Props) => {
   const handleTerms = () => {
     window.open(
-      'https://apidev.navarasaworld.com/v1/policies/terms-and-conditions',
+      'https://apidev.indhriya.com/v1/policies/terms-and-conditions',
       '_blank',
     );
   };
   const handlePrivacy = () => {
     window.open(
-      'https://apidev.navarasaworld.com/v1/policies/privacy-policy',
+      'https://apidev.indhriya.com/v1/policies/privacy-policy',
       '_blank',
     );
   };
   const handleRefundPolicy = () => {
     window.open(
-      'https://apidev.navarasaworld.com/v1/policies/refund-policy',
+      'https://apidev.indhriya.com/v1/policies/refund-policy',
       '_blank',
     );
   };
@@ -49,16 +50,16 @@ export const Footer = ({ className }: Props) => {
         <Grid className="footerContainer" container spacing={0}>
           <Grid className="footer" item xs={12} sm={6} md={4}>
             <div className="footer-logo-block">
-              <LogoImage src={logo} alt="Fusion-logo" />
+              <LogoImage src={logo} alt="Indhriya-logo" />
             </div>
             <div>
               <ul className="contact-ul">
                 <li>
                   <StyledImageIcon src={location} alt="phone" />
                   <a>
-                    Navarasa World Private Limited <br /> 51/3079 PRA 9 , <br />{' '}
-                    NIKUNJAM, PUNNAKKAMUGHAL , <br /> ARAMADA TRIVANDRUM Kerala
-                    695032, INDIA
+                    Indhriya <br /> 4567 Maple Avenue Avalon City, <br />
+                    Arcadia 89012 <br />
+                    Atlantis
                   </a>
                 </li>
                 <li>
@@ -88,9 +89,9 @@ export const Footer = ({ className }: Props) => {
               <ul className="terms-conditions-ul">
                 <li>
                   <a
-                    href="/FooterStaticPages/terms-and-conditions.html"
+                    style={{ cursor: 'pointer' }}
                     target="_blank"
-                    // onClick={handleTerms}
+                    onClick={handleTerms}
                     rel="noreferrer"
                   >
                     Terms of Use
@@ -98,9 +99,9 @@ export const Footer = ({ className }: Props) => {
                 </li>
                 <li>
                   <a
-                    href="/FooterStaticPages/privacy-policy.html"
+                    style={{ cursor: 'pointer' }}
                     target="_blank"
-                    // onClick={handlePrivacy}
+                    onClick={handlePrivacy}
                     rel="noreferrer"
                   >
                     Privacy Policy
@@ -108,9 +109,9 @@ export const Footer = ({ className }: Props) => {
                 </li>
                 <li>
                   <a
-                    href="/FooterStaticPages/terms-and-conditions.html"
+                    style={{ cursor: 'pointer' }}
                     target="_blank"
-                    // onClick={handleTerms}
+                    onClick={handleTerms}
                     rel="noreferrer"
                   >
                     Terms and Conditions
@@ -118,8 +119,9 @@ export const Footer = ({ className }: Props) => {
                 </li>
                 <li>
                   <a
-                    href="/FooterStaticPages/refund-policy.html"
+                    style={{ cursor: 'pointer' }}
                     target="_blank"
+                    onClick={handleRefundPolicy}
                     rel="noreferrer"
                   >
                     Refund Policy
@@ -152,17 +154,15 @@ export const Footer = ({ className }: Props) => {
       </Box>
       <div className="copyright">
         {' '}
-        <p>
-          Copyright &copy; 2024, All Right Reserved Navarasa World Private
-          Limited{' '}
-        </p>
+        <p>Copyright &copy; 2024, All Right Reserved Indhriya</p>
       </div>
     </FooterWrapper>
   );
 };
 const LogoImage = styled.img`
-  width: 170px;
-  object-fit: contain;
+  width: 220px;
+  height: 100px;
+  object-fit: cover;
 `;
 const StyledImageIcon = styled.img`
   width: 100%;

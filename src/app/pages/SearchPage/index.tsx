@@ -30,7 +30,6 @@ import PageLoaderWrapper from 'app/components/PageLoaderWrapper';
 import PulseLoader from 'react-spinners/PulseLoader';
 import { selectPageLoader } from '../slice/selectors';
 import { useManageAppSlice } from '../slice';
-// import FusionVideos from '../FusionHomePage/constants/index';
 
 type Props = {};
 
@@ -60,15 +59,6 @@ const SearchPage = (props: Props) => {
   );
   const [searchTerm, setSearchTerm] = React.useState('');
 
-  //handle Fusion Search Videos
-  // const handleSearchFusionVideos = (text: string) => {
-  //   const query = text.toLowerCase();
-  //   setSearchTerm(query);
-  // };
-  // const filteredVideos = FusionVideos.filter(video =>
-  //   video.title.toLowerCase().includes(searchTerm)
-  // );
-
   //handle Genre click
   const handleListItemClick = (index?: number, name?: string) => {
     if (index === selectedIndex) {
@@ -90,8 +80,6 @@ const SearchPage = (props: Props) => {
   //handle  backToHomeclick
   const handleBackToHomeClick = () => {
     navigate(RoutePath.homepage.path);
-    // Changed for fusion
-    // navigate(RoutePath.fusionhomepage.path);
   };
   //handle get Genre lookup
   const handleGetLookup = () => {
@@ -118,8 +106,6 @@ const SearchPage = (props: Props) => {
   ) => {
     e?.preventDefault();
     handleGetMediaSearchResult(e?.target.value! ?? '');
-    //updated for fusion videos
-    // handleSearchFusionVideos(e?.target.value! ?? '');
   };
   useEffect(() => {
     dispatch(AppActions.setPageLoader(true));
@@ -131,7 +117,7 @@ const SearchPage = (props: Props) => {
       {pageLoader ? (
         <>
           <PageLoaderWrapper>
-            <PulseLoader color="#f4793b" />
+            <PulseLoader color="#e0be00" />
           </PageLoaderWrapper>
         </>
       ) : (
@@ -272,7 +258,7 @@ const StyledListWrapper = styled.div`
       .MuiButtonBase-root {
         background: none !important;
         &:hover {
-          color: #f4793b !important;
+          color: #e0be00 !important;
         }
         .MuiTypography-root {
           font-family: Urbanist !important;
@@ -287,7 +273,7 @@ const StyledListWrapper = styled.div`
         }
         &.Mui-selected {
           background: none !important;
-          color: #f4793b !important;
+          color: #e0be00 !important;
         }
       }
     }

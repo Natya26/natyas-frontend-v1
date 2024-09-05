@@ -9,7 +9,7 @@ import {
   MenuItem,
 } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Icon from './assets/img/logo/logo.png';
+import Icon from './assets/img/logo/indhriya-logo.png';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import { ReactComponent as ProfileIcon } from './assets/img/icons/profile.svg';
@@ -41,22 +41,18 @@ export const LanguageModel: DropdownModel[] = [
     id: 1,
     name: 'All',
   },
-  // {
-  //   id: 2,
-  //   name: 'English',
-  // },
-  // {
-  //   id: 2,
-  //   name: 'Malayalam',
-  // },
-  // {
-  //   id: 3,
-  //   name: 'Tamil',
-  // },
-  // {
-  //   id: 4,
-  //   name: 'Hindi',
-  // },
+  {
+    id: 2,
+    name: 'Malayalam',
+  },
+  {
+    id: 3,
+    name: 'Tamil',
+  },
+  {
+    id: 4,
+    name: 'Hindi',
+  },
 ];
 
 const Header = () => {
@@ -164,8 +160,6 @@ const Header = () => {
   };
   const handleBackToHome = () => {
     navigate(RoutePath.homepage.path);
-    // Changed for fusion
-    // navigate(RoutePath.fusionhomepage.path);
   };
   let userName = Cookies.get('userName')!
     ? atob(Cookies.get('userName')!)
@@ -235,7 +229,7 @@ const Header = () => {
               )}
             {location?.pathname !== RoutePath.notifications.path && (
               <Box sx={headerStyles.iconBox}>
-                {/* <NotificationIcon onClick={handleNotificationClick} /> */}
+                <NotificationIcon onClick={handleNotificationClick} />
               </Box>
             )}
             <Box onClick={handleOpenUserMenu} sx={headerStyles.iconBox}>
@@ -368,8 +362,8 @@ const headerStyles = {
     width: 'calc(100% - 0px)',
   },
   logo: {
-    width: '100%',
-    height: '60px',
+    width: '220px',
+    height: '90px',
     borderRadius: '0px',
     cursor: 'pointer',
   },

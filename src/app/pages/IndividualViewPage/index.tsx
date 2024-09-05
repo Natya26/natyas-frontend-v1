@@ -14,7 +14,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { WatchCard } from 'app/components/WatchCard';
 import { TrailerCard } from 'app/components/TrailerCard';
 import ImageCard from 'app/components/ImageCard';
-import logo from './assets/images/logo/Fusion-logo.png';
+import logo from './assets/images/logo/indhriya-logo.png';
 import { selectSeries, selectSimilarSeries } from './slice/selectors';
 import dateFormat from 'dateformat';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,7 +39,6 @@ import { Footer } from 'app/components/Footer';
 import { selectCurrentUserSubscription } from '../Settings/slice/selectors';
 import { useManageUserSlice } from '../Settings/slice';
 import { SubscriptionApiService } from 'services/openapi/services/SubscriptionApiService';
-// import FusionVideo from '../FusionHomePage/constants/index';
 
 type Props = {
   children?: React.ReactNode;
@@ -86,14 +85,6 @@ export const IndividialView = ({
   const [error, setError] = React.useState<unknown | null>();
   const SeriesPayload = useSelector(selectSeries);
 
-  //updated for fusion
-  // const FusionSeriesPayload = FusionVideo.filter(
-  //   item => item.id.toString() === routeSeriesId,
-  // );
-
-  // const FusionSimilarSeriesPayload = FusionVideo.filter(
-  //   obj => JSON.stringify(obj) !== JSON.stringify(FusionSeriesPayload[0]),
-  // );
   const SimilarSeriesPayload = useSelector(selectSimilarSeries);
   const pageLoader = useSelector(selectPageLoader);
 
@@ -221,7 +212,6 @@ export const IndividialView = ({
       navigate(RoutePath.settings.path); //Redirect to settings page
       dispatch(userActions.setSettingsTabVal(4)); //for making subscription tab active
     }
-    // navigate(RoutePath.playvideo.path.replace(':videoId', id));
   };
   const handleWatch = (e, id: string) => {
     if (currentSubscription?.active && ExpiryDate) {
@@ -230,7 +220,6 @@ export const IndividialView = ({
       navigate(RoutePath.settings.path); //Redirect to settings page
       dispatch(userActions.setSettingsTabVal(4)); //for making subscription tab active
     }
-    // navigate(RoutePath.playvideo.path.replace(':videoId', id));
   };
 
   function a11yProps(index: number) {
@@ -273,14 +262,12 @@ export const IndividialView = ({
 
   const encodedBannerImg = encodeURI(SERVER_BASE_URL + SeriesPayload?.poster);
 
-  //updated for fusion static page.
-  // const encodedBannerImg = encodeURI(FusionSeriesPayload[0]?.image);
   return (
     <>
       {pageLoader ? (
         <>
           <PageLoaderWrapper>
-            <PulseLoader color="#f4793b" />
+            <PulseLoader color="#e0be00" />
           </PageLoaderWrapper>
         </>
       ) : (
@@ -391,21 +378,8 @@ export const IndividialView = ({
                       );
                     },
                   )}
-                  {/* updated for fusion static page */}
-                  {/* {FusionSeriesPayload?.map((episode, index) => {
-                    return (
-                      <StyledWatchCard
-                        key={index}
-                        src={episode?.image ? episode?.image : ''}
-                        name={episode.title}
-                        summary={episode.description}
-                        duration={episode?.duration}
-                        onClick={e => handleWatch(e, episode?.id.toString()!)}
-                      />
-                    );
-                  })} */}
                   <div className="border" />
-                  {/* <h4>Trailers</h4>
+                  <h4>Trailers</h4>
                   <TrailerWrapper>
                     {SeriesPayload?.trailers?.map((trailer, index) => {
                       return (
@@ -422,7 +396,7 @@ export const IndividialView = ({
                         />
                       );
                     })}
-                  </TrailerWrapper> */}
+                  </TrailerWrapper>
                   <div className="border" />
                 </WatchWrapper>
               </TabPanel>
@@ -728,7 +702,7 @@ const StyledTab = styled(Tabs)`
   border: none !important;
   padding-bottom: 0px;
   .Mui-selected {
-    color: #f4793b !important;
+    color: #e0be00 !important;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -750,7 +724,7 @@ const StyledTab = styled(Tabs)`
   .MuiTabs-indicator {
     height: 2px;
     bottom: 0;
-    background-color: #f4793b !important;
+    background-color: #e0be00 !important;
   }
   .MuiBox-root {
     border: none !important;

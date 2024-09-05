@@ -98,7 +98,7 @@ export const StyledLabel = styled.label`
   }
 `;
 export const ViewAllLabel = styled(StyledLabel)`
-  color: #f4793b !important;
+  color: #e0be00 !important;
   font-size: 20px !important;
   text-transform: initial !important;
   letter-spacing: 1px !important;
@@ -110,7 +110,7 @@ export const PaySuccessPrimarylabel = styled.label`
   font-weight: 400;
   font-size: 15px;
   line-height: 22px;
-  color: #f4793b !important;
+  color: #e0be00 !important;
   font-size: 22px !important;
   text-transform: initial !important;
   letter-spacing: 1px !important;

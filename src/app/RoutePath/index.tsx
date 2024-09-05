@@ -8,9 +8,6 @@ export const RoutePath = {
   homepage: {
     path: '/home',
   },
-  fusionhomepage: {
-    path: '/fusion-home',
-  },
   settings: {
     path: '/settings',
   },

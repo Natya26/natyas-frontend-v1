@@ -410,7 +410,7 @@ const SubscripionsTab = (props: Props) => {
                     <UpiLoaderWrapper className="upi-loader-wrapper">
                       <span className="loading-text"> Verifying</span>
                       <PulseLoader
-                        color="#f4793b"
+                        color="#e0be00"
                         size={8}
                         speedMultiplier={0.5}
                       />
@@ -490,7 +490,7 @@ const SubscripionsTab = (props: Props) => {
             <br />
 
             <br />
-            <FadeLoader color="#f4793b" />
+            <FadeLoader color="#e0be00" />
             <h6>Checking Transaction status...</h6>
           </StatusLoaderContentWrapper>
         </StatusLoaderWrapper>
@@ -620,7 +620,7 @@ const StatusLoaderContentWrapper = styled.div`
     font-weight: 100;
     position: relative;
     display: inline-block;
-    color: #f4793b3d;
+    color: #e0be003d;
 
     margin: 15px 0px 10px;
 
@@ -630,7 +630,7 @@ const StatusLoaderContentWrapper = styled.div`
       overflow: hidden;
       white-space: nowrap;
       width: 0;
-      color: #f4793b;
+      color: #e0be00;
       animation: fill-1 2s infinite;
     }
   }

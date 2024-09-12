@@ -99,9 +99,9 @@ export const Footer = ({ className }: Props) => {
                 </li>
                 <li>
                   <a
-                    style={{ cursor: 'pointer' }}
+                    href="/FooterStaticPages/privacy-policy.html"
                     target="_blank"
-                    onClick={handlePrivacy}
+                    // onClick={handlePrivacy}
                     rel="noreferrer"
                   >
                     Privacy Policy

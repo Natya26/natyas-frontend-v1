@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import logo from './assets/img/logo/indhriya-logo.png';
 import { Box, Grid } from '@mui/material';
@@ -15,6 +15,7 @@ type Props = {
 };
 
 export const Footer = ({ className }: Props) => {
+  const [isHovered, setIsHovered] = useState(false);
   const handleTerms = () => {
     window.open(
       'https://apidev.indhriya.com/v1/policies/terms-and-conditions',
@@ -99,9 +100,11 @@ export const Footer = ({ className }: Props) => {
                 </li>
                 <li>
                   <a
+                    style={{
+                      fontSize: '22px',
+                    }}
                     href="/FooterStaticPages/privacy-policy.html"
                     target="_blank"
-                    // onClick={handlePrivacy}
                     rel="noreferrer"
                   >
                     Privacy Policy
@@ -154,7 +157,26 @@ export const Footer = ({ className }: Props) => {
       </Box>
       <div className="copyright">
         {' '}
-        <p>Copyright &copy; 2024, All Right Reserved Indhriya</p>
+        <p>
+          Copyright &copy; 2024, All Right Reserved Indhriya &nbsp;
+          <a
+            href="/FooterStaticPages/privacy-policy.html"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Privacy Policy
+          </a>
+          &nbsp; and &nbsp;{' '}
+          <a
+            style={{ cursor: 'pointer' }}
+            target="_blank"
+            onClick={handleTerms}
+            rel="noreferrer"
+          >
+            Terms of Services
+          </a>
+          &nbsp; apply.
+        </p>
       </div>
     </FooterWrapper>
   );
@@ -178,11 +200,12 @@ const StyledImageIcon = styled.img`
 const FooterWrapper = styled.div`
   .copyright {
     margin-bottom: 10px;
+    font-size: 18px;
     p {
       color: #a5a5a5;
     }
     a {
-      text-decoration: none;
+      // text-decoration: ;
       color: #a5a5a5;
     }
   }

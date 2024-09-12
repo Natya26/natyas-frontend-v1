@@ -85,7 +85,11 @@ const SignUp = (props: Props) => {
   const handleSignUpWithGoogle = res => {
     if (res) {
       handleRequest(
-        socialSignup({ token: res?.credential, type: 'GOOGLE' }),
+        socialSignup({
+          token: res?.credential,
+          type: 'GOOGLE',
+          clientType: 'web',
+        }),
       ).then(res => {
         if (res.data) {
           setOffToast('success', 'Signed in  Successfully');
@@ -117,7 +121,7 @@ const SignUp = (props: Props) => {
       <Box>
         <Box>
           <HeadingOneWrapper>
-            Exclusive content, wherever you go 
+            Exclusive content, wherever you go
           </HeadingOneWrapper>
           <ParaOneWrapper>Create a free account.</ParaOneWrapper>
         </Box>

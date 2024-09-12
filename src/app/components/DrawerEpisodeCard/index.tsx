@@ -19,8 +19,7 @@ const DrawerEpisodeCard = ({ poster, onClick }: CardProps) => {
         <CardMedia
           component="img"
           height="150"
-          // image={poster ? poster : CardImg}
-          image={CardImg}
+          image={poster ? poster : CardImg}
           alt="episode-img"
         />
       </Card>
@@ -61,7 +60,6 @@ const CardWrapper = styled.div`
       @media (min-width: 992px) and (max-width: 1199px) {
         width: 280px !important;
         height: 190px;
-        
       }
       @media (min-width: 768px) and (max-width: 991px) {
         width: 260px !important;

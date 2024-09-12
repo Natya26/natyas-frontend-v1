@@ -5,4 +5,5 @@
 export type SocialLoginRequest = {
   token?: string;
   type?: 'GOOGLE' | 'FACEBOOK';
+  clientType?: 'web';
 };

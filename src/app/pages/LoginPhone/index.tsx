@@ -84,7 +84,11 @@ export const LoginPhone = () => {
   const handleLoginWithGoogle = res => {
     if (res) {
       handleRequest(
-        socialSignup({ token: res?.credential, type: 'GOOGLE' }),
+        socialSignup({
+          token: res?.credential,
+          type: 'GOOGLE',
+          clientType: 'web',
+        }),
       ).then(res => {
         if (res.data) {
           setOffToast('success', 'Login was successful');

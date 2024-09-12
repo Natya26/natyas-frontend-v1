@@ -205,7 +205,7 @@ const FooterWrapper = styled.div`
       color: #a5a5a5;
     }
     a {
-      // text-decoration: ;
+      text-decoration: underline;
       color: #a5a5a5;
     }
   }

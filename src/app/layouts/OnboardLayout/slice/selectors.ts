@@ -7,5 +7,7 @@ export const selectSocialLoginPayload = (state: RootState) =>
   state.manageLogin?.socialLoginPayload;
 export const selectLoginUserPayload = (state: RootState) =>
   state.manageLogin?.loginUserPayload;
-  export const selectResendOtpPayload = (state: RootState) =>
+export const selectResendOtpPayload = (state: RootState) =>
   state.manageLogin?.resendOtpPayload;
+export const selectOtplessPayload = (state: RootState) =>
+  state.manageLogin?.otplessSignUpPayload;

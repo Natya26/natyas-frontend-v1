@@ -26,10 +26,17 @@ export const initialState: ManageLoginState = {
     token: '',
     type: 'GOOGLE',
   },
-  resendOtpPayload:{
-    phone_code: "+91",
-    phone: ""
-  }
+  resendOtpPayload: {
+    phone_code: '+91',
+    phone: '',
+  },
+  otplessSignUpPayload: {
+    first_name: '',
+    phone_code: '+91',
+    phone: '',
+    email: '',
+    type: 'SUBSCRIBER',
+  },
 };
 
 const slice = createSlice({
@@ -58,6 +65,27 @@ const slice = createSlice({
     changeEmail(state, action: PayloadAction<string>) {
       if (state.signInUserPayload) {
         state.signInUserPayload.email = action.payload;
+      }
+    },
+    otplesschangeName(state, action: PayloadAction<string>) {
+      if (state.otplessSignUpPayload) {
+        state.otplessSignUpPayload.first_name = action.payload;
+      }
+    },
+    otplesschangePhone(state, action: PayloadAction<string>) {
+      if (state.otplessSignUpPayload) {
+        state.otplessSignUpPayload.phone = action.payload;
+      }
+    },
+    otplesschangePhoneCode(state, action: PayloadAction<string>) {
+      if (state.otplessSignUpPayload) {
+        state.otplessSignUpPayload.phone_code = action.payload;
+      }
+    },
+
+    otplesschangeEmail(state, action: PayloadAction<string>) {
+      if (state.otplessSignUpPayload) {
+        state.otplessSignUpPayload.email = action.payload;
       }
     },
     changeLoginUsername(state, action: PayloadAction<string>) {

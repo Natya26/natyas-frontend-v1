@@ -14,6 +14,12 @@ import { LogoutResponse } from '../models/LogoutResponse';
 import { SocialLoginRequest } from '../models/SocialLoginRequest';
 import { SocialLoginResponse } from '../models/SocialLoginResponse';
 import { ResendOtpRequest } from '../models/ResendOtpRequest';
+import { OTPLessSignUpRequest } from '../models/OTPLessSignUpRequest';
+import { OTPLessSignUpResponse } from '../models/OTPLessSignUpResponse';
+import { OTPLessWhatsppLoginRequest } from '../models/OTPLessWhatsppLoginRequest';
+import { OTPLessWhatsppLoginResponse } from '../models/OTPLessWhatsappLoginResponse';
+import { OTPLessVerifyTokenRequest } from '../models/OTPLessVerifyTokenRequest';
+import { OTPLessVerifyTokenResponse } from '../models/OTPLessVerifyTokenResponse';
 
 export class AuthenticationApIsService {
   /**
@@ -49,6 +55,39 @@ export class AuthenticationApIsService {
       mediaType: 'application/json',
     });
   }
+  /**
+   * API to login a user with username and password
+   * @param requestBody
+   * @returns Tokens Success
+   * @throws ApiError
+   */
+  public static otplessSignUpUser(
+    requestBody?: OTPLessSignUpRequest,
+  ): CancelablePromise<OTPLessSignUpResponse> {
+    return __request(OpenAPI, {
+      method: 'POST',
+      url: '/app/signup',
+      body: requestBody,
+      mediaType: 'application/json',
+    });
+  }
+
+  /**
+   * API to login a user with username and password
+   * @param requestBody
+   * @returns Tokens Success
+   * @throws ApiError
+   */
+  public static otplessVerifyToken(
+    requestBody?: OTPLessVerifyTokenRequest,
+  ): CancelablePromise<OTPLessVerifyTokenResponse> {
+    return __request(OpenAPI, {
+      method: 'POST',
+      url: '/verify-token',
+      body: requestBody,
+      mediaType: 'application/json',
+    });
+  }
 
   /**
    * API to login a user with username and password
@@ -66,7 +105,29 @@ export class AuthenticationApIsService {
       mediaType: 'application/json',
     });
   }
+  /**
+   * API to login a user with whatsapp magic link
+   * @param requestBody
+   * @returns Tokens Success
+   * @throws ApiError
+   */
+  public static otplessWhatsappLogin(
+    requestBody?: OTPLessWhatsppLoginRequest,
+  ): CancelablePromise<OTPLessWhatsppLoginResponse> {
+    return __request(OpenAPI, {
+      method: 'POST',
+      url: '/app/login-with-whatsapp',
+      body: requestBody,
+      mediaType: 'application/json',
+    });
+  }
 
+   /**
+   * API to resend otp
+   * @param requestBody
+   * @returns Tokens Success
+   * @throws ApiError
+   */ 
   public static authOtpResend(
     requestBody:ResendOtpRequest,
 ):CancelablePromise<LoginResponse>{

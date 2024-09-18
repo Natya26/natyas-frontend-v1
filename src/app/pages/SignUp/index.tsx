@@ -7,6 +7,7 @@ import { useManageLoginSlice } from '../../layouts/OnboardLayout/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { ApiError, AuthenticationApIsService } from 'services/openapi';
 import {
+  selectOtplessPayload,
   selectSignInUserPayload,
   selectSocialLoginPayload,
 } from '../../layouts/OnboardLayout/slice/selectors';
@@ -28,7 +29,7 @@ type Props = {};
 
 const SignUp = (props: Props) => {
   //Api Services
-  const { signUpUser, socialSignup } = AuthenticationApIsService;
+  const { signUpUser, socialSignup, otplessSignUpUser } = AuthenticationApIsService;
   const { error: apiError, isLoading, handleRequest } = useApi();
 
   //Slice Actions
@@ -40,28 +41,39 @@ const SignUp = (props: Props) => {
 
   //Redux Selectors
   const signInPayload = useSelector(selectSignInUserPayload);
+  const otplessSignInPayload = useSelector(selectOtplessPayload);
   const socialSigninPayload = useSelector(selectSocialLoginPayload);
   //Toast
   const { setOffToast } = useToast();
 
   const handleNameChange = e => {
-    dispatch(actions.changeName(e.target.value));
+    dispatch(actions.otplesschangeName(e.target.value));
   };
   const handleEmailChange = e => {
-    dispatch(actions.changeEmail(e.target.value));
+    dispatch(actions.otplesschangeEmail(e.target.value));
   };
   const handlePhoneCodeChange = e => {
-    dispatch(actions.changePhoneCode(e.target.value));
+    dispatch(actions.otplesschangePhoneCode(e.target.value));
   };
 
   const handlePhoneChange = e => {
-    dispatch(actions.changePhone(e.target.value));
+    dispatch(actions.otplesschangePhone(e.target.value));
   };
   const simpleValidator = React.useRef(new SimpleReactValidator());
   const [soon, setSoon] = useState<boolean>(true);
   const handleSignupUser = () => {
     if (simpleValidator?.current?.allValid()) {
-      handleRequest(signUpUser(signInPayload)).then(res => {
+      // handleRequest(signUpUser(signInPayload)).then(res => {
+      //   if (res.msg === 'Signup Success') {
+      //     let userId = btoa(res?.data?.result.indhriyaUser.id);
+      //     Cookies.set('userId', userId);
+      //     navigate(RoutePath.login.path);
+      //     setOffToast('success', 'Account created Successfully');
+      //   } else if ((res.msg = 'Phone Number/Email Already In Use')) {
+      //     setOffToast('error', 'Phone Number/Email Already In Use');
+      //   }
+      // });
+      handleRequest(otplessSignUpUser(otplessSignInPayload)).then(res => {
         if (res.msg === 'Signup Success') {
           let userId = btoa(res?.data?.result.indhriyaUser.id);
           Cookies.set('userId', userId);
@@ -155,14 +167,16 @@ const SignUp = (props: Props) => {
                 <MTextField
                   placeholder="Name"
                   onChange={e => handleNameChange(e)}
-                  value={signInPayload?.first_name}
+                  // value={signInPayload?.first_name}
+                  value={otplessSignInPayload?.first_name}
                   validator={simpleValidator.current}
                   error={'Name'}
                   validations={'required|alpha_space'}
                 />
                 <MTextField
                   placeholder="E-mail ID"
-                  value={signInPayload?.email}
+                  // value={signInPayload?.email}
+                  value={otplessSignInPayload?.email}
                   onChange={e => handleEmailChange(e)}
                   validator={simpleValidator.current}
                   error={'E-mail'}
@@ -171,13 +185,15 @@ const SignUp = (props: Props) => {
                 <Box sx={ContactBox}>
                   <StyledExtensionField
                     placeholder="Code"
-                    value={signInPayload?.phone_code}
+                    // value={signInPayload?.phone_code}
+                    value={otplessSignInPayload?.phone_code}
                     onChange={e => handlePhoneCodeChange(e)}
                   />
                   <StyledNumberField
                     className="custom-num-field"
                     placeholder="Your Mobile Number"
-                    value={signInPayload?.phone}
+                    // value={signInPayload?.phone}
+                    value={otplessSignInPayload?.phone}
                     onChange={e => handlePhoneChange(e)}
                     validator={simpleValidator.current}
                     error={'Mobile Number'}

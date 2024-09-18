@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import styled from 'styled-components';
 import Divider from '@mui/material/Divider';
@@ -27,12 +28,14 @@ import { useManageAppSlice } from '../slice';
 import Cookies from 'js-cookie';
 import LeftLogo from './assets/Indhriya-left-logo.png';
 import SimpleReactValidator from 'simple-react-validator';
+import { LoginWhatsapp } from 'app/components/LoginWhatsapp';
 
 interface Props {}
 
 export const LoginPhone = () => {
   //Api Services
-  const { authLogin, socialSignup } = AuthenticationApIsService;
+  const { authLogin, socialSignup, otplessWhatsappLogin, otplessVerifyToken } =
+    AuthenticationApIsService;
   const { error: apiError, isLoading, handleRequest } = useApi();
 
   //Slice Actions
@@ -48,7 +51,8 @@ export const LoginPhone = () => {
   const LoginUserPayload = useSelector(selectLoginUserPayload);
   //Toast
   const { setOffToast } = useToast();
-
+  // Hook to access the current URL location
+  const location = useLocation();
   const loginPayLoad = useSelector(selectLoginUserPayload);
   const [otpView, setOtpView] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -114,7 +118,85 @@ export const LoginPhone = () => {
       });
     }
   };
+  const [token, setToken] = useState(''); // State to hold the token
+  const handleWhatsappLogin = () => {
+    console.log('with whatsapp');
+    handleRequest(
+      otplessWhatsappLogin({
+        phone: loginPayLoad?.username,
+        phone_code: loginPayLoad?.phone_code,
+        type: 'WHATSAPP',
+      }),
+    ).then(res => {
+      if (res.data) {
+        let obtainedToken = res.data.requestIds[0].value;
+        console.log(obtainedToken);
+        setToken(obtainedToken);
+        localStorage.setItem('token', obtainedToken.toString());
+      } else {
+        setOffToast('error', 'Something went wrong');
+      }
+    });
+  };
+  const verifyToken = res => {
+    console.log('in verify token', res);
+    if (res) {
+      console.log('ready yo send request');
+      handleRequest(
+        otplessVerifyToken({
+          token: res,
+          phone: '9110936438',
+          phone_code: loginPayLoad?.phone_code,
+        }),
+      ).then(res => {
+        if (res.data) {
+          console.log(res.data);
+
+          if (res && !(res instanceof ApiError) && !res.err) {
+            setOffToast('success', 'Login was successful');
+            Cookies.set('idToken', res?.data?.idToken);
+            Cookies.set('accessToken', res?.data?.accessToken);
+            Cookies.set('refreshToken', res?.data?.refreshToken);
+            //encoded data
+            let userId = res?.data?.user?.id ? btoa(res?.data?.user?.id) : '';
+            let userName = res?.data?.user?.first_name
+              ? btoa(res?.data?.user?.first_name)
+              : '';
+            let userEmail = res?.data?.user?.email
+              ? btoa(res?.data?.user?.email)
+              : '';
+            let userPhoto = res?.data?.user?.photo
+              ? btoa(res?.data?.user?.photo)
+              : '';
+            //Setting encoded data to cookies
+            Cookies.set('userId', userId);
+            Cookies.set('userName', userName);
+            Cookies.set('userEmail', userEmail);
+            Cookies.set('userPhoto', userPhoto);
+            dispatch(appSliceActions.setIsAuthenticated(true));
+            dispatch(appSliceActions.setRedirectPath(RoutePath.settings.path));
+            navigate(RoutePath.homepage.path);
+          } else {
+            setOffToast('error', 'Something went wrong');
+          }
+        }
+      });
+    }
+  };
+  useEffect(() => {
+    // Extract the 'code' parameter from the URL
+    const urlParams = new URLSearchParams(location.search);
+    const code = urlParams.get('code'); // If coming from WhatsApp, there will be a code
+    // Only run this effect if there is a 'code' in the URL (i.e., redirected from WhatsApp)
+    if (code) {
+      // Send the request to the backend for verification
+      const savedToken = localStorage.getItem('token');
+      verifyToken(savedToken);
+    }
+  }, [location.search]);
+
   const simpleValidator = React.useRef(new SimpleReactValidator());
+
   useEffect(() => {
     dispatch(actions.changeLoginType('SEND_OTP'));
     dispatch(actions.changeLoginUsername(''));
@@ -134,6 +216,7 @@ export const LoginPhone = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                gap: '5px',
                 margin: '8px 0px',
               }}
             >
@@ -149,6 +232,7 @@ export const LoginPhone = () => {
                   console.log('Login Failed');
                 }}
               />
+              <LoginWhatsapp onClick={handleWhatsappLogin} />
             </Box>
             <StyledDivider className="section-divider">Or</StyledDivider>
           </div>
@@ -222,7 +306,7 @@ const StyledExtensionField = styled(MExtensionField)`
   align-self: baseline;
 `;
 const StyledNumberField = styled(NumberField)`
-  width: 100%;
+  width: 80% !important;
   &.custom-num-field {
     padding: 5px 5px 5px 2px !important;
   }

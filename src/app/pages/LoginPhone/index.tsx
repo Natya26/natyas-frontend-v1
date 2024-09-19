@@ -118,34 +118,38 @@ export const LoginPhone = () => {
       });
     }
   };
-  const [token, setToken] = useState(''); // State to hold the token
+
   const handleWhatsappLogin = () => {
-    console.log('with whatsapp');
-    handleRequest(
-      otplessWhatsappLogin({
-        phone: loginPayLoad?.username,
-        phone_code: loginPayLoad?.phone_code,
-        type: 'WHATSAPP',
-      }),
-    ).then(res => {
-      if (res.data) {
-        let obtainedToken = res.data.requestIds[0].value;
-        console.log(obtainedToken);
-        setToken(obtainedToken);
-        localStorage.setItem('token', obtainedToken.toString());
-      } else {
-        setOffToast('error', 'Something went wrong');
-      }
-    });
+    localStorage.setItem('phone', loginPayLoad?.username?.toString() ?? '');
+    if (simpleValidator?.current?.allValid()) {
+      handleRequest(
+        otplessWhatsappLogin({
+          phone: loginPayLoad?.username,
+          phone_code: loginPayLoad?.phone_code,
+          type: 'WHATSAPP',
+        }),
+      ).then(res => {
+        if (res.data) {
+          let obtainedToken = res.data.requestIds[0].value;
+          console.log(res.data);
+          localStorage.setItem('token', obtainedToken.toString());
+          const whatsappURL = `https://api.whatsapp.com/send?phone=919718134978&text&type=phone_number&app_absent=0`;
+          window.location.href = whatsappURL; // Redirect the user to WhatsApp in the same tab
+        } else {
+          setOffToast('error', 'Something went wrong, Retry again');
+        }
+      });
+    } else {
+      simpleValidator.current.showMessages();
+      setSoon(!soon);
+    }
   };
-  const verifyToken = res => {
-    console.log('in verify token', res);
+  const verifyToken = (res, phone) => {
     if (res) {
-      console.log('ready yo send request');
       handleRequest(
         otplessVerifyToken({
           token: res,
-          phone: '9110936438',
+          phone: phone,
           phone_code: loginPayLoad?.phone_code,
         }),
       ).then(res => {
@@ -153,7 +157,7 @@ export const LoginPhone = () => {
           console.log(res.data);
 
           if (res && !(res instanceof ApiError) && !res.err) {
-            setOffToast('success', 'Login was successful');
+            setOffToast('success', 'Successfully Logged In');
             Cookies.set('idToken', res?.data?.idToken);
             Cookies.set('accessToken', res?.data?.accessToken);
             Cookies.set('refreshToken', res?.data?.refreshToken);
@@ -191,7 +195,9 @@ export const LoginPhone = () => {
     if (code) {
       // Send the request to the backend for verification
       const savedToken = localStorage.getItem('token');
-      verifyToken(savedToken);
+      const phone = localStorage.getItem('phone');
+      console.log(savedToken, phone);
+      verifyToken(savedToken, phone);
     }
   }, [location.search]);
 
@@ -232,7 +238,6 @@ export const LoginPhone = () => {
                   console.log('Login Failed');
                 }}
               />
-              <LoginWhatsapp onClick={handleWhatsappLogin} />
             </Box>
             <StyledDivider className="section-divider">Or</StyledDivider>
           </div>
@@ -256,10 +261,11 @@ export const LoginPhone = () => {
                       validations={'required|max:10|min:10'}
                     />
                   </Box>
-                  <Box sx={ContactBox}>
+                  <Box sx={ContactBoxButtons}>
                     <LoginButton type="button" onClick={handleLogin}>
-                      Log in
+                      Log in with OTP
                     </LoginButton>
+                    <LoginWhatsapp onClick={handleWhatsappLogin} />
                   </Box>
                 </Box>
               </Form>
@@ -298,7 +304,16 @@ const ContactBox = {
   alignItems: 'center',
   justifyContent: 'center',
   padding: '0 0 0 5px',
-  margin: '10px 0px',
+  margin: '8px 0px',
+};
+const ContactBoxButtons = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '15px',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '0 0 0 5px',
+  margin: '8px 0px 8px 0px',
 };
 const StyledExtensionField = styled(MExtensionField)`
   padding: 0px !important;
@@ -306,7 +321,7 @@ const StyledExtensionField = styled(MExtensionField)`
   align-self: baseline;
 `;
 const StyledNumberField = styled(NumberField)`
-  width: 80% !important;
+  width: 90% !important;
   &.custom-num-field {
     padding: 5px 5px 5px 2px !important;
   }

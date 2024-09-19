@@ -11,7 +11,7 @@ export const LoginWhatsapp: React.FC<LoginWhatsappProps> = ({ onClick }) => {
   return (
     <CardContainer onClick={onClick}>
       <FaWhatsapp size={24} color="#25D366" style={{ marginRight: '10px' }} />
-      <LoginText>Login with WhatsApp</LoginText>
+      <LoginText>Continue with WhatsApp</LoginText>
     </CardContainer>
   );
 };
@@ -24,12 +24,12 @@ const CardContainer = styled(Box)`
   justify-content: center;
   padding: 12px 20px;
   border-radius: 8px;
-  background-color: #e0ffe0;
+  background-color: #3062d4;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #d0ffd0;
+    background-color: #244ead;
   }
 `;
 
@@ -37,5 +37,9 @@ const LoginText = styled.span`
   font-family: Urbanist, sans-serif;
   font-size: 16px;
   font-weight: 500;
-  color: #333;
+  color: #fff;
+
+  &:hover {
+    color: #dadada;
+  }
 `;

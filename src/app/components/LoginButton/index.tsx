@@ -31,14 +31,15 @@ const Wrapper = styled.div`
   padding: 2px 2px;
   &.button-wrapper {
     .MuiButtonBase-root {
-      font-size: 15px;
-      font-weight: 600;
-      font-family: 'Urbanist' !important;
-      text-transform: capitalize !important;
+      font-size: 16px !important;
+      font-weight: 500;
+      font-family: 'Urbanist', sans-serif !important;
+      text-transform: none;
       letter-spacing: 1.2px !important;
       background: #e0be00 !important;
       color: #ffffff;
-      width: 150px;
+      width: 250px !important;
+      height: 46px !important;
       border-radius: 8px !important;
       box-shadow: none !important;
       padding: 6px 8px !important;
@@ -67,7 +68,8 @@ const Wrapper = styled.div`
         font-size: 11px;
       }
       &:hover {
-        background: #e0be00 !important;
+        background: #c4a802 !important;
+        color: #dadada;
       }
     }
   }

@@ -39,7 +39,7 @@ const Wrapper = styled.div`
       background: #e0be00 !important;
       color: #ffffff;
       width: 250px !important;
-      height: 46px !important;
+      height: 48px !important;
       border-radius: 8px !important;
       box-shadow: none !important;
       padding: 6px 8px !important;

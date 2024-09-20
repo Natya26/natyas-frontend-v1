@@ -28,6 +28,7 @@ import { useManageAppSlice } from '../slice';
 import Cookies from 'js-cookie';
 import LeftLogo from './assets/Indhriya-left-logo.png';
 import SimpleReactValidator from 'simple-react-validator';
+import { LoginWhatsappButton } from 'app/components/LoginWhatsappButton';
 import { LoginWhatsapp } from 'app/components/LoginWhatsapp';
 
 interface Props {}
@@ -54,7 +55,11 @@ export const LoginPhone = () => {
   // Hook to access the current URL location
   const location = useLocation();
   const loginPayLoad = useSelector(selectLoginUserPayload);
+
+  // State to handle the login type and views
+  const [loginType, setLoginType] = useState<string>(''); // 'OTP' or 'WHATSAPP'
   const [otpView, setOtpView] = useState<boolean>(false);
+  const [codeView, setCodeView] = useState<boolean>(false);
   const navigate = useNavigate();
   //Logout Fn
   const handleGotoSignUp = () => {
@@ -72,6 +77,7 @@ export const LoginPhone = () => {
   const [soon, setSoon] = useState<boolean>(true);
   const handleLogin = () => {
     if (simpleValidator?.current?.allValid()) {
+      setLoginType('OTP'); // Set state to OTP login type
       handleRequest(authLogin(loginPayLoad)).then(res => {
         if (res && !(res instanceof ApiError) && !res.err) {
           setOtpView(true);
@@ -122,6 +128,7 @@ export const LoginPhone = () => {
   const handleWhatsappLogin = () => {
     localStorage.setItem('phone', loginPayLoad?.username?.toString() ?? '');
     if (simpleValidator?.current?.allValid()) {
+      setLoginType('WHATSAPP'); // Set state to WhatsApp login type
       handleRequest(
         otplessWhatsappLogin({
           phone: loginPayLoad?.username,
@@ -129,14 +136,16 @@ export const LoginPhone = () => {
           type: 'WHATSAPP',
         }),
       ).then(res => {
-        if (res.data) {
-          let obtainedToken = res.data.requestIds[0].value;
-          console.log(res.data);
-          localStorage.setItem('token', obtainedToken.toString());
-          const whatsappURL = `https://api.whatsapp.com/send?phone=919718134978&text&type=phone_number&app_absent=0`;
-          window.location.href = whatsappURL; // Redirect the user to WhatsApp in the same tab
+        if (res && !(res instanceof ApiError) && !res.err) {
+          if (res.data) {
+            let obtainedToken = res.data.requestIds[0].value;
+            console.log(res.data);
+            localStorage.setItem('token', obtainedToken.toString());
+          } else {
+            setOffToast('error', 'Something went wrong, Retry again');
+          }
         } else {
-          setOffToast('error', 'Something went wrong, Retry again');
+          setOffToast('error', 'User not found Register to continue ');
         }
       });
     } else {
@@ -145,6 +154,7 @@ export const LoginPhone = () => {
     }
   };
   const verifyToken = (res, phone) => {
+    setLoginType('WHATSAPP');
     if (res) {
       handleRequest(
         otplessVerifyToken({
@@ -212,7 +222,7 @@ export const LoginPhone = () => {
       <div>
         <LeftLogoWrapper src={LeftLogo} />
       </div>
-      {!otpView ? (
+      {loginType === '' && (
         <Box>
           <div>
             <HeadingWrapper>Welcome back</HeadingWrapper>
@@ -265,7 +275,10 @@ export const LoginPhone = () => {
                     <LoginButton type="button" onClick={handleLogin}>
                       Log in with OTP
                     </LoginButton>
-                    <LoginWhatsapp onClick={handleWhatsappLogin} />
+                    <LoginWhatsappButton
+                      text="Continue with Whatsapp"
+                      onClick={handleWhatsappLogin}
+                    />
                   </Box>
                 </Box>
               </Form>
@@ -285,8 +298,10 @@ export const LoginPhone = () => {
             Not a registered user? Click here to register.
           </p>
         </Box>
-      ) : (
-        <LoginOtp />
+      )}
+      {loginType === 'OTP' && <LoginOtp />}
+      {loginType === 'WHATSAPP' && (
+        <LoginWhatsapp onBack={() => setLoginType('')} />
       )}
     </NumberWrapper>
   );

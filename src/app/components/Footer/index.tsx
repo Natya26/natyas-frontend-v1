@@ -44,7 +44,7 @@ export const Footer = ({ className }: Props) => {
   };
   return (
     <FooterWrapper
-      className={`navarasa-footer ${className}`}
+      className={`indhriya-footer ${className}`}
       id="FooterWrapper"
     >
       <Box>
@@ -58,9 +58,9 @@ export const Footer = ({ className }: Props) => {
                 <li>
                   <StyledImageIcon src={location} alt="phone" />
                   <a>
-                    Indhriya <br /> 4567 Maple Avenue Avalon City, <br />
-                    Arcadia 89012 <br />
-                    Atlantis
+                    Indhriya <br /> 32/211/21 Serene Krishna Nagar, Peroorkada, <br />
+                    Thiruvananthapuram,  695005 <br />
+                    Kerala
                   </a>
                 </li>
                 <li>
@@ -101,7 +101,7 @@ export const Footer = ({ className }: Props) => {
                 <li>
                   <a
                     style={{
-                      fontSize: '22px',
+                      // fontSize: '22px',
                     }}
                     href="/FooterStaticPages/privacy-policy.html"
                     target="_blank"
@@ -200,7 +200,7 @@ const StyledImageIcon = styled.img`
 const FooterWrapper = styled.div`
   .copyright {
     margin-bottom: 10px;
-    font-size: 18px;
+    font-size: 12px;
     p {
       color: #a5a5a5;
     }

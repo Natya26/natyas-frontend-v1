@@ -77,10 +77,9 @@ export const LoginPhone = () => {
   const [soon, setSoon] = useState<boolean>(true);
   const handleLogin = () => {
     if (simpleValidator?.current?.allValid()) {
-      setLoginType('OTP'); // Set state to OTP login type
       handleRequest(authLogin(loginPayLoad)).then(res => {
         if (res && !(res instanceof ApiError) && !res.err) {
-          setOtpView(true);
+          setLoginType('OTP');
         } else {
           setOffToast('error', 'User not found ');
         }

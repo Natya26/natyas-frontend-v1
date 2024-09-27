@@ -132,9 +132,9 @@ const PlayVideo = (props: Props) => {
       ) : VideoUrl && !pageLoader ? (
         <MainWrapper id="mainWrapper">
           <SubWrapper>
-            <NavarasaVideoPlayer
+            <IndhriyaVideoPlayer
               currentTime={currentTime}
-              className="navarasa-player"
+              className="indhriya-player"
             >
               <Hls version="1.4.14">
                 <source data-src={VideoUrl} type="application/x-mpegURL" />
@@ -241,7 +241,7 @@ const PlayVideo = (props: Props) => {
                 </Controls>
                 <DblClickFullscreen />
               </Ui>
-            </NavarasaVideoPlayer>
+            </IndhriyaVideoPlayer>
           </SubWrapper>
           <WatchWrapper>
             <h4>You are currently watching</h4>
@@ -353,7 +353,7 @@ const SubWrapper = styled.div`
   margin: auto;
   max-width: 178vh;
 `;
-const NavarasaVideoPlayer = styled(Player)``;
+const IndhriyaVideoPlayer = styled(Player)``;
 const WatchWrapper = styled.div`
   width: 100%;
   background-color: #000000;

@@ -32,20 +32,6 @@ export const LandingPage = (props: Props) => {
     navigate(RoutePath.signup.path);
   };
 
-  // const handleGooglePlay = () => {
-  //   window.open(
-  //     // 'https://play.google.com/store/apps/details?id=com.world.navarasa&hl=en&gl=US',
-  //     'https://play.google.com/store/apps/details?id=com.world.navarasalite',
-  //     '_blank',
-  //   );
-  // };
-
-  // const handleAppStore = () => {
-  //   window.open(
-  //     'https://play.google.com/store/apps/details?id=com.world.navarasa&hl=en&gl=US',
-  //     '_blank',
-  //   );
-  // };
 
   const handleDownloadAndroidApkClick = () => {
     var url = SERVER_BASE_URL + 'download/apk';
@@ -60,7 +46,7 @@ export const LandingPage = (props: Props) => {
     <MainWrapper id="landingPageMainWrapperId">
       <FirstWrapper id="FirstWrapper">
         <SubWrapper>
-          <img src={logo} alt="navarasa_logo" style={{ width: '270px' }} />
+          <img src={logo} alt="indhriya_logo" style={{ width: '270px' }} />
           <HeadingWrapper>Exclusive content, wherever you go</HeadingWrapper>
           <FirstParaWrapper>
             Get early access to new releases to content exclusively available on

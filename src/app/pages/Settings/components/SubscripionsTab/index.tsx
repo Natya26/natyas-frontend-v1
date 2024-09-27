@@ -313,7 +313,7 @@ const SubscripionsTab = (props: Props) => {
                       : ''
                   }
                   expireDate={'10/23'}
-                  // onClick={e => handleShowPaymentView(e, item?.id, item)}
+                  onClick={e => handleShowPaymentView(e, item?.id, item)}
                 />
               );
             })}

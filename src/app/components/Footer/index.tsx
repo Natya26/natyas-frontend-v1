@@ -58,8 +58,9 @@ export const Footer = ({ className }: Props) => {
                 <li>
                   <StyledImageIcon src={location} alt="phone" />
                   <a>
-                    Indhriya <br /> 32/211/21 Serene Krishna Nagar, Peroorkada, <br />
-                    Thiruvananthapuram,  695005 <br />
+                    Indhriya <br /> 32/211/21 Serene Krishna Nagar, Peroorkada,{' '}
+                    <br />
+                    Thiruvananthapuram, 695005 <br />
                     Kerala
                   </a>
                 </li>
@@ -100,10 +101,8 @@ export const Footer = ({ className }: Props) => {
                 </li>
                 <li>
                   <a
-                    style={{
-                      // fontSize: '22px',
-                    }}
-                    href="/FooterStaticPages/privacy-policy.html"
+                    style={{ cursor: 'pointer' }}
+                    href="/policies/privacy-policy.html"
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -113,8 +112,8 @@ export const Footer = ({ className }: Props) => {
                 <li>
                   <a
                     style={{ cursor: 'pointer' }}
+                    href="/policies/terms-and-conditions.html"
                     target="_blank"
-                    onClick={handleTerms}
                     rel="noreferrer"
                   >
                     Terms and Conditions
@@ -130,27 +129,27 @@ export const Footer = ({ className }: Props) => {
                     Refund Policy
                   </a>
                 </li>
-              </ul>
-              <div
-                className="download-buttons-block"
-                style={{ display: 'none' }}
-              >
-                <ImgWrapper>
-                  <div
-                    style={{
-                      textDecoration: 'none',
-                    }}
-                    className="store-image-block"
+                <li>
+                  <a
+                    style={{ cursor: 'pointer' }}
+                    href="/policies/terms-and-conditions.html"
+                    target="_blank"
+                    rel="noreferrer"
                   >
-                    <img
-                      className="appButton"
-                      src={ApkDownloadIcon}
-                      alt="download apk"
-                      onClick={handleDownloadAndroidApkClick}
-                    />
-                  </div>
-                </ImgWrapper>
-              </div>
+                    Contact Us
+                  </a>
+                </li>
+                <li>
+                  <a
+                    style={{ cursor: 'pointer' }}
+                    href="/plans/pricing-plan.html"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Pricing Plans
+                  </a>
+                </li>
+              </ul>
             </div>
           </Grid>
         </Grid>
@@ -160,7 +159,7 @@ export const Footer = ({ className }: Props) => {
         <p>
           Copyright &copy; 2024, All Right Reserved Indhriya &nbsp;
           <a
-            href="/FooterStaticPages/privacy-policy.html"
+            href="/policies/privacy-policy.html"
             target="_blank"
             rel="noreferrer"
           >
@@ -168,9 +167,8 @@ export const Footer = ({ className }: Props) => {
           </a>
           &nbsp; and &nbsp;{' '}
           <a
-            style={{ cursor: 'pointer' }}
+            href="/policies/terms-and-conditions.html"
             target="_blank"
-            onClick={handleTerms}
             rel="noreferrer"
           >
             Terms of Services

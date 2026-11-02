@@ -217,6 +217,18 @@ export function App() {
               />
             }
           />
+          <Route
+            path={RoutePath.playvideo.path}
+            element={
+              <ProtectedRoute
+                {...{
+                  ...defaultProtectedRouteProps,
+                  redirectPath: RoutePath.playvideo.path.replace(':videoId', ''),
+                }}
+                outlet={<PlayVideo />}
+              />
+            }
+          />
         </Route>
         <Route
           path={RoutePath.individualview.path}
@@ -227,18 +239,6 @@ export function App() {
                 redirectPath: RoutePath.individualview.path,
               }}
               outlet={<IndividialView />}
-            />
-          }
-        />
-        <Route
-          path={RoutePath.playvideo.path}
-          element={
-            <ProtectedRoute
-              {...{
-                ...defaultProtectedRouteProps,
-                redirectPath: RoutePath.playvideo.path.replace(':videoId', ''),
-              }}
-              outlet={<PlayVideo />}
             />
           }
         />

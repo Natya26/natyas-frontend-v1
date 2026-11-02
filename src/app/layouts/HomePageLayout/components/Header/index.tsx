@@ -9,9 +9,10 @@ import {
   MenuItem,
 } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Icon from './assets/img/logo/indhriya-logo.png';
+import { NatyaWordmark } from 'app/components/NatyaWordmark';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
+import OndemandVideoOutlinedIcon from '@mui/icons-material/OndemandVideoOutlined';
 import { ReactComponent as ProfileIcon } from './assets/img/icons/profile.svg';
 import { ReactComponent as NotificationIcon } from './assets/img/icons/notification.svg';
 import { ReactComponent as SearchIcon } from './assets/img/icons/search.svg';
@@ -158,6 +159,9 @@ const Header = () => {
   const handleNotificationClick = () => {
     navigate(RoutePath.notifications.path);
   };
+  const handleWatchMovie = () => {
+    navigate(RoutePath.playvideo.path.replace(':videoId', '1'));
+  };
   const handleBackToHome = () => {
     navigate(RoutePath.homepage.path);
   };
@@ -197,12 +201,7 @@ const Header = () => {
       >
         <Toolbar sx={headerStyles.Wrapper}>
           <LogoWrapper>
-            <Avatar
-              onClick={handleBackToHome}
-              alt={userName ? userName : 'Username'}
-              sx={headerStyles.logo}
-              src={Icon}
-            />
+            <HeaderWordmark onClick={handleBackToHome} />
           </LogoWrapper>
           <Box sx={headerStyles.icon}>
             {searchButton &&
@@ -227,6 +226,20 @@ const Header = () => {
                   </Box>
                 </Box>
               )}
+            <Box
+              component="button"
+              aria-label="Watch movie"
+              onClick={handleWatchMovie}
+              sx={{
+                ...headerStyles.iconBox,
+                background: 'transparent',
+                border: 0,
+                color: '#ffffff',
+                lineHeight: 0,
+              }}
+            >
+              <OndemandVideoOutlinedIcon sx={{ color: '#ffffff', fontSize: 26 }} />
+            </Box>
             {location?.pathname !== RoutePath.notifications.path && (
               <Box sx={headerStyles.iconBox}>
                 <NotificationIcon onClick={handleNotificationClick} />
@@ -298,10 +311,12 @@ const Header = () => {
     </>
   );
 };
+const HeaderWordmark = styled(NatyaWordmark)`
+  font-size: 36px;
+`;
 const LogoWrapper = styled(Box)`
-  .MuiAvatar-img {
-    height: 100% !important;
-  }
+  display: flex;
+  align-items: center;
   @media (min-width: 768px) and (max-width: 991px) {
     width: 190px;
   }

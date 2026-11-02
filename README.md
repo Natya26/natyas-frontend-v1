@@ -1,6 +1,6 @@
-# Indhriya
+# Natya
 
-Welcome to the **Indhriya** ! This is a React-based application developed with TypeScript, designed to provide a seamless experience for streaming web series, and other video content. The platform offers features like user authentication, content browsing, search functionality, and more.
+Welcome to the **Natya** ! This is a React-based application developed with TypeScript, designed to provide a seamless experience for streaming web series, and other video content. The platform offers features like user authentication, content browsing, search functionality, and more.
 
 ## Table of Contents
 
@@ -83,9 +83,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For any inquiries or feedback, please contact:
 
-- **Name**: Indhriya
-- **Email**: contact@indhriya.com
-- **Website**: [https://indhriya.com/]
+- **Name**: Natya
+- **Email**: contact@natya.com
+- **Website**: [https://natya.com/]
 
 ---
 

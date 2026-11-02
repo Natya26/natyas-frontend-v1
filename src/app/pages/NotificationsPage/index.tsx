@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import vector from './assets/img/icons/Vector.png';
-import logo from './assets/img/logo/indhriya-logo.png';
+import { NatyaWordmark } from 'app/components/NatyaWordmark';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { RoutePath } from 'app/RoutePath';
@@ -105,7 +105,9 @@ export const NotificationsPage = ({ name, summary, id }: Props) => {
             </BodyWrapper>
           </SubWrapper>
           <FooterWrapper>
-            <ImgWrapperThree src={logo} />
+            <ImgWrapperThree>
+              <NatyaWordmark />
+            </ImgWrapperThree>
           </FooterWrapper>
         </MainWrapper>
       )}
@@ -177,7 +179,7 @@ const FooterWrapper = styled.div`
   align-items: center;
 `;
 
-const ImgWrapperThree = styled.img`
+const ImgWrapperThree = styled.div`
   width: 200px;
   height: 90px;
 `;

@@ -22,7 +22,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
 import { useManageAppSlice } from '../slice';
 import useToast from 'hooks/Toast';
-import LeftLogo from './assets/indhriya-logo.png';
+import { NatyaWordmark } from 'app/components/NatyaWordmark';
 import SimpleReactValidator from 'simple-react-validator';
 
 type Props = {};
@@ -128,7 +128,9 @@ const SignUp = (props: Props) => {
   return (
     <NumberWrapper>
       <div>
-        <LeftLogoWrapper src={LeftLogo} />
+        <LeftLogoWrapper>
+          <NatyaWordmark />
+        </LeftLogoWrapper>
       </div>
       <Box>
         <Box>
@@ -346,7 +348,7 @@ const LinkWrapper = styled.div`
     letter-spacing: 0.5px;
   }
 `;
-const LeftLogoWrapper = styled.img`
+const LeftLogoWrapper = styled.div`
   width: 300px;
   height: 125px;
   display: none;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import bgImage from './assets/img/bg/Indhriya_background_Img.png';
 import { Grid, Box, Divider } from '@mui/material';
 import { Outlet } from 'react-router-dom';
-import RightLogo from './assets/img/bg/Indhriya-Right-logo.png';
+import { NatyaWordmark } from 'app/components/NatyaWordmark';
 
 const OnboardLayout = () => {
   return (
@@ -14,7 +14,9 @@ const OnboardLayout = () => {
         </Grid>
         <Grid sx={loginRight}>
           <StyledBox>
-            <LogoWrapper src={RightLogo} />
+            <LogoWrapper>
+              <SideWordmark />
+            </LogoWrapper>
           </StyledBox>
         </Grid>
       </Box>
@@ -71,7 +73,12 @@ const StyledBox = styled.div`
     display:none;
   }
 `;
-const LogoWrapper = styled.img`
+const SideWordmark = styled(NatyaWordmark)`
+  font-size: 72px;
+`;
+const LogoWrapper = styled.div`
   width: 100%;
-  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

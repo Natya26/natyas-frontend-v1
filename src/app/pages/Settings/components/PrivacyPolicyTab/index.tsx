@@ -21,8 +21,8 @@ const PrivacyPolicyTab = (props: Props) => {
               sx={{ marginBottom: '10px' }}
               gutterBottom
             >
-              This Privacy Policy (“Privacy Policy”) applies to Indhriya App
-              platforms including without limitation www.indhriya.com and other
+              This Privacy Policy (“Privacy Policy”) applies to Natya App
+              platforms including without limitation www.natya.com and other
               related Site/s or App/s, mobile applications and other online
               features each a “Site/s or App/s”.
             </StyledTypography>
@@ -88,8 +88,8 @@ const PrivacyPolicyTab = (props: Props) => {
               If after you opt-in, you change your mind, you may withdraw your
               consent for us to contact you, for the continued collection, use
               or disclosure of your information, at any time, by emailing us at
-              contact@indhriya.com or contacting us at the address provided on
-              the website.
+              contact@natya.com or contacting us at the address provided on the
+              website.
             </StyledTypography>
           </SubContentWrapper>
           <SubHeaderWrapper>
@@ -250,9 +250,8 @@ const PrivacyPolicyTab = (props: Props) => {
               If you would like to: access, correct, amend or delete any
               personal information we have, register a complaint, or simply want
               more information, mail our Privacy Compliance Officer at
-              contact@indhriya.com Or by contacting at the company contact which
-              is hereby incorporated by this reference into the Terms of
-              Service.
+              contact@natya.com Or by contacting at the company contact which is
+              hereby incorporated by this reference into the Terms of Service.
             </StyledTypography>
           </SubContentWrapper>
         </SubWrapper>

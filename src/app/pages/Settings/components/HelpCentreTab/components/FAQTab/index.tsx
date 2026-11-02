@@ -10,7 +10,7 @@ export default function FaqTab({}: FaqTabProps) {
   return (
     <Wrapper>
       <StyledTabCardView className="StyledTabCardView">
-        <FaqAccordion title="What Is Indhriya" content={dummyContent} />
+        <FaqAccordion title="What Is Natya" content={dummyContent} />
         <FaqAccordion title="How to remove wishlist?" content={dummyContent} />
         <FaqAccordion
           title="How do I subscribe to premium?"

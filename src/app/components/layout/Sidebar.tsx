@@ -81,7 +81,7 @@ const Sidebar = ({ data }: SideBarProps) => {
               letterSpacing: '1.5px',
             }}
           >
-            Indhriya
+            Natya
           </span>
         </Box>
         {/* <Divider /> */}

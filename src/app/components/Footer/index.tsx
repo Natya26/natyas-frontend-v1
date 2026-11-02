@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import logo from './assets/img/logo/indhriya-logo.png';
+import { NatyaWordmark } from 'app/components/NatyaWordmark';
 import { Box, Grid } from '@mui/material';
 import emailIcon from './assets/img/icons/email.png';
 import phoneIcon from './assets/img/icons/phone.png';
@@ -44,21 +44,21 @@ export const Footer = ({ className }: Props) => {
   };
   return (
     <FooterWrapper
-      className={`indhriya-footer ${className}`}
+      className={`natya-footer ${className}`}
       id="FooterWrapper"
     >
       <Box>
         <Grid className="footerContainer" container spacing={0}>
           <Grid className="footer" item xs={12} sm={6} md={4}>
             <div className="footer-logo-block">
-              <LogoImage src={logo} alt="Indhriya-logo" />
+              <NatyaWordmark />
             </div>
             <div>
               <ul className="contact-ul">
                 <li>
                   <StyledImageIcon src={location} alt="phone" />
                   <a>
-                    Indhriya <br /> 32/211/21 Serene Krishna Nagar, Peroorkada,{' '}
+                    Natya <br /> 32/211/21 Serene Krishna Nagar, Peroorkada,{' '}
                     <br />
                     Thiruvananthapuram, 695005 <br />
                     Kerala
@@ -66,7 +66,7 @@ export const Footer = ({ className }: Props) => {
                 </li>
                 <li>
                   <StyledImageIcon src={emailIcon} alt="email" />
-                  <a href="mailto:contact@indhriya.com">contact@indhriya.com</a>
+                  <a href="mailto:contact@natya.com">contact@natya.com</a>
                 </li>
                 {/* <li>
                   <StyledImageIcon src={phoneIcon} alt="phone" />
@@ -157,7 +157,7 @@ export const Footer = ({ className }: Props) => {
       <div className="copyright">
         {' '}
         <p>
-          Copyright &copy; 2024, All Right Reserved Indhriya &nbsp;
+          Copyright &copy; 2024, All Right Reserved Natya &nbsp;
           <a
             href="/policies/privacy-policy.html"
             target="_blank"
@@ -179,11 +179,6 @@ export const Footer = ({ className }: Props) => {
     </FooterWrapper>
   );
 };
-const LogoImage = styled.img`
-  width: 220px;
-  height: 100px;
-  object-fit: cover;
-`;
 const StyledImageIcon = styled.img`
   width: 100%;
   max-width: 20px;

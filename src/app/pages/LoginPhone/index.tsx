@@ -6,7 +6,7 @@ import Divider from '@mui/material/Divider';
 import googleImg from './assets/google_login.png';
 import { NumberField } from 'app/components/NumberField';
 import { MExtensionField } from 'app/components/MExtensionField';
-import logo from './assets/indhriya-logo.png';
+import { NatyaWordmark } from 'app/components/NatyaWordmark';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'app/RoutePath';
 import { LoginButton } from 'app/components';
@@ -26,7 +26,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GoogleLogin } from '@react-oauth/google';
 import { useManageAppSlice } from '../slice';
 import Cookies from 'js-cookie';
-import LeftLogo from './assets/Indhriya-left-logo.png';
 import SimpleReactValidator from 'simple-react-validator';
 import { LoginWhatsappButton } from 'app/components/LoginWhatsappButton';
 import { LoginWhatsapp } from 'app/components/LoginWhatsapp';
@@ -219,7 +218,9 @@ export const LoginPhone = () => {
   return (
     <NumberWrapper>
       <div>
-        <LeftLogoWrapper src={LeftLogo} />
+        <LeftLogoWrapper>
+          <NatyaWordmark />
+        </LeftLogoWrapper>
       </div>
       {loginType === '' && (
         <Box>
@@ -414,7 +415,7 @@ const MainBackgroundImg = styled.div`
   background-position: center;
 `;
 
-const LeftLogoWrapper = styled.img`
+const LeftLogoWrapper = styled.div`
   width: 300px;
   height: 125px;
   display: none;

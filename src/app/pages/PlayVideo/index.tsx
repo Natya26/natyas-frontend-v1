@@ -10,7 +10,7 @@ import {
   selectThumbnail,
   selectVideoUrl,
 } from './slice/selectors';
-import { SERVER_BASE_URL } from 'utils/constants';
+import { HLS_PLAYBACK_URL, SERVER_BASE_URL } from 'utils/constants';
 //...........VimeVideoPlayer Imports......./
 import '@vime/core/themes/default.css';
 import {
@@ -80,28 +80,33 @@ const PlayVideo = (props: Props) => {
     window.history.back();
   };
   const handleGetVideo = id => {
+    dispatch(actions.setVideoUrl(HLS_PLAYBACK_URL));
+    dispatch(
+      actions.setCurrentlyWatching({
+        name: 'Ambalapravu',
+        description: '1970 Malayalam full movie',
+        duration: 8501,
+        poster: '',
+      }),
+    );
     handleRequest(getVideo(id)).then(res => {
-      if (res.data) {
+      const metadata = res?.data?.metadata;
+      if (metadata) {
         dispatch(
           actions.setThumbnail(
-            res?.data?.metadata?.poster
-              ? SERVER_BASE_URL + res?.data?.metadata?.poster
-              : '',
+            metadata.poster ? SERVER_BASE_URL + metadata.poster : '',
           ),
         );
-        dispatch(actions.setVideoUrl(res?.data?.metadata?.encodings?.[0]?.url));
         dispatch(
           actions.setCurrentlyWatching({
-            name: res?.data?.metadata?.name,
-            description: res?.data?.metadata?.description,
-            duration: res?.data?.metadata?.duration!,
-            poster: res?.data?.metadata?.poster,
+            name: metadata.name || 'Ambalapravu',
+            description: metadata.description,
+            duration: metadata.duration || 8501,
+            poster: metadata.poster,
           }),
         );
-        setTimeout(() => {
-          dispatch(AppActions.setPageLoader(false));
-        }, 2000);
       }
+      dispatch(AppActions.setPageLoader(false));
     });
     setTimeout(() => {
       dispatch(AppActions.setPageLoader(false));
@@ -132,9 +137,9 @@ const PlayVideo = (props: Props) => {
       ) : VideoUrl && !pageLoader ? (
         <MainWrapper id="mainWrapper">
           <SubWrapper>
-            <IndhriyaVideoPlayer
+            <NatyaVideoPlayer
               currentTime={currentTime}
-              className="indhriya-player"
+              className="natya-player"
             >
               <Hls version="1.4.14">
                 <source data-src={VideoUrl} type="application/x-mpegURL" />
@@ -241,7 +246,7 @@ const PlayVideo = (props: Props) => {
                 </Controls>
                 <DblClickFullscreen />
               </Ui>
-            </IndhriyaVideoPlayer>
+            </NatyaVideoPlayer>
           </SubWrapper>
           <WatchWrapper>
             <h4>You are currently watching</h4>
@@ -268,8 +273,8 @@ const PlayVideo = (props: Props) => {
 export default PlayVideo;
 const MainWrapper = styled.div`
   width: 100%;
-  height: 100%;
   min-height: 100vh;
+  padding: 120px 24px 40px;
   background-color: #000000;
 
   .border {
@@ -350,10 +355,14 @@ const MainWrapper = styled.div`
   }
 `;
 const SubWrapper = styled.div`
-  margin: auto;
-  max-width: 178vh;
+  margin: 0 auto;
+  max-width: 1100px;
 `;
-const IndhriyaVideoPlayer = styled(Player)``;
+const NatyaVideoPlayer = styled(Player)`
+  display: block;
+  width: 100%;
+  height: min(62vh, 620px);
+`;
 const WatchWrapper = styled.div`
   width: 100%;
   background-color: #000000;

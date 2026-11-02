@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import backImg from './assets/image/background/Indhriya_background_Img.png';
-import logo from './assets/image/logo/indhriya-logo.png';
+import { NatyaWordmark } from 'app/components/NatyaWordmark';
 import appStore from './assets/image/icons/download-apk.png';
 import googlePlay from './assets/image/icons/google-play-button.png';
 import indhriyaSlideTwo from './assets/videos/indhriyaSlideTwo.gif';
@@ -46,11 +46,11 @@ export const LandingPage = (props: Props) => {
     <MainWrapper id="landingPageMainWrapperId">
       <FirstWrapper id="FirstWrapper">
         <SubWrapper>
-          <img src={logo} alt="indhriya_logo" style={{ width: '270px' }} />
+          <LandingWordmark />
           <HeadingWrapper>Exclusive content, wherever you go</HeadingWrapper>
           <FirstParaWrapper>
             Get early access to new releases to content exclusively available on
-            Indhriya
+            Natya
           </FirstParaWrapper>
           <ButtonWrapper
             onClick={handleWatchClick}
@@ -111,12 +111,12 @@ export const LandingPage = (props: Props) => {
                     Exclusive content, <span>wherever you go</span>
                   </SecondHeadingWrapper>
                   <SecondParaWrapper>
-                    Become a part of the exclusive Indhriya community.
+                    Become a part of the exclusive Natya community.
                   </SecondParaWrapper>
                   <SecondParaWrapper>
                     Only subscribed members have access to this exclusive
                     content, so you'll be joining a community of like-minded
-                    people who love Indhriya originals.
+                    people who love Natya originals.
                   </SecondParaWrapper>
                 </div>
               </Grid>
@@ -147,7 +147,7 @@ export const LandingPage = (props: Props) => {
                   Create your own personalized watchlists
                 </ThirdParaWrapper> */}
                 <ThirdParaWrapper>
-                  Change the way you watch content on Indhriya.
+                  Change the way you watch content on Natya.
                 </ThirdParaWrapper>
                 <ThirdParaWrapper>
                   {' '}
@@ -279,6 +279,10 @@ const ButtonWrapper = styled(Button)`
   }
 `;
 
+const LandingWordmark = styled(NatyaWordmark)`
+  font-size: 64px;
+  margin-bottom: 12px;
+`;
 const FirstWrapper = styled.div`
   padding: 40px;
   background-color: #000000;

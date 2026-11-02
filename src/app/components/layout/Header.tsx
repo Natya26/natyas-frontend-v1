@@ -8,7 +8,7 @@ import Toolbar from '@mui/material/Toolbar';
 import InputBase from '@mui/material/InputBase';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import icon from './assets/img/icon/usericon.jpg';
-import IndhriyaHeadIcon from './assets/img/icon/indhriya-logo.svg';
+import { NatyaWordmark } from 'app/components/NatyaWordmark';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -116,12 +116,7 @@ const Header = ({}: Props) => {
         } `}
       >
         <Toolbar sx={headerStyles.Wrapper}>
-          <Avatar
-            onClick={handleBackToHome}
-            sx={headerStyles.headerAppIcon}
-            alt="Indhriya Header Icon"
-            src={IndhriyaHeadIcon}
-          />
+          <NatyaWordmark onClick={handleBackToHome} />
           <Box sx={headerStyles.icon}>
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               {/* <Avatar alt="" src={SERVER_BASE_URL + userPhoto} /> */}

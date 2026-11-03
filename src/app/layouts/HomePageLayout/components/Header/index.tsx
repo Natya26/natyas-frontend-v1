@@ -13,6 +13,7 @@ import { NatyaWordmark } from 'app/components/NatyaWordmark';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import OndemandVideoOutlinedIcon from '@mui/icons-material/OndemandVideoOutlined';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import { ReactComponent as ProfileIcon } from './assets/img/icons/profile.svg';
 import { ReactComponent as NotificationIcon } from './assets/img/icons/notification.svg';
 import { ReactComponent as SearchIcon } from './assets/img/icons/search.svg';
@@ -248,15 +249,13 @@ const Header = () => {
             <Box onClick={handleOpenUserMenu} sx={headerStyles.iconBox}>
               <ProfileIcon />
             </Box>
-            <Menu
-              sx={{ mt: '45px' }}
+            <AccountMenu
               id="home-menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
+                vertical: 'bottom',
                 horizontal: 'right',
               }}
-              className="admin-settings-popover"
               keepMounted
               transformOrigin={{
                 vertical: 'top',
@@ -265,46 +264,51 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '100%',
-                  padding: '20px 0px 00px 0px',
-                  flexDirection: 'column',
+              <ProfileBlock>
+                <Avatar
+                  alt={userName || 'Natya'}
+                  src={userPhoto ? SERVER_BASE_URL + userPhoto : undefined}
+                  sx={{ bgcolor: '#e0be00', color: '#111', fontWeight: 700 }}
+                >
+                  {(userName || 'N').slice(0, 1)}
+                </Avatar>
+                <ProfileCopy>
+                  <strong>{userName || 'Natya'}</strong>
+                  <span>{userEmail || 'Your account'}</span>
+                </ProfileCopy>
+              </ProfileBlock>
+              <StyledMenuItem
+                onClick={() => {
+                  handleCloseUserMenu();
+                  handleBackToHome();
                 }}
               >
-                <Avatar
-                  alt={userName ? userName : ''}
-                  src={SERVER_BASE_URL + userPhoto}
-                />
-                <Typography
-                  sx={{
-                    padding: '15px 0px 5px 0px',
-                  }}
-                  component={'h5'}
-                >
-                  {userName}
-                </Typography>
-                <Typography
-                  sx={{
-                    padding: '5px 0px',
-                  }}
-                  component={'h5'}
-                >
-                  {userEmail}
-                </Typography>
-              </Box>
-              <StyledMenuItem onClick={handleSettingsClick}>
-                <ManageAccountsOutlinedIcon sx={{ margin: '0px 8px' }} />
-                <Typography textAlign="center">Settings</Typography>
+                <HomeOutlinedIcon />
+                <span>Home</span>
+              </StyledMenuItem>
+              <StyledMenuItem
+                onClick={() => {
+                  handleCloseUserMenu();
+                  handleWatchMovie();
+                }}
+              >
+                <OndemandVideoOutlinedIcon />
+                <span>Video</span>
+              </StyledMenuItem>
+              <StyledMenuItem
+                onClick={() => {
+                  handleCloseUserMenu();
+                  handleSettingsClick();
+                }}
+              >
+                <ManageAccountsOutlinedIcon />
+                <span>Settings</span>
               </StyledMenuItem>
               <StyledMenuItem onClick={handleLogout}>
-                <LogoutIcon sx={{ margin: '0px 8px' }} />
-                <Typography textAlign="center">Logout</Typography>
+                <LogoutIcon />
+                <span>Logout</span>
               </StyledMenuItem>
-            </Menu>
+            </AccountMenu>
           </Box>
         </Toolbar>
       </AppBar>
@@ -387,8 +391,64 @@ const headerStyles = {
     cursor: 'pointer',
   },
 };
+const AccountMenu = styled(Menu)`
+  .MuiPaper-root {
+    margin-top: 10px;
+    min-width: 248px;
+    padding: 8px;
+    color: #ffffff;
+    background: #141414 !important;
+    border: 1px solid rgba(224, 190, 0, 0.45);
+    border-radius: 18px;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.5);
+  }
+  .MuiList-root {
+    padding: 0;
+  }
+`;
+const ProfileBlock = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 10px 14px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+`;
+const ProfileCopy = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  strong {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  span {
+    color: #bdbdbd;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+`;
 const StyledMenuItem = styled(MenuItem)`
-  margin: 6px 0 !important;
+  && {
+    gap: 12px;
+    margin: 2px 0;
+    padding: 10px 12px;
+    border-radius: 12px;
+    color: #ffffff;
+    justify-content: flex-start;
+  }
+  svg {
+    color: #e0be00;
+    font-size: 22px;
+  }
+  span {
+    font-size: 15px;
+    letter-spacing: 0.2px;
+  }
+  &&:hover {
+    background: rgba(224, 190, 0, 0.16);
+  }
 `;
 
 export default Header;

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { RoutePath } from 'app/RoutePath';
 import useApi from 'services/mavapi/useApi';
 import { VideoApIsService } from 'services/openapi/services/VideoApIsService';
 import { useManagePlayVideoSlice } from './slice';
@@ -53,6 +54,7 @@ type Props = {};
 
 const PlayVideo = (props: Props) => {
   const { videoId: routeVideoId } = useParams();
+  const navigate = useNavigate();
   const { error: apiError, isLoading, handleRequest } = useApi();
   const { getVideo } = VideoApIsService;
   const dispatch = useDispatch();
@@ -77,7 +79,7 @@ const PlayVideo = (props: Props) => {
     setCurrentTime(currentTime - 10);
   };
   const onClickBack = () => {
-    window.history.back();
+    navigate(RoutePath.homepage.path);
   };
   const handleGetVideo = id => {
     dispatch(actions.setVideoUrl(HLS_PLAYBACK_URL));
@@ -274,7 +276,9 @@ export default PlayVideo;
 const MainWrapper = styled.div`
   width: 100%;
   min-height: 100vh;
-  padding: 120px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  padding: 120px 24px 0;
   background-color: #000000;
 
   .border {
@@ -365,9 +369,10 @@ const NatyaVideoPlayer = styled(Player)`
 `;
 const WatchWrapper = styled.div`
   width: 100%;
+  flex: 1 0 auto;
   background-color: #000000;
   position: relative;
-  padding: 1% 6.5%;
+  padding: 1% 6.5% 24px;
   margin: auto;
   @media (min-width: 320px) and (max-width: 1366px) {
     width: 100%;

@@ -206,8 +206,7 @@ const FooterWrapper = styled.div`
   background-color: #212121;
   color: #ffffff !important;
   width: 100%;
-  height: 100%;
-  min-height: 300px;
+  height: auto;
   /* max-height: 300px; */
   display: flex;
   align-items: center;

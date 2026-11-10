@@ -63,7 +63,7 @@ import { Footer } from 'app/components/Footer';
 import { SubscriptionApiService } from 'services/openapi/services/SubscriptionApiService';
 import { useManageUserSlice } from '../Settings/slice';
 import { selectCurrentUserSubscription } from '../Settings/slice/selectors';
-import backImg from '../LandingPage/assets/image/background/Indhriya_background_Img.png';
+import { LocalBrowse } from './LocalBrowse';
 
 type Props = {};
 
@@ -275,25 +275,7 @@ const HomePage = (props: Props) => {
           </PageLoaderWrapper>
         </>
       ) : !FeaturedPaylord?.name ? (
-        <NowShowing>
-          <ShowCard>
-            <ShowEyebrow>Now showing</ShowEyebrow>
-            <ShowTitle>Ambalapravu</ShowTitle>
-            <ShowMeta>1970 Malayalam full movie · 2h 21m</ShowMeta>
-            <ShowCopy>
-              Prem Nazir, Sheela, Madhu and Sharada. Watch the full movie on
-              Natya.
-            </ShowCopy>
-            <PlayButton
-              type="button"
-              onClick={() =>
-                navigate(RoutePath.playvideo.path.replace(':videoId', '1'))
-              }
-            >
-              Play movie
-            </PlayButton>
-          </ShowCard>
-        </NowShowing>
+        <LocalBrowse />
       ) : (
         <HomePageWrapper>
           <Wrapper
@@ -1239,67 +1221,6 @@ const Wrapper = styled.div`
     right: unset;
     left: 82px;
     top: 80%;
-  }
-`;
-const NowShowing = styled.section`
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 120px 24px 48px;
-  background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.78)),
-    url(${backImg}) center / cover no-repeat;
-`;
-const ShowCard = styled.div`
-  width: min(560px, 100%);
-  padding: 40px 36px;
-  text-align: center;
-  color: #ffffff;
-  background: rgba(12, 12, 12, 0.78);
-  border: 1px solid rgba(224, 190, 0, 0.5);
-  border-radius: 28px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-`;
-const ShowEyebrow = styled.p`
-  margin: 0 0 10px;
-  color: #e0be00;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  font-size: 13px;
-`;
-const ShowTitle = styled.h1`
-  margin: 0;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 56px;
-  line-height: 1;
-  color: #e0be00;
-`;
-const ShowMeta = styled.p`
-  margin: 16px 0 0;
-  color: #f2f2f2;
-  font-size: 16px;
-`;
-const ShowCopy = styled.p`
-  margin: 14px auto 0;
-  max-width: 420px;
-  color: #d0d0d0;
-  font-size: 16px;
-  line-height: 1.5;
-`;
-const PlayButton = styled.button`
-  margin-top: 26px;
-  border: 0;
-  border-radius: 999px;
-  padding: 14px 32px;
-  background: #e0be00;
-  color: #161616;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  &:hover {
-    background: #f0d34a;
   }
 `;
 const ImageBackground = styled.div`

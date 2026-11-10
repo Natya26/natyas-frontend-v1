@@ -1,393 +1,465 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
-import {
-  SearchPageContentWrapper,
-  SearchPageWrapper,
-} from 'app/components/Wrappers';
-import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import { DemoGenres } from './components/DemoGenres';
-import SearchTextField from 'app/components/SearchTextField';
-import CardImg1 from './assets/img/card/1.png';
-import CardImg2 from './assets/img/card/2.png';
-import CardImg3 from './assets/img/card/3.png';
-import ImageCard from 'app/components/ImageCard';
-import { ReactComponent as CloseIcon } from './assets/img/icons/close.svg';
 import { RoutePath } from 'app/RoutePath';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectGenres } from 'store/slices/lookupSlice/selectors';
-import useApi from 'services/mavapi/useApi';
-import { GeneralApIsService } from 'services/openapi/services/GeneralApIsService';
-import { useLookupSlice } from 'store/slices/lookupSlice';
-import { useManageSearchPageSlice } from './slice';
-import { selectAllSeriesList } from './slice/selectors';
-import { SERVER_BASE_URL } from 'utils/constants';
-import { SearchApiService } from 'services/openapi/services/SearchApiService';
-import PageLoaderWrapper from 'app/components/PageLoaderWrapper';
-import PulseLoader from 'react-spinners/PulseLoader';
-import { selectPageLoader } from '../slice/selectors';
-import { useManageAppSlice } from '../slice';
+import {
+  LocalSearchHit,
+  searchLocalCatalog,
+} from 'app/data/localCatalog';
 
-type Props = {};
+type Filter = 'all' | LocalSearchHit['kind'];
 
-const SearchPage = (props: Props) => {
-  const { handleRequest, isLoading, error: apiError } = useApi();
-  const { getLookupData } = GeneralApIsService;
-  const { getMediaSearchList } = SearchApiService;
-  const { actions: lookupActions } = useLookupSlice();
-  const { actions: searchActions } = useManageSearchPageSlice();
-  const dispatch = useDispatch();
+const sections: { kind: LocalSearchHit['kind']; title: string }[] = [
+  { kind: 'series', title: 'Web series' },
+  { kind: 'movie', title: 'Movies' },
+  { kind: 'upcoming', title: 'Coming soon' },
+];
 
+const filters: { id: Filter; label: string }[] = [
+  { id: 'all', label: 'All' },
+  { id: 'series', label: 'Series' },
+  { id: 'movie', label: 'Movies' },
+  { id: 'upcoming', label: 'Coming soon' },
+];
+
+const suggestions = ['Bro Code', 'Aara', 'Menaka', 'Malayalam', 'Metro'];
+
+const SearchPage = () => {
   const navigate = useNavigate();
-  //Loader
-  const pageLoader = useSelector(selectPageLoader);
-  const { actions: AppActions } = useManageAppSlice();
+  const [params, setParams] = useSearchParams();
+  const [query, setQuery] = useState(params.get('q') ?? '');
+  const [filter, setFilter] = useState<Filter>('all');
+  const results = useMemo(() => searchLocalCatalog(query), [query]);
+  const trimmed = query.trim();
 
-  //Selectors
-  const Genres = useSelector(selectGenres);
-  const allSeriesList = useSelector(selectAllSeriesList);
-
-  //useStates
-  const [selectedIndex, setSelectedIndex] = React.useState<number | undefined>(
-    undefined,
-  );
-  const [selectedGenre, setSelectedGenre] = React.useState<string | undefined>(
-    '',
-  );
-  const [searchTerm, setSearchTerm] = React.useState('');
-
-  //handle Genre click
-  const handleListItemClick = (index?: number, name?: string) => {
-    if (index === selectedIndex) {
-      setSelectedGenre('');
-      setSelectedIndex(undefined);
-    } else {
-      setSelectedGenre(name);
-      setSelectedIndex(index);
-    }
-  };
-  const handleSeriesViewClick = (id: number) => {
-    if (id) {
-      navigate(
-        RoutePath.individualview.path.replace(':seriesId', id.toString()),
-      );
-    }
-  };
-
-  //handle  backToHomeclick
-  const handleBackToHomeClick = () => {
-    navigate(RoutePath.homepage.path);
-  };
-  //handle get Genre lookup
-  const handleGetLookup = () => {
-    handleRequest(getLookupData('genres')).then(responseBody => {
-      if (!responseBody) return;
-
-      dispatch(lookupActions.addGenres(responseBody?.data?.genres));
-      dispatch(lookupActions.addLanguages(responseBody?.data?.languages));
-    });
-  };
-  //HandleGet Media Search List
-  const handleGetMediaSearchResult = (text: string) => {
-    handleRequest(getMediaSearchList(text ?? '')).then(responseBody => {
-      if (responseBody) {
-        dispatch(searchActions.setAllSeriesList(responseBody?.data?.series));
-        dispatch(AppActions.setPageLoader(false));
-      } else return;
-    });
-  };
-
-  //handle onInput Change
-  const handleChange = (
-    e?: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    e?.preventDefault();
-    handleGetMediaSearchResult(e?.target.value! ?? '');
-  };
+  // Keep the query in the address bar so Back and refresh keep the search.
   useEffect(() => {
-    dispatch(AppActions.setPageLoader(true));
-    handleGetLookup();
-    handleGetMediaSearchResult('');
-  }, []);
+    const next: Record<string, string> = trimmed ? { q: trimmed } : {};
+    setParams(next, { replace: true });
+  }, [trimmed, setParams]);
+
+  const counts = useMemo(() => {
+    const total: Record<Filter, number> = {
+      all: results.length,
+      series: 0,
+      movie: 0,
+      upcoming: 0,
+    };
+    results.forEach(hit => {
+      total[hit.kind] += 1;
+    });
+    return total;
+  }, [results]);
+
+  // If the chosen filter has nothing for the new query, fall back to All.
+  useEffect(() => {
+    if (filter !== 'all' && counts[filter] === 0) setFilter('all');
+  }, [filter, counts]);
+
+  const visible = sections.filter(
+    section =>
+      (filter === 'all' || filter === section.kind) && counts[section.kind] > 0,
+  );
+
+  const openHit = (hit: LocalSearchHit) => {
+    if (hit.kind === 'movie') {
+      navigate(RoutePath.homepage.path, { state: { playId: hit.id } });
+      return;
+    }
+    if (hit.kind === 'series') {
+      navigate(RoutePath.homepage.path, { state: { openSeriesId: hit.id } });
+    }
+  };
+
   return (
-    <>
-      {pageLoader ? (
-        <>
-          <PageLoaderWrapper>
-            <PulseLoader color="#e0be00" />
-          </PageLoaderWrapper>
-        </>
+    <Page>
+      <Top>
+        <Heading>{trimmed ? 'Search results' : 'Search'}</Heading>
+        <Bar>
+          <Icon viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M20 20l-3.5-3.5" />
+          </Icon>
+          <Field
+            autoFocus
+            type="search"
+            value={query}
+            placeholder="Search for a movie, series, episode or language"
+            aria-label="Search movies and series"
+            onChange={event => setQuery(event.target.value)}
+            onKeyDown={event => {
+              if (event.key === 'Escape') setQuery('');
+            }}
+          />
+          {query && (
+            <Clear
+              type="button"
+              aria-label="Clear search"
+              onClick={() => setQuery('')}
+            >
+              ×
+            </Clear>
+          )}
+        </Bar>
+        <Chips role="tablist" aria-label="Filter results">
+          {filters.map(item => (
+            <Chip
+              key={item.id}
+              type="button"
+              role="tab"
+              aria-selected={filter === item.id}
+              $active={filter === item.id}
+              disabled={item.id !== 'all' && counts[item.id] === 0}
+              onClick={() => setFilter(item.id)}
+            >
+              {item.label}
+              <Count>{counts[item.id]}</Count>
+            </Chip>
+          ))}
+        </Chips>
+      </Top>
+
+      {results.length === 0 || visible.length === 0 ? (
+        <Empty>
+          <h2>No results for “{trimmed}”</h2>
+          <p>
+            Check the spelling, or search for a title, an episode name or a
+            language. Try one of these:
+          </p>
+          <Chips>
+            {suggestions.map(word => (
+              <Chip
+                key={word}
+                type="button"
+                $active={false}
+                onClick={() => {
+                  setFilter('all');
+                  setQuery(word);
+                }}
+              >
+                {word}
+              </Chip>
+            ))}
+          </Chips>
+        </Empty>
       ) : (
-        <SearchPageWrapper>
-          <SearchPageContentWrapper className="SearchPageContentWrapper">
-            <SearchPageWrapperContent>
-              <Box sx={{ width: '100%', padding: '60px 60px 25px 60px ' }}>
-                <CloseIcon
-                  style={{ cursor: 'pointer' }}
-                  onClick={handleBackToHomeClick}
-                />
-              </Box>
-              <Box sx={{ width: '100%', padding: '0 35px 0px 100px' }}>
-                <StyledSearchTextField
-                  placeholder={`Search any title by name ${
-                    selectedGenre ? 'in ' + selectedGenre : ''
-                  }`}
-                  onChange={e => handleChange(e)}
-                />
-              </Box>
-            </SearchPageWrapperContent>
-            <ContentWrapper className="search-ContentWrapper">
-              <StyledListWrapper className="search-list">
-                <Box className="main-genres-list-box" sx={{ width: 200 }}>
-                  <List
-                    className="main-genres-list"
-                    component="nav"
-                    aria-label="main-genres-list"
-                  >
-                    {Genres?.map((item, index) => {
-                      return (
-                        <ListItemButton
-                          key={index}
-                          selected={item?.id === selectedIndex}
-                          onClick={e =>
-                            handleListItemClick(item?.id, item.name)
-                          }
-                        >
-                          <ListItemText>{item?.name}</ListItemText>
-                        </ListItemButton>
-                      );
-                    })}
-                  </List>
-                </Box>
-              </StyledListWrapper>
-              <RightContentWrapper className="search-content">
-                <CardContentWrapper>
-                  {allSeriesList?.map((item, index) => (
-                    <ImageCard
-                      key={index}
-                      poster={
-                        item?.poster ? SERVER_BASE_URL + item?.poster : ''
-                      }
-                      onClick={e => handleSeriesViewClick(item?.id!)}
-                    />
-                  ))}
-                  {/* {filteredVideos?.map((item, index) => (
-                    <ImageCard
-                      key={index}
-                      poster={item?.image ? item?.image : ''}
-                      onClick={e => handleSeriesViewClick(item?.id!)}
-                    />
-                  ))} */}
-                </CardContentWrapper>
-              </RightContentWrapper>
-            </ContentWrapper>
-          </SearchPageContentWrapper>
-        </SearchPageWrapper>
+        visible.map(section => (
+          <Section key={section.kind}>
+            <SectionHead>
+              <h2>{section.title}</h2>
+              <span>
+                {counts[section.kind]}{' '}
+                {counts[section.kind] === 1 ? 'title' : 'titles'}
+              </span>
+            </SectionHead>
+            <Grid>
+              {results
+                .filter(hit => hit.kind === section.kind)
+                .map(hit => {
+                  const soon = hit.kind === 'upcoming';
+                  return (
+                    <Card
+                      key={`${hit.kind}-${hit.id}`}
+                      type="button"
+                      disabled={soon}
+                      onClick={() => openHit(hit)}
+                      aria-label={`${hit.name}, ${hit.detail}`}
+                    >
+                      <Frame $muted={soon}>
+                        <img src={hit.poster} alt="" loading="lazy" />
+                        <Badge $soon={soon}>
+                          {soon
+                            ? 'Coming soon'
+                            : hit.kind === 'series'
+                            ? 'Series'
+                            : 'Movie'}
+                        </Badge>
+                        {!soon && (
+                          <PlayHint aria-hidden="true">
+                            <span />
+                          </PlayHint>
+                        )}
+                      </Frame>
+                      <Name>{hit.name}</Name>
+                      <Meta>
+                        {[hit.language, soon ? '' : hit.detail]
+                          .filter(Boolean)
+                          .join(' · ') || 'Coming to Natya'}
+                      </Meta>
+                      {hit.matchedEpisode && (
+                        <Matched>Matches {hit.matchedEpisode}</Matched>
+                      )}
+                    </Card>
+                  );
+                })}
+            </Grid>
+          </Section>
+        ))
       )}
-    </>
+    </Page>
   );
 };
-const SearchPageWrapperContent = styled.div`
-  @media (min-width: 1366px) and (max-width: 4000px) {
-    font-size: 24px;
-  }
-  @media (min-width: 1200px) and (max-width: 1365px) {
-    font-size: 22px;
-  }
-  @media (min-width: 992px) and (max-width: 1199px) {
-    font-size: 20px;
-  }
-  @media (min-width: 768px) and (max-width: 991px) {
-    font-size: 18px;
-  }
-  @media (min-width: 576px) and (max-width: 767px) {
-    font-size: 15px;
-  }
-  @media (min-width: 320px) and (max-width: 575px) {
-    display: flex;
-    align-items: center;
-    padding: 15px 10px 0 10px;
-    > div {
-      &:nth-child(1) {
-        padding: 1px 7px;
-        display: inline-flex;
-        align-items: center;
-        width: 35px;
-        height: 20px;
-      }
-      &:nth-child(2) {
-        width: calc(100% - 35px);
-        padding: 0;
-      }
-    }
-  }
-`;
-const StyledListWrapper = styled.div`
-  margin: 6px 0 !important;
-  padding: 0px;
-  .main-genres-list-box {
-    @media (min-width: 320px) and (max-width: 575px) {
-      width: 100%;
-    }
-    nav.MuiList-root {
-      background: none !important;
-      color: #ffffff !important;
-      // height: 600px;
-      max-height: calc(100vh - 172px);
-      overflow: auto;
-      @media (min-width: 320px) and (max-width: 575px) {
-        width: 100%;
-        padding: 0px !important;
-      }
-      ::-webkit-scrollbar {
-        width: 5px;
-        margin-left: 3px;
-      }
-      ::-webkit-scrollbar-track {
-        background: transparent !important;
-        border-radius: 10px;
-      }
-      ::-webkit-scrollbar-thumb {
-        width: 9px;
-        background: #201e1e !important;
-        border-radius: 10px;
-      }
-      .MuiButtonBase-root {
-        background: none !important;
-        &:hover {
-          color: #e0be00 !important;
-        }
-        .MuiTypography-root {
-          font-family: Urbanist !important;
-          font-size: 15px;
-          letter-spacing: 1px;
-          @media (min-width: 576px) and (max-width: 767px) {
-            font-size: 13px;
-          }
-          @media (min-width: 320px) and (max-width: 575px) {
-            font-size: 12px;
-          }
-        }
-        &.Mui-selected {
-          background: none !important;
-          color: #e0be00 !important;
-        }
-      }
-    }
+
+const Page = styled.div`
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  padding: 110px 4vw 64px;
+  box-sizing: border-box;
+  background: #090909;
+  color: #f6f3ee;
+  text-align: left;
+  @media (max-width: 640px) {
+    padding-top: 96px;
   }
 `;
 
-const ContentWrapper = styled.div`
+const Top = styled.div`
+  max-width: 760px;
+`;
+
+const Heading = styled.h1`
+  margin: 0 0 16px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 32px;
+  font-weight: 500;
+  color: #e7c56a;
+`;
+
+const Bar = styled.div`
+  position: relative;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 15px 40px;
-  height: calc(100vh - 122px);
-  @media (min-width: 1200px) and (max-width: 1365px) {
-    height: auto;
-    padding: 15px 0;
+  align-items: center;
+`;
+
+const Icon = styled.svg`
+  position: absolute;
+  left: 18px;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: rgba(246, 243, 238, 0.55);
+  stroke-width: 2;
+  stroke-linecap: round;
+  pointer-events: none;
+`;
+
+const Field = styled.input`
+  flex: 1;
+  height: 56px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 0 52px 0 50px;
+  background: #171717;
+  color: #f6f3ee;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  &::placeholder {
+    color: rgba(246, 243, 238, 0.45);
   }
-  @media (min-width: 992px) and (max-width: 1199px) {
-    height: auto;
-    padding: 15px 0;
+  &:focus {
+    border-color: #e7c56a;
+    background: #1c1c1c;
   }
-  @media (min-width: 768px) and (max-width: 991px) {
-    height: auto;
-    padding: 15px 0;
-  }
-  @media (min-width: 576px) and (max-width: 767px) {
-    height: auto;
-    padding: 15px 0;
-  }
-  @media (min-width: 320px) and (max-width: 575px) {
-    height: auto;
-    padding: 15px 0;
-    .search-list {
-      width: 130px;
-    }
-    .search-content {
-      width: calc(100% - 130px);
-    }
+  &::-webkit-search-cancel-button {
+    display: none;
   }
 `;
-const RightContentWrapper = styled.div`
-  width: calc(100% - 200px);
-  max-height: calc(100vh - 172px);
-  padding: 0px 20px;
-  @media (min-width: 320px) and (max-width: 575px) {
-    padding-left: 5px;
+
+const Clear = styled.button`
+  position: absolute;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #f6f3ee;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  &:hover {
+    background: rgba(255, 255, 255, 0.18);
   }
 `;
-const CardContentWrapper = styled.div`
-  max-height: calc(100vh - 172px);
-  overflow: auto;
-  margin: 20px 0px 0px;
+
+const Chips = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 20px;
-  @media (min-width: 320px) and (max-width: 575px) {
-    padding-right: 5px;
+  gap: 8px;
+  margin-top: 16px;
+`;
+
+const Chip = styled.button<{ $active: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid
+    ${props => (props.$active ? '#e7c56a' : 'rgba(255, 255, 255, 0.16)')};
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: ${props => (props.$active ? '#e7c56a' : 'transparent')};
+  color: ${props => (props.$active ? '#1a1408' : '#ece7de')};
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  &:hover:not(:disabled) {
+    border-color: #e7c56a;
   }
-  ::-webkit-scrollbar {
-    width: 5px;
-    margin-left: 3px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent !important;
-    border-radius: 10px;
-  }
-  ::-webkit-scrollbar-thumb {
-    width: 9px;
-    background: #201e1e !important;
-    border-radius: 10px;
-  }
-  .fRXMuu .MuiPaper-root.MuiPaper-elevation img.MuiCardMedia-root {
-    width: 100%;
-    height: auto;
-    @media (min-width: 1366px) and (max-width: 4000px) {
-      width: 236px;
-      height: 320px;
-    }
-    @media (min-width: 1200px) and (max-width: 1365px) {
-      width: 195px;
-      height: 260px;
-    }
-    @media (min-width: 992px) and (max-width: 1199px) {
-      width: 146px;
-      height: 200px;
-    }
-    @media (min-width: 768px) and (max-width: 991px) {
-      width: 95px;
-      height: 140px;
-    }
-    @media (min-width: 576px) and (max-width: 767px) {
-      width: 100px;
-      height: 140px;
-    }
-    @media (min-width: 320px) and (max-width: 575px) {
-      width: 90px;
-      height: 130px;
-    }
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
   }
 `;
-const StyledSearchTextField = styled(SearchTextField)`
-  @media (min-width: 576px) and (max-width: 767px) {
-    height: 50px;
+
+const Count = styled.span`
+  font-weight: 500;
+  opacity: 0.7;
+`;
+
+const Section = styled.section`
+  margin-top: 40px;
+`;
+
+const SectionHead = styled.div`
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
+  h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
   }
-  @media (min-width: 320px) and (max-width: 575px) {
-    height: 35px;
-    padding: 5px 20px !important;
-    input {
-      height: 35px !important;
-      font-size: 10px !important;
-    }
-    svg {
-      width: 12px;
-    }
+  span {
+    color: rgba(246, 243, 238, 0.5);
+    font-size: 13px;
+  }
+`;
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 24px 16px;
+  @media (max-width: 640px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 12px;
+  }
+`;
+
+const PlayHint = styled.span`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  span {
+    width: 0;
+    height: 0;
+    margin-left: 4px;
+    border-style: solid;
+    border-width: 14px 0 14px 22px;
+    border-color: transparent transparent transparent #f6f3ee;
+  }
+`;
+
+const Frame = styled.span<{ $muted: boolean }>`
+  position: relative;
+  display: block;
+  aspect-ratio: 2 / 3;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #161616;
+  outline: 2px solid transparent;
+  transition: transform 0.2s ease, outline-color 0.2s ease;
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: ${props => (props.$muted ? 'saturate(0.6) brightness(0.8)' : 'none')};
+  }
+`;
+
+const Badge = styled.span<{ $soon: boolean }>`
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  border-radius: 3px;
+  padding: 3px 7px;
+  background: ${props => (props.$soon ? '#e7c56a' : 'rgba(0, 0, 0, 0.7)')};
+  color: ${props => (props.$soon ? '#1a1408' : '#f6f3ee')};
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+`;
+
+const Card = styled.button`
+  align-self: start;
+  display: block;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  &:hover:not(:disabled) ${Frame}, &:focus-visible ${Frame} {
+    transform: translateY(-4px);
+    outline-color: #e7c56a;
+  }
+  &:hover:not(:disabled) ${PlayHint}, &:focus-visible ${PlayHint} {
+    opacity: 1;
+  }
+  &:focus-visible {
+    outline: none;
+  }
+  &:disabled {
+    cursor: default;
+  }
+`;
+
+const Name = styled.strong`
+  display: block;
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const Meta = styled.span`
+  display: block;
+  margin-top: 3px;
+  color: rgba(246, 243, 238, 0.6);
+  font-size: 12px;
+`;
+
+const Matched = styled.span`
+  display: block;
+  margin-top: 4px;
+  color: #e7c56a;
+  font-size: 12px;
+`;
+
+const Empty = styled.div`
+  margin-top: 48px;
+  max-width: 560px;
+  h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  p {
+    margin: 8px 0 0;
+    color: rgba(246, 243, 238, 0.7);
+    line-height: 1.5;
   }
 `;
 

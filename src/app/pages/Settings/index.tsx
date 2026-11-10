@@ -7,11 +7,11 @@ import { ReactComponent as Profile } from './assets/img/icon/profile.svg';
 import { ReactComponent as Help } from './assets/img/icon/help.svg';
 import { ReactComponent as Privacy } from './assets/img/icon/privacy1.svg';
 import { ReactComponent as Subscription } from './assets/img/icon/subscription1.svg';
-import { MyProfileTab } from './components/MyProfileTab';
 import { HelpCentreTab } from './components/HelpCentreTab';
 import PrivacyPolicyTab from './components/PrivacyPolicyTab';
 import NotificationTab from './components/NotificationTab';
-import SubscripionsTab from './components/SubscripionsTab';
+import StaticPlans from './components/StaticPlans';
+import StaticProfile from './components/StaticProfile';
 import { SettingsApiService } from 'services/openapi/services/SettingsApiService';
 import { useManageUserSlice } from './slice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -93,8 +93,9 @@ const Settings = (props: any) => {
     containerStyles: {
       background: '#111010 !important',
       color: '#FFFFFF !important',
-      margin: '60px 0 0 0',
-      height: 'calc(100vh - 60px)',
+      margin: '0',
+      paddingTop: '90px',
+      minHeight: '100vh',
       overflow: 'auto',
       pointerEvents: `${selectPaymentLoading ? 'none' : ''}`,
     },
@@ -175,11 +176,8 @@ const Settings = (props: any) => {
   };
 
   useEffect(() => {
-    dispatch(AppActions.setPageLoader(true));
-    handleGetProfileData();
-    handleGetUserSubscription();
-    handleGetSubscriptionList();
-  }, [selectedTriggerApi]);
+    dispatch(AppActions.setPageLoader(false));
+  }, [dispatch, AppActions]);
   return (
     <>
       {pageLoader ? (
@@ -278,9 +276,9 @@ const Settings = (props: any) => {
                         />
                       </StyledTab>
                     </StyledGrid>
-                    <Grid item xs={12} sm={9} md={8}>
+                    <Grid item xs={12} sm={9} md={8} sx={{ minWidth: 0 }}>
                       <TabPanel value={SelectSettingsTabVal!} index={0}>
-                        <MyProfileTab />
+                        <StaticProfile />
                       </TabPanel>
                       <TabPanel value={SelectSettingsTabVal!} index={1}>
                         <NotificationTab />
@@ -292,7 +290,7 @@ const Settings = (props: any) => {
                         <PrivacyPolicyTab />
                       </TabPanel>
                       <TabPanel value={SelectSettingsTabVal!} index={4}>
-                        <SubscripionsTab />
+                        <StaticPlans />
                       </TabPanel>
                     </Grid>
                   </Grid>
@@ -387,9 +385,9 @@ const Wrappr = styled.div`
 const StyledTab = styled(Tabs)`
   border: none !important;
   .MuiTabs-scroller {
-    padding-top: 40px;
+    padding-top: 12px;
     @media (min-width: 768px) and (max-width: 991px) {
-      padding-top: 30px;
+      padding-top: 12px;
     }
   }
   .Mui-selected {
@@ -404,7 +402,7 @@ const StyledTab = styled(Tabs)`
     }
   }
   .MuiGrid-root {
-    margin-top: 23%;
+    margin-top: 8px;
   }
 
   .MuiTab-root {

@@ -32,6 +32,9 @@ export const RoutePath = {
   playvideo: {
     path: '/video/:videoId',
   },
+  preview: {
+    path: '/preview/:titleId',
+  },
   paymentSuccess: {
     path: '/payment/success/:pId',
   },

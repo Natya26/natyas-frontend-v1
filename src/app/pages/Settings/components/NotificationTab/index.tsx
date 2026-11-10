@@ -1,151 +1,124 @@
-import React from 'react';
-import { TabCardView } from 'app/components/TabCardView';
+import { useState } from 'react';
 import styled from 'styled-components';
-import Typography from '@mui/material/Typography';
-import NotificationSwitch from 'app/components/NotificationSwitch';
 
-type Props = {};
+const items = [
+  {
+    id: 'episodes',
+    title: 'New seasons and episodes',
+    text: 'When a new episode of a series you watch is out.',
+  },
+  {
+    id: 'arrivals',
+    title: 'New arrivals',
+    text: 'Films and series that have just landed on Natya.',
+  },
+  {
+    id: 'soon',
+    title: 'Coming soon',
+    text: 'A reminder on the day an upcoming title is released.',
+  },
+  {
+    id: 'picks',
+    title: 'Watch suggestions',
+    text: 'Films and series picked for you, based on what you watch.',
+  },
+  {
+    id: 'membership',
+    title: 'Membership',
+    text: 'Updates about your plan, renewals, and payments.',
+  },
+];
 
-const NotificationTab = (props: Props) => {
+const NotificationTab = () => {
+  const [on, setOn] = useState<Record<string, boolean>>({
+    episodes: true,
+    arrivals: true,
+    soon: true,
+    picks: false,
+    membership: true,
+  });
+
   return (
-    <TabCardView>
-      <Wrapper>
-        <SubWrapper>
-          <InnerWrapper>
-            <SubHeaderWrapper>
-              <Typography variant="subtitle1" gutterBottom>
-                General Notification
-              </Typography>
-            </SubHeaderWrapper>
-            <SubContentWrapper>
-              <SubTextWrapper>
-                <Typography variant="body2" gutterBottom>
-                  Lorem ipsum dolor sit amet. Et sint maxime sed rerum molestias
-                  ab libero obcaecati vel accusantium fugiat. Et voluptatum
-                  corporis At eaque omnis et dolor eius id ipsa minus ut
-                  perferendis eius et ipsum quia. Id tenetur earum ab enim ullam
-                  aut totam cupiditate.
-                </Typography>
-              </SubTextWrapper>
-              <SubSwitchWrapper>
-                <NotificationSwitch checked={false} />
-              </SubSwitchWrapper>
-            </SubContentWrapper>
-          </InnerWrapper>
-          <InnerWrapper>
-            <SubHeaderWrapper>
-              <Typography variant="subtitle1" gutterBottom>
-                New Arrival
-              </Typography>
-            </SubHeaderWrapper>
-            <SubContentWrapper>
-              <SubTextWrapper>
-                <Typography variant="body2" gutterBottom>
-                  Lorem ipsum dolor sit amet. Et sint maxime sed rerum molestias
-                  ab libero obcaecati vel accusantium fugiat. Et voluptatum
-                  corporis At eaque omnis et dolor eius id ipsa minus ut
-                  perferendis eius et ipsum quia. Id tenetur earum ab enim ullam
-                  aut totam cupiditate.
-                </Typography>
-              </SubTextWrapper>
-              <SubSwitchWrapper>
-                <NotificationSwitch />
-              </SubSwitchWrapper>
-            </SubContentWrapper>
-          </InnerWrapper>
-          <InnerWrapper>
-            <SubHeaderWrapper>
-              <Typography variant="subtitle1" gutterBottom>
-                New Releases
-              </Typography>
-            </SubHeaderWrapper>
-            <SubContentWrapper>
-              <SubTextWrapper>
-                <Typography variant="body2" gutterBottom>
-                  Lorem ipsum dolor sit amet. Et sint maxime sed rerum molestias
-                  ab libero obcaecati vel accusantium fugiat. Et voluptatum
-                  corporis At eaque omnis et dolor eius id ipsa minus ut
-                  perferendis eius et ipsum quia. Id tenetur earum ab enim ullam
-                  aut totam cupiditate.
-                </Typography>
-              </SubTextWrapper>
-              <SubSwitchWrapper>
-                <NotificationSwitch />
-              </SubSwitchWrapper>
-            </SubContentWrapper>
-          </InnerWrapper>
-          <InnerWrapper>
-            <SubHeaderWrapper>
-              <Typography variant="subtitle1" gutterBottom>
-                App Updates
-              </Typography>
-            </SubHeaderWrapper>
-            <SubContentWrapper>
-              <SubTextWrapper>
-                <Typography variant="body2" gutterBottom>
-                  Lorem ipsum dolor sit amet. Et sint maxime sed rerum molestias
-                  ab libero obcaecati vel accusantium fugiat. Et voluptatum
-                  corporis At eaque omnis et dolor eius id ipsa minus ut
-                  perferendis eius et ipsum quia. Id tenetur earum ab enim ullam
-                  aut totam cupiditate.
-                </Typography>
-              </SubTextWrapper>
-              <SubSwitchWrapper>
-                <NotificationSwitch />
-              </SubSwitchWrapper>
-            </SubContentWrapper>
-          </InnerWrapper>
-        </SubWrapper>
-      </Wrapper>
-    </TabCardView>
+    <Card>
+      <h2>Notifications</h2>
+      <p>Choose what Natya tells you about. You can change this at any time.</p>
+      {items.map(item => (
+        <Row key={item.id}>
+          <div>
+            <strong>{item.title}</strong>
+            <span>{item.text}</span>
+          </div>
+          <Toggle
+            type="button"
+            aria-pressed={on[item.id]}
+            onClick={() =>
+              setOn(current => ({ ...current, [item.id]: !current[item.id] }))
+            }
+          >
+            <Knob $on={on[item.id]} />
+          </Toggle>
+        </Row>
+      ))}
+    </Card>
   );
 };
-const Wrapper = styled.div`
-  padding: 20px;
-`;
-const InnerWrapper = styled.div`
-  margin: 15px 0px;
-`;
-const SubWrapper = styled.div`
-  padding: 3% 5%;
-`;
-const SubHeaderWrapper = styled.div`
-  text-align: start;
-  h6 {
-    font-size: 12px !important;
-    font-family: 'Urbanist' !important;
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    letter-spacing: 1.1px !important;
+
+const Card = styled.section`
+  color: #fff;
+  background: #161616;
+  border: 1px solid rgba(224, 190, 0, 0.35);
+  border-radius: 20px;
+  padding: 28px 24px;
+  h2 {
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #e0be00;
+    font-size: 28px;
+  }
+  > p {
+    margin: 8px 0 0;
+    color: #c8c8c8;
   }
 `;
-const SubContentWrapper = styled.div`
-  text-align: start;
-  padding-top: 10px;
+
+const Row = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  p {
-    font-size: 12px !important;
-    letter-spacing: 0.5px;
-    font-family: 'Urbanist' !important;
-    color: #8a8a8a !important;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  strong {
+    display: block;
   }
-  a {
-    color: #e0be00 !important;
-  }
-`;
-const SubTextWrapper = styled.div`
-  text-align: start;
-  h5 {
-    font-size: 18px;
+  span {
+    display: block;
+    margin-top: 4px;
+    color: #bdbdbd;
   }
 `;
-const SubSwitchWrapper = styled.div`
-  padding: 8px 10px;
-  width: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: end;
+
+const Toggle = styled.button`
+  width: 52px;
+  height: 30px;
+  flex: 0 0 52px;
+  border: 0;
+  border-radius: 999px;
+  padding: 3px;
+  background: #3a3a3a;
+  cursor: pointer;
+  &[aria-pressed='true'] {
+    background: #e0be00;
+  }
 `;
+
+const Knob = styled.span<{ $on: boolean }>`
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #111010;
+  transform: translateX(${props => (props.$on ? '22px' : '0')});
+`;
+
 export default NotificationTab;

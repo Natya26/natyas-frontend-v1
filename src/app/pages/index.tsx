@@ -10,6 +10,7 @@ import { NotFoundPage } from './NotFoundPage';
 import { ListView } from './ListView';
 import { NotificationsPage } from './NotificationsPage';
 import PlayVideo from './PlayVideo';
+import PreviewPage from './PreviewPage';
 import { PaymentSuccessPage } from './PaymentSuccessPage';
 
 export {
@@ -25,5 +26,6 @@ export {
   ListView,
   NotificationsPage,
   PlayVideo,
+  PreviewPage,
   PaymentSuccessPage,
 };

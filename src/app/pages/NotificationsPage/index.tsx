@@ -1,185 +1,146 @@
-import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import vector from './assets/img/icons/Vector.png';
-import { NatyaWordmark } from 'app/components/NatyaWordmark';
 import { useNavigate } from 'react-router-dom';
-import Button from '@mui/material/Button';
 import { RoutePath } from 'app/RoutePath';
-import { NotificationsCard } from 'app/components/NotificationsCard';
-import useApi from 'services/mavapi/useApi';
-import { NotificationApiService } from 'services/openapi/services/NotificationApisServices';
-import { useDispatch, useSelector } from 'react-redux';
-import { useManageNotificationSlice } from './slice';
-import { selectNotificationList } from './slice/selectors';
-import Cookies from 'js-cookie';
-import { SERVER_BASE_URL } from 'utils/constants';
-import { selectPageLoader } from '../slice/selectors';
-import { useManageAppSlice } from '../slice';
-import PageLoaderWrapper from 'app/components/PageLoaderWrapper';
-import PulseLoader from 'react-spinners/PulseLoader';
 
-type Props = {
-  name?: string;
-  summary?: string;
-  id?: number;
-};
+const notes = [
+  {
+    when: 'Today',
+    kind: 'New episode',
+    text: 'Bro Code, Episode 4 "Last Round" is out now. The group finally has to choose.',
+  },
+  {
+    when: 'Today',
+    kind: 'Free demo',
+    text: 'Watch a free two-minute demo of Aara before you start the full film.',
+  },
+  {
+    when: 'Yesterday',
+    kind: 'New series',
+    text: 'Gangs of Gregory is now streaming. All episodes are ready to watch.',
+  },
+  {
+    when: 'This week',
+    kind: 'Coming soon',
+    text: 'Metro and Team 17 are coming to Natya soon. We will let you know the day they open.',
+  },
+  {
+    when: 'This week',
+    kind: 'Because you watched',
+    text: 'You watched Thoovanathumbikal. Try Oru CBI Diary Kurippu next, another Malayalam classic.',
+  },
+  {
+    when: 'Earlier',
+    kind: 'Membership',
+    text: 'Demos are always free. Choose a plan in Settings to watch every film and series in full.',
+  },
+];
 
-export const NotificationsPage = ({ name, summary, id }: Props) => {
+export const NotificationsPage = () => {
   const navigate = useNavigate();
-  const { error: apiError, isLoading, handleRequest } = useApi();
-  const { getNotificationList } = NotificationApiService;
-  const dispatch = useDispatch();
-  const { actions } = useManageNotificationSlice();
-  const allNotificationList = useSelector(selectNotificationList);
-  const pageLoader = useSelector(selectPageLoader);
-  const { actions: AppActions } = useManageAppSlice();
 
-  const handleBack = (): void => {
-    navigate(RoutePath.homepage.path);
-  };
-
-  const getAllNotificationList = (
-    page?: number,
-    pageLength?: number,
-    order?: string,
-    userId?: string,
-  ) => {
-    handleRequest(getNotificationList(page, pageLength, order, userId)).then(
-      res => {
-        if (res.data) {
-          dispatch(actions.setNotificationList(res?.data?.items));
-          dispatch(AppActions.setPageLoader(false));
-        } else return;
-      },
-    );
-  };
-
-  const handleNotificationViewClick = (id: number) => {
-    if (id) {
-      navigate(
-        RoutePath.individualview.path.replace(':seriesId', id.toString()),
-      );
-    }
-  };
-  useEffect(() => {
-    dispatch(AppActions.setPageLoader(true));
-    let userId = Cookies.get('userId') ? atob(Cookies.get('userId')!) : '';
-
-    getAllNotificationList(undefined, undefined, undefined, userId);
-  }, []);
   return (
-    <>
-      {pageLoader ? (
-        <>
-          <PageLoaderWrapper>
-            <PulseLoader color="#e0be00" />
-          </PageLoaderWrapper>
-        </>
-      ) : (
-        <MainWrapper>
-          <SubWrapper>
-            <TopWrapper>
-              <ButtonOneWrapper variant="text" onClick={handleBack}>
-                <ImgWrapperOne src={vector} alt="vector" />
-              </ButtonOneWrapper>
-              <span>Notifications</span>
-            </TopWrapper>
-            <BodyWrapper>
-              {allNotificationList?.map((item, index) => {
-                return (
-                  <NotificationsCard
-                    key={item.id}
-                    src={
-                      item?.details?.poster
-                        ? SERVER_BASE_URL + item?.details?.poster
-                        : ''
-                    }
-                    name={item.details?.headings?.en}
-                    summary={item.details?.contents?.en}
-                    onClick={e =>
-                      handleNotificationViewClick(item?.details?.series_id!)
-                    }
-                  />
-                );
-              })}
-            </BodyWrapper>
-          </SubWrapper>
-          <FooterWrapper>
-            <ImgWrapperThree>
-              <NatyaWordmark />
-            </ImgWrapperThree>
-          </FooterWrapper>
-        </MainWrapper>
-      )}
-    </>
+    <Main>
+      <Panel>
+        <Head>
+          <div>
+            <Title>Notifications</Title>
+            <Lead>
+              New episodes, new arrivals, and reminders about what is coming
+              next on Natya.
+            </Lead>
+          </div>
+          <Back type="button" onClick={() => navigate(RoutePath.homepage.path)}>
+            Back to home
+          </Back>
+        </Head>
+        <List>
+          {notes.map(note => (
+            <Item key={note.text}>
+              <When>{note.when}</When>
+              <Kind>{note.kind}</Kind>
+              <p>{note.text}</p>
+            </Item>
+          ))}
+        </List>
+      </Panel>
+    </Main>
   );
 };
-const MainWrapper = styled.div`
-  font-family: Urbanist !important;
-  background-color: #2a2727 !important;
-  color: #ffffff;
+
+const Main = styled.main`
   width: 100%;
   min-height: 100vh;
-  padding: 40px 50px;
-  @media (min-width: 320px) and (max-width: 575px) {
-  }
-`;
-const SubWrapper = styled.div`
-  margin-top: 64px;
+  background: #111010;
+  color: #fff;
+  padding: 110px 24px 48px;
 `;
 
-const ButtonOneWrapper = styled(Button)`
-  &.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
-    color: #ffffff !important;
-    font-size: 10px;
-    font-weight: 400;
-    font-size: 12px;
-    min-width: unset;
-    @media (min-width: 1366px) and (max-width: 4000px) {
-      font-size: 13px !important;
-    }
-    @media (min-width: 320px) and (max-width: 575px) {
-      font-size: 11px !important;
-    }
-  }
+const Panel = styled.section`
+  max-width: 760px;
+  margin: 0 auto;
 `;
 
-const TopWrapper = styled.div`
+const Head = styled.div`
   display: flex;
-  justify-content: left;
-  align-items: center;
-  padding: 0px 10px !important;
-  margin-bottom: 30px;
-  button {
-    padding: 0px !important;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 18px;
+  @media (max-width: 640px) {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  span {
-    font-size: 18px;
-    text-transform: uppercase;
-  }
-`;
-const ImgWrapperOne = styled.img`
-  width: 9px;
-  height: auto;
-  padding: 0px !important;
-  margin: 0px 20px 0px 0px !important;
 `;
 
-const BodyWrapper = styled.div`
-  background-color: #2a2727;
-  padding: 20px 35px;
+const Title = styled.h1`
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #e0be00;
+  font-size: 34px;
 `;
-const FooterWrapper = styled.div`
+
+const Lead = styled.p`
+  margin: 8px 0 0;
+  color: #c8c8c8;
+`;
+
+const Back = styled.button`
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 18px;
+  background: #e0be00;
+  color: #161616;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+`;
+
+const List = styled.div`
   display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  min-height: 300px !important;
-  max-height: 300px !important;
-  align-items: center;
+  flex-direction: column;
+  gap: 12px;
 `;
 
-const ImgWrapperThree = styled.div`
-  width: 200px;
-  height: 90px;
+const Item = styled.article`
+  background: #161616;
+  border: 1px solid rgba(224, 190, 0, 0.28);
+  border-radius: 16px;
+  padding: 16px 18px;
+  p {
+    margin: 8px 0 0;
+    color: #eee;
+    line-height: 1.45;
+  }
+`;
+
+const When = styled.span`
+  color: #9a9a9a;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+`;
+
+const Kind = styled.h2`
+  margin: 6px 0 0;
+  font-size: 16px;
+  color: #e0be00;
 `;

@@ -280,8 +280,8 @@ const ButtonWrapper = styled(Button)`
 `;
 
 const LandingWordmark = styled(NatyaWordmark)`
-  font-size: 64px;
-  margin-bottom: 12px;
+  height: 180px;
+  margin: 0 auto 12px;
 `;
 const FirstWrapper = styled.div`
   padding: 40px;

@@ -17,6 +17,7 @@ import 'sanitize.css/sanitize.css';
 
 // Import root app
 import { App } from 'app';
+import { DemoGate } from 'app/components/DemoGate';
 
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -38,7 +39,9 @@ root.render(
     <HelmetProvider>
       <React.StrictMode>
         <GoogleOAuthProvider clientId="29100417368-8f54uockt9gcqjvdhsflomla7vhfujg4.apps.googleusercontent.com">
-          <App />
+          <DemoGate>
+            <App />
+          </DemoGate>
         </GoogleOAuthProvider>
       </React.StrictMode>
     </HelmetProvider>

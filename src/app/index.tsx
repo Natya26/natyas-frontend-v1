@@ -27,6 +27,7 @@ import {
   ListView,
   NotificationsPage,
   PlayVideo,
+  PreviewPage,
   PaymentSuccessPage,
 } from './pages';
 import { HomePageLayout, OnboardLayout } from './layouts';
@@ -69,36 +70,12 @@ export function App() {
     redirectPath: redirectPath!,
   };
 
-  function preventActions() {
-    document.addEventListener('contextmenu', function (e) {
-      e.preventDefault();
-    });
-
-    document.onkeydown = function (e) {
-      if (e.key === 'F12') {
-        return false;
-      }
-
-      if (e.ctrlKey && e.shiftKey && e.key === 'I') {
-        return false;
-      }
-
-      if (e.ctrlKey && e.shiftKey && e.key === 'C') {
-        return false;
-      }
-
-      if (e.ctrlKey && e.shiftKey && e.key === 'J') {
-        return false;
-      }
-
-      if (e.ctrlKey && e.key === 'U') {
-        return false;
-      }
-    };
-  }
-
   React.useEffect(() => {
-    preventActions();
+    const blockRightClick = (event: MouseEvent) => {
+      event.preventDefault();
+    };
+    document.addEventListener('contextmenu', blockRightClick);
+    return () => document.removeEventListener('contextmenu', blockRightClick);
   }, [isAuthenticated]);
 
   return (
@@ -109,18 +86,6 @@ export function App() {
           <Route path={RoutePath.signup.path} element={<SignUp />} />
         </Route>
         <Route element={<Layout />}>
-          <Route
-            path={RoutePath.settings.path}
-            element={
-              <ProtectedRoute
-                {...{
-                  ...defaultProtectedRouteProps,
-                  redirectPath: RoutePath.settings.path,
-                }}
-                outlet={<Settings />}
-              />
-            }
-          />
           <Route
             path={RoutePath.paymentSuccess.path}
             element={
@@ -140,17 +105,18 @@ export function App() {
         </Route>
         <Route element={<HomePageLayout />}>
           <Route
-            path={RoutePath.homepage.path}
+            path={RoutePath.settings.path}
             element={
               <ProtectedRoute
                 {...{
                   ...defaultProtectedRouteProps,
-                  redirectPath: RoutePath.homepage.path,
+                  redirectPath: RoutePath.settings.path,
                 }}
-                outlet={<HomePage />}
+                outlet={<Settings />}
               />
             }
           />
+          <Route path={RoutePath.homepage.path} element={<HomePage />} />
           <Route
             path={RoutePath.mylistpage.path}
             element={
@@ -190,18 +156,7 @@ export function App() {
               />
             }
           />
-          <Route
-            path={RoutePath.search.path}
-            element={
-              <ProtectedRoute
-                {...{
-                  ...defaultProtectedRouteProps,
-                  redirectPath: RoutePath.search.path,
-                }}
-                outlet={<SearchPage />}
-              />
-            }
-          />
+          <Route path={RoutePath.search.path} element={<SearchPage />} />
           <Route
             path={RoutePath.listview.path}
             element={
@@ -226,6 +181,18 @@ export function App() {
                   redirectPath: RoutePath.playvideo.path.replace(':videoId', ''),
                 }}
                 outlet={<PlayVideo />}
+              />
+            }
+          />
+          <Route
+            path={RoutePath.preview.path}
+            element={
+              <ProtectedRoute
+                {...{
+                  ...defaultProtectedRouteProps,
+                  redirectPath: RoutePath.preview.path.replace(':titleId', ''),
+                }}
+                outlet={<PreviewPage />}
               />
             }
           />

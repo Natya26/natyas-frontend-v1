@@ -74,7 +74,7 @@ const StyledBox = styled.div`
   }
 `;
 const SideWordmark = styled(NatyaWordmark)`
-  font-size: 72px;
+  height: 220px;
 `;
 const LogoWrapper = styled.div`
   width: 100%;

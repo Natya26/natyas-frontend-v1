@@ -31,6 +31,7 @@ import { useDispatch } from 'react-redux';
 import { googleLogout } from '@react-oauth/google';
 import { useManageUserDetailsSlice } from '../../slice';
 import { SERVER_BASE_URL } from 'utils/constants';
+import { localMovies } from 'app/data/localCatalog';
 
 interface DropdownModel {
   id?: number;
@@ -161,7 +162,8 @@ const Header = () => {
     navigate(RoutePath.notifications.path);
   };
   const handleWatchMovie = () => {
-    navigate(RoutePath.playvideo.path.replace(':videoId', '1'));
+    const demo = localMovies[0];
+    navigate(RoutePath.homepage.path, { state: { playId: demo.id } });
   };
   const handleBackToHome = () => {
     navigate(RoutePath.homepage.path);
@@ -213,7 +215,8 @@ const Header = () => {
                 location.pathname.includes('search') ||
                 location.pathname.includes('notifications')
               ) && (
-                <Box sx={headerStyles.icon}>
+                <Box sx={headerStyles.iconBox}>
+                  {/* Language filter is hidden until there are films in more than one language.
                   <Box sx={headerStyles.iconBox}>
                     <HomeNavDropdown
                       data={LanguageModel}
@@ -221,6 +224,7 @@ const Header = () => {
                       onChange={handleHomeNavDropdown}
                     />
                   </Box>
+                  */}
 
                   <Box onClick={handleSearchClick} sx={headerStyles.iconBox}>
                     <SearchIcon />
@@ -316,7 +320,10 @@ const Header = () => {
   );
 };
 const HeaderWordmark = styled(NatyaWordmark)`
-  font-size: 36px;
+  height: 64px;
+  @media (max-width: 575px) {
+    height: 44px;
+  }
 `;
 const LogoWrapper = styled(Box)`
   display: flex;
@@ -367,18 +374,17 @@ const headerStyles = {
   },
   icon: {
     display: 'flex',
-    justifyContent: 'end',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     gap: '35px',
-    // mr: '10px',
+    marginLeft: 'auto',
+    width: 'auto',
     '@media (min-width: 576px) and (max-width: 767px)': {
       gap: '30px',
     },
     '@media (min-width: 320px) and (max-width: 575px)': {
       gap: '17px',
     },
-
-    width: 'calc(100% - 0px)',
   },
   logo: {
     width: '220px',

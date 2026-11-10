@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import logo from './natya-logo.png';
 
 type Props = {
   onClick?: () => void;
@@ -6,19 +7,13 @@ type Props = {
 };
 
 export const NatyaWordmark = ({ onClick, className }: Props) => (
-  <Mark className={className} onClick={onClick}>
-    Natya
-  </Mark>
+  <Mark className={className} onClick={onClick} src={logo} alt="Natya" />
 );
 
-const Mark = styled.span`
-  display: inline-block;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-weight: 700;
-  color: #e0be00;
-  border-bottom: 3px solid #e0be00;
-  line-height: 0.95;
-  letter-spacing: 0.5px;
-  font-size: 42px;
+const Mark = styled.img`
+  display: block;
+  height: 72px;
+  width: auto;
+  object-fit: contain;
   cursor: pointer;
 `;

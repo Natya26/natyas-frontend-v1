@@ -15,7 +15,11 @@ const HomePageLayout = (props: Props) => {
   );
 };
 const MainGrid = styled(Grid)`
+    display: block !important;
     width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    overflow-x: hidden;
   ::-webkit-scrollbar {
     width: 5px;
     margin-left: 3px;

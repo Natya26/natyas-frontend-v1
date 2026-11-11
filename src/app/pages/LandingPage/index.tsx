@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import backImg from './assets/image/background/Indhriya_background_Img.png';
 import { NatyaWordmark } from 'app/components/NatyaWordmark';
 import appStore from './assets/image/icons/download-apk.png';
 import googlePlay from './assets/image/icons/google-play-button.png';
@@ -14,7 +15,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import aaraWide from './assets/image/natya/aara-wide.jpg';
 import unmadamWide from './assets/image/natya/unmadam-wide.jpg';
 import devices from './assets/image/icons/devices.png';
-import { NatyaPosterWall, natyaPosters } from 'app/components/NatyaPosterWall';
+import chuzhal from './assets/image/natya/chuzhal.jpg';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'app/RoutePath';
 import { SERVER_BASE_URL } from 'utils/constants';
@@ -43,7 +44,6 @@ export const LandingPage = (props: Props) => {
   return (
     <MainWrapper id="landingPageMainWrapperId">
       <FirstWrapper id="FirstWrapper">
-        <NatyaPosterWall />
         <SubWrapper>
           <LandingWordmark />
           <HeadingWrapper>Exclusive content, wherever you go</HeadingWrapper>
@@ -194,10 +194,7 @@ export const LandingPage = (props: Props) => {
             </Grid>
             <Grid className="rightNavigation" xs={12} sm={6} md={6}>
               <div className="navDiv">
-                <ImgFourthWrapper
-                  src={natyaPosters.sabhashChandrabose}
-                  alt="Sabhash Chandrabose on Natya"
-                />
+                <ImgFourthWrapper src={chuzhal} alt="Chuzhal on Natya" />
               </div>
             </Grid>
           </Grid>
@@ -294,10 +291,13 @@ const FirstWrapper = styled.div`
   text-align: center;
   align-items: center;
   color: #ffffff;
-  position: relative;
-  overflow: hidden;
+  background: url(${backImg});
   width: 100%;
   height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  z-index: -1;
 `;
 const StyledImage = styled.img`
   width: 100%;
@@ -318,10 +318,7 @@ const StyledImage = styled.img`
   }
 `;
 const SubWrapper = styled.div`
-  position: relative;
-  z-index: 1;
   width: 100%;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
 `;
 const StyledImageIcon = styled.img`
   width: 100%;

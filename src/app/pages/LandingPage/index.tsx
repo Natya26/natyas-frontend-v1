@@ -1,10 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import backImg from './assets/image/background/Indhriya_background_Img.png';
 import { NatyaWordmark } from 'app/components/NatyaWordmark';
 import appStore from './assets/image/icons/download-apk.png';
 import googlePlay from './assets/image/icons/google-play-button.png';
-import indhriyaSlideTwo from './assets/videos/indhriyaSlideTwo.gif';
 import emailIcon from './assets/image/icons/email.png';
 import phoneIcon from './assets/image/icons/phone.png';
 import WhatsappIcon from './assets/image/icons/whatsapp.png';
@@ -13,9 +11,10 @@ import WhatsappIcon from './assets/image/icons/whatsapp.png';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-import tv from './assets/image/gif/indhriyaSlideOne.gif';
+import aaraWide from './assets/image/natya/aara-wide.jpg';
+import unmadamWide from './assets/image/natya/unmadam-wide.jpg';
 import devices from './assets/image/icons/devices.png';
-import navigation from './assets/image/icons/navigation.png';
+import { NatyaPosterWall, natyaPosters } from 'app/components/NatyaPosterWall';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'app/RoutePath';
 import { SERVER_BASE_URL } from 'utils/constants';
@@ -32,7 +31,6 @@ export const LandingPage = (props: Props) => {
     navigate(RoutePath.signup.path);
   };
 
-
   const handleDownloadAndroidApkClick = () => {
     var url = SERVER_BASE_URL + 'download/apk';
     var link = document.createElement('a');
@@ -45,6 +43,7 @@ export const LandingPage = (props: Props) => {
   return (
     <MainWrapper id="landingPageMainWrapperId">
       <FirstWrapper id="FirstWrapper">
+        <NatyaPosterWall />
         <SubWrapper>
           <LandingWordmark />
           <HeadingWrapper>Exclusive content, wherever you go</HeadingWrapper>
@@ -121,7 +120,7 @@ export const LandingPage = (props: Props) => {
                 </div>
               </Grid>
               <Grid className="rightGrid" xs={12} sm={6} md={6} lg={6} xl={6}>
-                <GifOneWrapper src={tv} />
+                <GifOneWrapper src={aaraWide} alt="Aara on Natya" />
               </Grid>
             </Grid>
           </Box>
@@ -134,7 +133,8 @@ export const LandingPage = (props: Props) => {
               <div className="positionDevice">
                 <StyledImage
                   className="imgpositionDevice"
-                  src={indhriyaSlideTwo}
+                  src={unmadamWide}
+                  alt="Unmadam on Natya"
                 />
               </div>
             </Grid>
@@ -194,7 +194,10 @@ export const LandingPage = (props: Props) => {
             </Grid>
             <Grid className="rightNavigation" xs={12} sm={6} md={6}>
               <div className="navDiv">
-                <ImgFourthWrapper src={navigation} alt="mobile" />
+                <ImgFourthWrapper
+                  src={natyaPosters.sabhashChandrabose}
+                  alt="Sabhash Chandrabose on Natya"
+                />
               </div>
             </Grid>
           </Grid>
@@ -291,15 +294,14 @@ const FirstWrapper = styled.div`
   text-align: center;
   align-items: center;
   color: #ffffff;
-  background: url(${backImg});
+  position: relative;
+  overflow: hidden;
   width: 100%;
   height: 100vh;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  z-index: -1;
 `;
 const StyledImage = styled.img`
+  width: 100%;
+  height: auto;
   border-radius: 15px;
   @media (min-width: 320px) and (max-width: 575px) {
     width: 100%;
@@ -316,7 +318,10 @@ const StyledImage = styled.img`
   }
 `;
 const SubWrapper = styled.div`
+  position: relative;
+  z-index: 1;
   width: 100%;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
 `;
 const StyledImageIcon = styled.img`
   width: 100%;
@@ -856,7 +861,9 @@ const FourthParaWrapper = styled.p`
 `;
 const ImgFourthWrapper = styled.img`
   width: 100%;
+  max-width: 420px;
   height: auto;
+  object-fit: cover;
   border-radius: 15px;
   @media (min-width: 576px) and (max-width: 767px) {
     width: 300px;

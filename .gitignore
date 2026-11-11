@@ -39,5 +39,3 @@ generated-cra-app
 template
 .eslintcache
 .env
-# Local Netlify folder
-.netlify

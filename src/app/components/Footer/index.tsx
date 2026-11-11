@@ -17,22 +17,13 @@ type Props = {
 export const Footer = ({ className }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
   const handleTerms = () => {
-    window.open(
-      'https://apidev.indhriya.com/v1/policies/terms-and-conditions',
-      '_blank',
-    );
+    window.open('/policies/terms-and-conditions.html', '_blank');
   };
   const handlePrivacy = () => {
-    window.open(
-      'https://apidev.indhriya.com/v1/policies/privacy-policy',
-      '_blank',
-    );
+    window.open('/policies/privacy-policy.html', '_blank');
   };
   const handleRefundPolicy = () => {
-    window.open(
-      'https://apidev.indhriya.com/v1/policies/refund-policy',
-      '_blank',
-    );
+    window.open('/policies/refund-policy.html', '_blank');
   };
   const handleDownloadAndroidApkClick = () => {
     var url = SERVER_BASE_URL + 'download/apk';
@@ -43,10 +34,7 @@ export const Footer = ({ className }: Props) => {
     document.body.removeChild(link);
   };
   return (
-    <FooterWrapper
-      className={`natya-footer ${className}`}
-      id="FooterWrapper"
-    >
+    <FooterWrapper className={`natya-footer ${className}`} id="FooterWrapper">
       <Box>
         <Grid className="footerContainer" container spacing={0}>
           <Grid className="footer" item xs={12} sm={6} md={4}>
@@ -66,7 +54,7 @@ export const Footer = ({ className }: Props) => {
                 </li>
                 <li>
                   <StyledImageIcon src={emailIcon} alt="email" />
-                  <a href="mailto:contact@natya.com">contact@natya.com</a>
+                  <a href="mailto:contact@natya.co.uk">contact@natya.co.uk</a>
                 </li>
                 {/* <li>
                   <StyledImageIcon src={phoneIcon} alt="phone" />

@@ -22,7 +22,7 @@ const PrivacyPolicyTab = (props: Props) => {
               gutterBottom
             >
               This Privacy Policy (“Privacy Policy”) applies to Natya App
-              platforms including without limitation www.natya.com and other
+              platforms including without limitation www.natya.co.uk and other
               related Site/s or App/s, mobile applications and other online
               features each a “Site/s or App/s”.
             </StyledTypography>
@@ -88,7 +88,7 @@ const PrivacyPolicyTab = (props: Props) => {
               If after you opt-in, you change your mind, you may withdraw your
               consent for us to contact you, for the continued collection, use
               or disclosure of your information, at any time, by emailing us at
-              contact@natya.com or contacting us at the address provided on the
+              contact@natya.co.uk or contacting us at the address provided on the
               website.
             </StyledTypography>
           </SubContentWrapper>
@@ -250,7 +250,7 @@ const PrivacyPolicyTab = (props: Props) => {
               If you would like to: access, correct, amend or delete any
               personal information we have, register a complaint, or simply want
               more information, mail our Privacy Compliance Officer at
-              contact@natya.com Or by contacting at the company contact which is
+              contact@natya.co.uk Or by contacting at the company contact which is
               hereby incorporated by this reference into the Terms of Service.
             </StyledTypography>
           </SubContentWrapper>

@@ -84,8 +84,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 For any inquiries or feedback, please contact:
 
 - **Name**: Natya
-- **Email**: contact@natya.com
-- **Website**: [https://natya.com/]
+- **Email**: contact@natya.co.uk
+- **Website**: [https://natya.co.uk/](https://natya.co.uk/)
 
 ---
 

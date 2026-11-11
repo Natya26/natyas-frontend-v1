@@ -18,8 +18,8 @@ export default function ContactUsTab({}: ContactUsTabProps) {
           </p>
         </Intro>
         <LinkButton
-          text="Email us at contact@natya.co.uk"
-          link="mailto:contact@natya.co.uk"
+          text="Email us at info@natyas.com"
+          link="mailto:info@natyas.com"
           icon={email}
         />
         <Block>

@@ -54,7 +54,7 @@ export const Footer = ({ className }: Props) => {
                 </li>
                 <li>
                   <StyledImageIcon src={emailIcon} alt="email" />
-                  <a href="mailto:contact@natya.co.uk">contact@natya.co.uk</a>
+                  <a href="mailto:info@natyas.com">info@natyas.com</a>
                 </li>
                 {/* <li>
                   <StyledImageIcon src={phoneIcon} alt="phone" />

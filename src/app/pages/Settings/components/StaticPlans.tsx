@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 const plans = [
   {
-    name: 'Monthly',
-    price: '£4.99',
+    name: 'Basic',
+    price: '£9',
     period: 'per month',
     points: ['Full movies after you subscribe', 'Watch on this website'],
   },
@@ -11,7 +11,7 @@ const plans = [
     name: '3 months',
     price: '£12.99',
     period: 'every 3 months',
-    points: ['Everything in Monthly', 'Better value for a season'],
+    points: ['Everything in Basic', 'Better value for a season'],
     featured: true,
   },
   {

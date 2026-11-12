@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'app/RoutePath';
+import { Footer } from 'app/components/Footer';
 
 const notes = [
   {
@@ -39,31 +40,37 @@ export const NotificationsPage = () => {
   const navigate = useNavigate();
 
   return (
-    <Main>
-      <Panel>
-        <Head>
-          <div>
-            <Title>Notifications</Title>
-            <Lead>
-              New episodes, new arrivals, and reminders about what is coming
-              next on Natya.
-            </Lead>
-          </div>
-          <Back type="button" onClick={() => navigate(RoutePath.homepage.path)}>
-            Back to home
-          </Back>
-        </Head>
-        <List>
-          {notes.map(note => (
-            <Item key={note.text}>
-              <When>{note.when}</When>
-              <Kind>{note.kind}</Kind>
-              <p>{note.text}</p>
-            </Item>
-          ))}
-        </List>
-      </Panel>
-    </Main>
+    <>
+      <Main>
+        <Panel>
+          <Head>
+            <div>
+              <Title>Notifications</Title>
+              <Lead>
+                New episodes, new arrivals, and reminders about what is coming
+                next on Natya.
+              </Lead>
+            </div>
+            <Back
+              type="button"
+              onClick={() => navigate(RoutePath.homepage.path)}
+            >
+              Back to home
+            </Back>
+          </Head>
+          <List>
+            {notes.map(note => (
+              <Item key={note.text}>
+                <When>{note.when}</When>
+                <Kind>{note.kind}</Kind>
+                <p>{note.text}</p>
+              </Item>
+            ))}
+          </List>
+        </Panel>
+      </Main>
+      <Footer />
+    </>
   );
 };
 

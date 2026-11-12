@@ -12,14 +12,14 @@ import { SERVER_BASE_URL } from 'utils/constants';
 
 const footerLinks = [
   { label: 'About Us', href: '/policies/about-us.html' },
-  { label: 'Contact Us', href: '/policies/contact-us.html' },
   {
     label: 'Terms and Conditions',
     href: '/policies/terms-and-conditions.html',
   },
+  { label: 'Contact Us', href: '/policies/contact-us.html' },
   { label: 'Privacy Policy', href: '/policies/privacy-policy.html' },
-  { label: 'Refund Policy', href: '/policies/refund-policy.html' },
-  { label: 'Pricing Plans', href: '/plans/pricing-plan.html' },
+  { label: 'Product Pricing', href: '/plans/pricing-plan.html' },
+  { label: 'Refunds & Cancellation', href: '/policies/refund-policy.html' },
 ];
 
 type Props = {
@@ -161,7 +161,7 @@ const FooterWrapper = styled.div`
     .terms-block {
       text-align: right;
       ul {
-        max-width: 160px;
+        max-width: 190px;
         margin: 0 0 0 auto;
         text-align: left;
         li {

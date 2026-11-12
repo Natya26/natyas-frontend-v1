@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { RoutePath } from 'app/RoutePath';
 import { findLocalTitle } from 'app/data/localCatalog';
 import { useManageUserSlice } from '../Settings/slice';
+import { Footer } from 'app/components/Footer';
 
 const PreviewPage = () => {
   const { titleId } = useParams();
@@ -40,52 +41,55 @@ const PreviewPage = () => {
   }
 
   return (
-    <Page>
-      <Top>
-        <Back type="button" onClick={() => navigate(RoutePath.homepage.path)}>
-          Back
-        </Back>
-        <Heading>
-          <h1>{title.name}</h1>
-          <p>2 minute demo · the full film needs a subscription</p>
-        </Heading>
-      </Top>
-      <Stage>
-        <Video
-          ref={videoRef}
-          src={title.preview}
-          controls
-          controlsList="nodownload"
-          playsInline
-          onContextMenu={event => event.preventDefault()}
-          onTimeUpdate={stopAtPreview}
-          onSeeked={stopAtPreview}
-          onEnded={() => setLocked(true)}
-          onError={() => setMissing(true)}
-        />
-        {locked && (
-          <Lock>
-            <h2>Demo finished</h2>
-            <p>Subscribe to watch the rest of {title.name}.</p>
-            <Subscribe type="button" onClick={askToSubscribe}>
-              Subscribe
-            </Subscribe>
-          </Lock>
+    <>
+      <Page>
+        <Top>
+          <Back type="button" onClick={() => navigate(RoutePath.homepage.path)}>
+            Back
+          </Back>
+          <Heading>
+            <h1>{title.name}</h1>
+            <p>2 minute demo · the full film needs a subscription</p>
+          </Heading>
+        </Top>
+        <Stage>
+          <Video
+            ref={videoRef}
+            src={title.preview}
+            controls
+            controlsList="nodownload"
+            playsInline
+            onContextMenu={event => event.preventDefault()}
+            onTimeUpdate={stopAtPreview}
+            onSeeked={stopAtPreview}
+            onEnded={() => setLocked(true)}
+            onError={() => setMissing(true)}
+          />
+          {locked && (
+            <Lock>
+              <h2>Demo finished</h2>
+              <p>Subscribe to watch the rest of {title.name}.</p>
+              <Subscribe type="button" onClick={askToSubscribe}>
+                Subscribe
+              </Subscribe>
+            </Lock>
+          )}
+        </Stage>
+        {missing && (
+          <Hint>
+            Put the demo file on this computer at{' '}
+            <code>public{title.preview}</code>. It is not uploaded anywhere.
+          </Hint>
         )}
-      </Stage>
-      {missing && (
-        <Hint>
-          Put the demo file on this computer at{' '}
-          <code>public{title.preview}</code>. It is not uploaded anywhere.
-        </Hint>
-      )}
-      <Under>
-        <p>{title.description}</p>
-        <Subscribe type="button" onClick={askToSubscribe}>
-          Watch full {title.kind === 'series' ? 'series' : 'movie'}
-        </Subscribe>
-      </Under>
-    </Page>
+        <Under>
+          <p>{title.description}</p>
+          <Subscribe type="button" onClick={askToSubscribe}>
+            Watch full {title.kind === 'series' ? 'series' : 'movie'}
+          </Subscribe>
+        </Under>
+      </Page>
+      <Footer />
+    </>
   );
 };
 

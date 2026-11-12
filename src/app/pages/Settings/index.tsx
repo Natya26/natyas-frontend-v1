@@ -29,6 +29,7 @@ import {
   selectTriggerApi,
 } from './slice/selectors';
 import { RoutePath } from '../../RoutePath';
+import { Footer } from 'app/components/Footer';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -300,6 +301,7 @@ const Settings = (props: any) => {
           </StyledBox>
         </Grid>
       )}
+      <Footer />
     </>
   );
 };

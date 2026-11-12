@@ -2,10 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { RoutePath } from 'app/RoutePath';
-import {
-  LocalSearchHit,
-  searchLocalCatalog,
-} from 'app/data/localCatalog';
+import { LocalSearchHit, searchLocalCatalog } from 'app/data/localCatalog';
+import { Footer } from 'app/components/Footer';
 
 type Filter = 'all' | LocalSearchHit['kind'];
 
@@ -72,131 +70,134 @@ const SearchPage = () => {
   };
 
   return (
-    <Page>
-      <Top>
-        <Heading>{trimmed ? 'Search results' : 'Search'}</Heading>
-        <Bar>
-          <Icon viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="11" cy="11" r="7" />
-            <path d="M20 20l-3.5-3.5" />
-          </Icon>
-          <Field
-            autoFocus
-            type="search"
-            value={query}
-            placeholder="Search for a movie, series, episode or language"
-            aria-label="Search movies and series"
-            onChange={event => setQuery(event.target.value)}
-            onKeyDown={event => {
-              if (event.key === 'Escape') setQuery('');
-            }}
-          />
-          {query && (
-            <Clear
-              type="button"
-              aria-label="Clear search"
-              onClick={() => setQuery('')}
-            >
-              ×
-            </Clear>
-          )}
-        </Bar>
-        <Chips role="tablist" aria-label="Filter results">
-          {filters.map(item => (
-            <Chip
-              key={item.id}
-              type="button"
-              role="tab"
-              aria-selected={filter === item.id}
-              $active={filter === item.id}
-              disabled={item.id !== 'all' && counts[item.id] === 0}
-              onClick={() => setFilter(item.id)}
-            >
-              {item.label}
-              <Count>{counts[item.id]}</Count>
-            </Chip>
-          ))}
-        </Chips>
-      </Top>
-
-      {results.length === 0 || visible.length === 0 ? (
-        <Empty>
-          <h2>No results for “{trimmed}”</h2>
-          <p>
-            Check the spelling, or search for a title, an episode name or a
-            language. Try one of these:
-          </p>
-          <Chips>
-            {suggestions.map(word => (
-              <Chip
-                key={word}
+    <>
+      <Page>
+        <Top>
+          <Heading>{trimmed ? 'Search results' : 'Search'}</Heading>
+          <Bar>
+            <Icon viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" />
+              <path d="M20 20l-3.5-3.5" />
+            </Icon>
+            <Field
+              autoFocus
+              type="search"
+              value={query}
+              placeholder="Search for a movie, series, episode or language"
+              aria-label="Search movies and series"
+              onChange={event => setQuery(event.target.value)}
+              onKeyDown={event => {
+                if (event.key === 'Escape') setQuery('');
+              }}
+            />
+            {query && (
+              <Clear
                 type="button"
-                $active={false}
-                onClick={() => {
-                  setFilter('all');
-                  setQuery(word);
-                }}
+                aria-label="Clear search"
+                onClick={() => setQuery('')}
               >
-                {word}
+                ×
+              </Clear>
+            )}
+          </Bar>
+          <Chips role="tablist" aria-label="Filter results">
+            {filters.map(item => (
+              <Chip
+                key={item.id}
+                type="button"
+                role="tab"
+                aria-selected={filter === item.id}
+                $active={filter === item.id}
+                disabled={item.id !== 'all' && counts[item.id] === 0}
+                onClick={() => setFilter(item.id)}
+              >
+                {item.label}
+                <Count>{counts[item.id]}</Count>
               </Chip>
             ))}
           </Chips>
-        </Empty>
-      ) : (
-        visible.map(section => (
-          <Section key={section.kind}>
-            <SectionHead>
-              <h2>{section.title}</h2>
-              <span>
-                {counts[section.kind]}{' '}
-                {counts[section.kind] === 1 ? 'title' : 'titles'}
-              </span>
-            </SectionHead>
-            <Grid>
-              {results
-                .filter(hit => hit.kind === section.kind)
-                .map(hit => {
-                  const soon = hit.kind === 'upcoming';
-                  return (
-                    <Card
-                      key={`${hit.kind}-${hit.id}`}
-                      type="button"
-                      disabled={soon}
-                      onClick={() => openHit(hit)}
-                      aria-label={`${hit.name}, ${hit.detail}`}
-                    >
-                      <Frame $muted={soon}>
-                        <img src={hit.poster} alt="" loading="lazy" />
-                        <Badge $soon={soon}>
-                          {soon
-                            ? 'Coming soon'
-                            : hit.kind === 'series'
-                            ? 'Series'
-                            : 'Movie'}
-                        </Badge>
-                        {!soon && (
-                          <PlayHint aria-hidden="true">
-                            <span />
-                          </PlayHint>
+        </Top>
+
+        {results.length === 0 || visible.length === 0 ? (
+          <Empty>
+            <h2>No results for “{trimmed}”</h2>
+            <p>
+              Check the spelling, or search for a title, an episode name or a
+              language. Try one of these:
+            </p>
+            <Chips>
+              {suggestions.map(word => (
+                <Chip
+                  key={word}
+                  type="button"
+                  $active={false}
+                  onClick={() => {
+                    setFilter('all');
+                    setQuery(word);
+                  }}
+                >
+                  {word}
+                </Chip>
+              ))}
+            </Chips>
+          </Empty>
+        ) : (
+          visible.map(section => (
+            <Section key={section.kind}>
+              <SectionHead>
+                <h2>{section.title}</h2>
+                <span>
+                  {counts[section.kind]}{' '}
+                  {counts[section.kind] === 1 ? 'title' : 'titles'}
+                </span>
+              </SectionHead>
+              <Grid>
+                {results
+                  .filter(hit => hit.kind === section.kind)
+                  .map(hit => {
+                    const soon = hit.kind === 'upcoming';
+                    return (
+                      <Card
+                        key={`${hit.kind}-${hit.id}`}
+                        type="button"
+                        disabled={soon}
+                        onClick={() => openHit(hit)}
+                        aria-label={`${hit.name}, ${hit.detail}`}
+                      >
+                        <Frame $muted={soon}>
+                          <img src={hit.poster} alt="" loading="lazy" />
+                          <Badge $soon={soon}>
+                            {soon
+                              ? 'Coming soon'
+                              : hit.kind === 'series'
+                              ? 'Series'
+                              : 'Movie'}
+                          </Badge>
+                          {!soon && (
+                            <PlayHint aria-hidden="true">
+                              <span />
+                            </PlayHint>
+                          )}
+                        </Frame>
+                        <Name>{hit.name}</Name>
+                        <Meta>
+                          {[hit.language, soon ? '' : hit.detail]
+                            .filter(Boolean)
+                            .join(' · ') || 'Coming to Natya'}
+                        </Meta>
+                        {hit.matchedEpisode && (
+                          <Matched>Matches {hit.matchedEpisode}</Matched>
                         )}
-                      </Frame>
-                      <Name>{hit.name}</Name>
-                      <Meta>
-                        {[hit.language, soon ? '' : hit.detail]
-                          .filter(Boolean)
-                          .join(' · ') || 'Coming to Natya'}
-                      </Meta>
-                      {hit.matchedEpisode && (
-                        <Matched>Matches {hit.matchedEpisode}</Matched>
-                      )}
-                    </Card>
-                  );
-                })}
-            </Grid>
-          </Section>
-        ))
-      )}
-    </Page>
+                      </Card>
+                    );
+                  })}
+              </Grid>
+            </Section>
+          ))
+        )}
+      </Page>
+      <Footer />
+    </>
   );
 };
 
@@ -381,7 +382,8 @@ const Frame = styled.span<{ $muted: boolean }>`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: ${props => (props.$muted ? 'saturate(0.6) brightness(0.8)' : 'none')};
+    filter: ${props =>
+      props.$muted ? 'saturate(0.6) brightness(0.8)' : 'none'};
   }
 `;
 

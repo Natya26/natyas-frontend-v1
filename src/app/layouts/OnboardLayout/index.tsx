@@ -4,6 +4,7 @@ import bgImage from './assets/img/bg/Indhriya_background_Img.png';
 import { Grid, Box, Divider } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import { NatyaWordmark } from 'app/components/NatyaWordmark';
+import { Footer } from 'app/components/Footer';
 
 const OnboardLayout = () => {
   return (
@@ -20,6 +21,7 @@ const OnboardLayout = () => {
           </StyledBox>
         </Grid>
       </Box>
+      <Footer />
     </Box>
   );
 };
@@ -39,7 +41,7 @@ const loginLeft = {
   },
   '@media(min-width: 320px) and (max-width: 575px)': {
     width: '100%',
-  }
+  },
 };
 const loginRight = {
   height: '100vh',
@@ -53,7 +55,7 @@ const loginRight = {
   },
   '@media(min-width: 320px) and (max-width: 575px)': {
     width: 'auto',
-  }
+  },
 };
 const StyledBox = styled.div`
   background-image: url(${bgImage});
@@ -67,10 +69,10 @@ const StyledBox = styled.div`
   display: flex;
   align-items: center;
   @media (min-width: 576px) and (max-width: 767px) {
-    display:none;
+    display: none;
   }
   @media (min-width: 320px) and (max-width: 575px) {
-    display:none;
+    display: none;
   }
 `;
 const SideWordmark = styled(NatyaWordmark)`

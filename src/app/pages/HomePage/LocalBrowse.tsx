@@ -14,6 +14,7 @@ import {
 import { useManageUserSlice } from '../Settings/slice';
 import { DemoModal } from './DemoModal';
 import { SeriesPanel } from './SeriesPanel';
+import { Footer } from 'app/components/Footer';
 
 const coverIds = ['unmadam', 'aara'];
 const covers = coverIds
@@ -152,6 +153,8 @@ export const LocalBrowse = () => {
         <Shelf title="Movies" items={localMovies} onOpen={setActive} />
         <Upcoming />
       </Rails>
+
+      <Footer />
 
       {active && (
         <DemoModal
@@ -372,8 +375,7 @@ const Dot = styled.button<{ $on: boolean }>`
   padding: 0;
   border: 0;
   border-radius: 99px;
-  background: ${props =>
-    props.$on ? '#f4f1ea' : 'rgba(255, 255, 255, 0.45)'};
+  background: ${props => (props.$on ? '#f4f1ea' : 'rgba(255, 255, 255, 0.45)')};
   cursor: pointer;
 `;
 

@@ -10,21 +10,24 @@ import location from './assets/img/icons/location.png';
 import ApkDownloadIcon from './assets/img/icons/android-download-button.png';
 import { SERVER_BASE_URL } from 'utils/constants';
 
+const footerLinks = [
+  { label: 'About Us', href: '/policies/about-us.html' },
+  { label: 'Contact Us', href: '/policies/contact-us.html' },
+  {
+    label: 'Terms and Conditions',
+    href: '/policies/terms-and-conditions.html',
+  },
+  { label: 'Privacy Policy', href: '/policies/privacy-policy.html' },
+  { label: 'Refund Policy', href: '/policies/refund-policy.html' },
+  { label: 'Pricing Plans', href: '/plans/pricing-plan.html' },
+];
+
 type Props = {
   className?: string;
 };
 
 export const Footer = ({ className }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
-  const handleTerms = () => {
-    window.open('/policies/terms-and-conditions.html', '_blank');
-  };
-  const handlePrivacy = () => {
-    window.open('/policies/privacy-policy.html', '_blank');
-  };
-  const handleRefundPolicy = () => {
-    window.open('/policies/refund-policy.html', '_blank');
-  };
   const handleDownloadAndroidApkClick = () => {
     var url = SERVER_BASE_URL + 'download/apk';
     var link = document.createElement('a');
@@ -77,66 +80,13 @@ export const Footer = ({ className }: Props) => {
           <Grid className="terms-footer-grid" item xs={12} sm={6} md={8}>
             <div className="terms-block">
               <ul className="terms-conditions-ul">
-                <li>
-                  <a
-                    style={{ cursor: 'pointer' }}
-                    target="_blank"
-                    onClick={handleTerms}
-                    rel="noreferrer"
-                  >
-                    Terms of Use
-                  </a>
-                </li>
-                <li>
-                  <a
-                    style={{ cursor: 'pointer' }}
-                    href="/policies/privacy-policy.html"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a
-                    style={{ cursor: 'pointer' }}
-                    href="/policies/terms-and-conditions.html"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Terms and Conditions
-                  </a>
-                </li>
-                <li>
-                  <a
-                    style={{ cursor: 'pointer' }}
-                    target="_blank"
-                    onClick={handleRefundPolicy}
-                    rel="noreferrer"
-                  >
-                    Refund Policy
-                  </a>
-                </li>
-                <li>
-                  <a
-                    style={{ cursor: 'pointer' }}
-                    href="/policies/terms-and-conditions.html"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Contact Us
-                  </a>
-                </li>
-                <li>
-                  <a
-                    style={{ cursor: 'pointer' }}
-                    href="/plans/pricing-plan.html"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Pricing Plans
-                  </a>
-                </li>
+                {footerLinks.map(link => (
+                  <li key={link.href}>
+                    <a href={link.href} target="_blank" rel="noreferrer">
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           </Grid>
@@ -145,7 +95,8 @@ export const Footer = ({ className }: Props) => {
       <div className="copyright">
         {' '}
         <p>
-          Copyright &copy; 2024, All Right Reserved Natya &nbsp;
+          Copyright &copy; {new Date().getFullYear()}, All Rights Reserved Natya
+          &nbsp;
           <a
             href="/policies/privacy-policy.html"
             target="_blank"
@@ -159,7 +110,7 @@ export const Footer = ({ className }: Props) => {
             target="_blank"
             rel="noreferrer"
           >
-            Terms of Services
+            Terms and Conditions
           </a>
           &nbsp; apply.
         </p>
